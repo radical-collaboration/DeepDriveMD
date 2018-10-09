@@ -7,7 +7,7 @@ Hyperspace (ORNL) and RCT collaboration
 
 ### System Requirements Specification
 
-* [SRS](https://github.com/jdakka/htbac/blob/master/docs/requirements/protocols/srs_main.tex)
+* [SRS](https://github.com/radical-collaboration/hyperspace/blob/master/srs_main.tex)
 
 ### References 
 
