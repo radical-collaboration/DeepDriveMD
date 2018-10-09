@@ -31,7 +31,7 @@
 }
 
 \def\myversion{0.1.0 }
-\def\projname{High Throughput Free Energy Binding Affinity Calculator}
+\def\projname{Hyperspace}
 \def\projauthors{$<$Authors$>$}
 \date{}
 \title{}
@@ -65,7 +65,7 @@
         \vspace{1.9cm}
         Prepared by \projauthors\\
         \vspace{1.9cm}
-        University College London and Rutgers University\\
+        ORNL and Rutgers University\\
         \vspace{1.9cm}
         \today\\
     \end{bfseries}
@@ -100,7 +100,7 @@
 \section{Purpose}
 %$<$Identify the product whose software requirements are specified in this document, including the revision or release number. Describe the scope of the product that is covered by this SRS, particularly if this SRS describes only part of the system or a single subsystem.$>$
 
-The purpose of the document is to capture, in detail, the requirements of the High Throughput Binding Affinity Calculator  project. This document will include all the system requirements, interface, interactions and limitations of this track. . This document is primarily intended to be proposed to a customer for its approval
+The purpose of the document is to capture, in detail, the requirements of HyperSpace project. This document will include all the system requirements, interface, interactions and limitations of this track. . This document is primarily intended to be proposed to a customer for its approval
 and a reference for developing the first version of the system.
 
 \section{Document Conventions}
@@ -113,7 +113,7 @@ The requested features are listed in section 4 and the non-functional requiremen
 
 The document is created and iterated by both the users and developers together. This document is intended for the developers and project manager to get a complete understanding of the requirements of the system as expected by the user.
 
-An early usecase document is available at [1]. [2] presents the current status and overall goal of the seismic inversion application. [3] provides a quick introduction to the current capabilities of the Ensemble Toolkit and the anticipated software built upon Ensemble Toolkit, which we refer to as HTBAC. 
+An early usecase document is available at [1]. [2] presents the current status and overall goal of the distributed Bayesian optimization application. [3] provides a quick introduction to the current capabilities of the Ensemble Toolkit and the anticipated software built upon Ensemble Toolkit, which we refer to as HyperSpace-RCT. 
 
 \section{Project Scope}
 %$<$Provide a short description of the software being specified and its purpose, including relevant benefits, objectives, and goals. Relate the software to corporate goals or business strategies. If a separate vision and scope document is available, refer to it rather than duplicating its contents here.$>$
@@ -121,21 +121,21 @@ An early usecase document is available at [1]. [2] presents the current status a
 The project has the following goals:
 
 \begin{itemize}[noitemsep]
-\item increase scalable, interoperable & extensible runtime system, without diluting domain specific capabilities of BAC
-\item open new avenues of scientific research,in particular, new binding free energy protocols
-\item a package is to be developed and shared with HTBAC users at UCL
+\item increase scalable, interoperable & extensible runtime system, without diluting domain specific capabilities of Hyperspace
+\item open new avenues of scientific research, in particular, adaptive execution of optimizations 
+\item a package is to be developed and shared with Hyperspace users at ORNL
 \end{itemize}
 
 \section{References}
 %$<$List any other documents or Web addresses to which this SRS refers. These may include user interface style guides, contracts, standards, system requirements specifications, use case documents, or a vision and scope document. Provide enough information so that the reader could access a copy of each reference, including title, author, version number, date, and source or location.$>$
 
-[1] \url{https://docs.google.com/drawings/d/1IBU2wJt2RUsWlR06qokTmE6s5JstLcev7JMJr5shT18/edit?usp=sharing}
+% [1] \url{https://docs.google.com/drawings/d/1IBU2wJt2RUsWlR06qokTmE6s5JstLcev7JMJr5shT18/edit?usp=sharing}
 
-[2] \url{https://github.com/radical-collaboration/GB-SC18}
+% [2] \url{https://github.com/radical-collaboration/GB-SC18}
 
-[3] \url{https://github.com/radical-collaboration/RADICAL-UCL/wiki}
+% [3] \url{https://github.com/radical-collaboration/RADICAL-UCL/wiki}
 
-[4] \url{https://docs.google.com/presentation/d/1cHfiDtVVHsTfJAnanYsDxfLc1dVG0upinl1WXXyKwTA/edit?usp=sharing}
+% [4] \url{https://docs.google.com/presentation/d/1cHfiDtVVHsTfJAnanYsDxfLc1dVG0upinl1WXXyKwTA/edit?usp=sharing}
 
 % ----------------------------------------------------------------------------
 % Overall Description
@@ -145,14 +145,14 @@ The project has the following goals:
 \section{Product Perspective}
 %$<$Describe the context and origin of the product being specified in this SRS.  For example, state whether this product is a follow-on member of a product family, a replacement for certain existing systems, or a new, self-contained product. If the SRS defines a component of a larger system, relate the requirements of the larger system to the functionality of this software and identify interfaces between the two. A simple diagram that shows the major components of the overall system, subsystem interconnections, and external interfaces can be helpful.$>$
 
-The system will be designed to execute the free energy binding affinity protocols, as represented in %Figure~\ref{fig:seismic_wflow},% 
-at scale on HPCs, more specifically on NCSA Blue Waters. The various protocols associated data movement will be captured using the HTBAC API.
+The system will be designed to execute the distributed Bayesian optimizations, 
+% as represented in %Figure~\ref{fig:seismic_wflow},% 
+at scale on HPCs, more specifically on Summit. Existing solution executes the varaious stages of the workflow in parts using a coordinating workflow engine: Hyperspace is the workflow tool used for executing the HyperSpace algorithm (distributed Bayesian optimizations). This document captures the requirements of a product that will be an end-to-end solution addressing many of the missing features in the existing solution. 
 
-Existing solution executes the various stages of the workflow in parts using a coordinating workflow engine: BAC Build is the workflow tool used for collect staging data i.e. mutations with respective configuration files from a (protein) database, BAC Simulate is the workflow tool that manages the BAC App which contains the protocol necessary to simulate on HPCs, BAC Analyse is the workflow tool used to produce statistical representation which in turn performs the ranking of mutations. This document captures the requirements of a product that will be an end-to-end solution addressing many of the missing features in the existing solution. 
+% Existing solution executes the various stages of the workflow in parts using a coordinating workflow engine: BAC Build is the workflow tool used for collect staging data i.e. mutations with respective configuration files from a (protein) database, BAC Simulate is the workflow tool that manages the BAC App which contains the protocol necessary to simulate on HPCs, BAC Analyse is the workflow tool used to produce statistical representation which in turn performs the ranking of mutations. This document captures the requirements of a product that will be an end-to-end solution addressing many of the missing features in the existing solution. 
 
-This system will be designed in order to expose, to the user, two components: an API and a database. The API will enable the user to select a predetermined application protocol. The database will provide access to the state of the various tasks in the workflow. This will enable the user to observe performance metrics or perform various analysis in real time. 
+This system will be designed in order to expose, to the user, two components: an API and a database. The API will enable the user to select a predetermined machine learning algorithm, the number of hyperparameters, and the objective function. The database will provide access to the state of the various tasks in the workflow. This will enable the user to observe performance metrics or perform various analysis in real time. 
 Once the application is described via the API, the internal components will translate the application with Ensemble Toolkit, which will turn the tasks into executable units and manage their execution across multiple resources. 
-
 
 \section{Product Functions}
 %$<$Summarize the major functions the product must perform or must let the user perform. Details will be provided in Section 3, so only a high level summary (such as a bullet list) is needed here. Organize the functions to make them understandable to any reader of the SRS. A picture of the major groups of related requirements and how they relate, such as a top level data flow diagram or object class diagram, is often effective.$>$
@@ -161,7 +161,8 @@ The major functions the product is expected to perform is the following:
 
 \begin{itemize}[noitemsep]
 \item an API sufficient to capture the description necessary to run workflows
-\item capacity to execute O(1000) tasks concurrently
+\item capacity to execute between O(2**7) - O(2**12) tasks concurrently
+\item capacity to execute the workflow for durations of 3 hours to several days
 \item ability to manage task failures due to several reasons
 \item ability to provide real time execution statistics and user access to intermediate data
 \end{itemize}
@@ -169,26 +170,27 @@ The major functions the product is expected to perform is the following:
 \section{User Classes and Characteristics}
 %$<$Identify the various user classes that you anticipate will use this product.  User classes may be differentiated based on frequency of use, subset of product functions used, technical expertise, security or privilege levels, educational level, or experience. Describe the pertinent characteristics of each user class.  Certain requirements may pertain only to certain user classes. Distinguish the most important user classes for this product from those who are less important to satisfy.$>$
 
-The \myversion version of the product is intended to be used only by the UCL and Rutgers groups. 
+The \myversion version of the product is intended to be used only by the ORNL and Rutgers groups. 
 
 \section{Operating Environment}
 %$<$Describe the environment in which the software will operate, including the hardware platform, operating system and versions, and any other software components or applications with which it must peacefully coexist.$>$
 
-The primary OS the product will be tested on is Linux with possible support of MacOS. The primary HPCs the product will be tested on is the NCSA Blue Waters.
+The primary OS the product will be tested on is Linux with possible support of MacOS. The primary HPCs the product will be tested on is the Summit.
 
 \section{Design and Implementation Constraints}
 %$<$Describe any items or issues that will limit the options available to the developers. These might include: corporate or regulatory policies; hardware limitations (timing requirements, memory requirements); interfaces to other applications; specific technologies, tools, and databases to be used; parallel operations; language requirements; communications protocols; security considerations; design conventions or programming standards (for example, if the customer’s organization will be responsible for maintaining the delivered software).$>$
 
-The entire framework, including the API exposed to the user, will be python based but will support any task kernel intended for a Linux OS.
+The entire framework, including the API exposed to the user, will be Python based but will support any task kernel intended for a Linux OS.
 
 The current version will be using Ensemble Toolkit as the workflow management system, RADICAL Pilot (RP) as a runtime system and will be constrained to the performance limitations of the same. <TBA: Relevant RP performance numbers/plots>.
 
-The molecular dynamics simulation tool will use NAMD or Amber engines. Support for running engines in MPI or using GPUs depend on NCSA Blue Waters resources. 
+The optimizations will use Sci-kit Optimize. 
+% Support for running engines in MPI or using GPUs depend on NCSA Blue Waters resources. 
 
 \section{User Documentation}
 %$<$List the user documentation components (such as user manuals, on-line help, and tutorials) that will be delivered along with the software. Identify any known user documentation delivery formats or standards.$>$
 
-All the relevant code will be available on Github. HTBAC code will be made available at \url{https://github.com/radical-cybertools/radical.htbac}. Ensemble Toolkit code will be available at \url{https://github.com/radical-cybertools/radical.ensemblemd}. User manual for Ensemble Toolkit will be made available in \url{http://radicalensemblemd.readthedocs.org/en/latest/}. The code for the end-to-end workflow will be available on Github and user manual on \url{www.readthedocs.org}. The exact URLs will be updated as the project matures.
+All the relevant code will be available on Github. Hyperspace-RCT code will be made available at \url{https://github.com/jdakka/hyperspace-RCT}. Ensemble Toolkit code will be available at \url{https://github.com/radical-cybertools/radical.entk}. User manual for Ensemble Toolkit will be made available in \url{https://github.com/radical-cybertools/radical.entk}. The code for the end-to-end workflow will be available on Github and user manual on \url{www.readthedocs.org}. The exact URLs will be updated as the project matures.
 
 
 \section{Assumptions and Dependencies}
@@ -199,7 +201,7 @@ All the relevant code will be available on Github. HTBAC code will be made avail
 The following assumptions have been made:
 \begin{itemize}[noitemsep]
 \item Currently, the framework requires no interactivity. If a manual halt is necessary, this requires starting (as opposed to resuming) from the last checkpoint or backup.
-\item CPU-only/GPU/MPI support from Blue Waters is sufficient  for simulation.
+\item CPU-only is sufficient for executing the workflow.
 \end{itemize}
 
 The framework will have a dependency on the following tools:
@@ -207,7 +209,8 @@ The framework will have a dependency on the following tools:
 \begin{itemize}[noitemsep]
 \item RADICAL Pilot
 \item Ensemble Toolkit
-\item NAMD/AMBER 
+\item SciKit-Optimize
+\item Anaconda 
 \end{itemize}
 
 
@@ -230,7 +233,7 @@ The interaction between the product and the hardware, both on the local and remo
 \section{Software Interfaces}
 %$<$Describe the connections between this product and other specific software components (name and version), including databases, operating systems, tools, libraries, and integrated commercial components. Identify the data items or messages coming into the system and going out and describe the purpose of each.  Describe the services needed and the nature of communications. Refer to documents that describe detailed application programming interface protocols.  Identify data that will be shared across software components. If the data sharing mechanism must be implemented in a specific way (for example, use of a global data area in a multitasking operating system), specify this as an implementation constraint.$>$
 
-The user will be exposed to the python API provided by HTBAC. Depending on the database that is decided, the standard python API would be used to interface with the database. 
+The user will be exposed to the python API provided by Hyperspace. Depending on the database that is decided, the standard python API would be used to interface with the database. 
 
 \section{Communications Interfaces}
 %$<$Describe the requirements associated with any communications functions required by this product, including e-mail, web browser, network server communications protocols, electronic forms, and so on. Define any pertinent message formatting. Identify any communication standards that will be used, such as FTP or HTTP. Specify any communication security or encryption issues, data transfer rates, and synchronization mechanisms.$>$
@@ -246,13 +249,13 @@ There exists communication amongst the various internal components of the system
 
 This chapter enumerates the features the system is expected to support. Each of these features have requirements that will be given a priority and will be implemented in that order. 
 
-\section{Execution of O(1000) concurrent tasks on Blue Waters}
+\section{Execution of O(2**7) - O(2**12) concurrent tasks on Summit}
 
 
 \subsection{Description and Priority}
 %$<$Provide a short description of the feature and indicate whether it is of High, Medium, or Low priority. You could also include specific priority component ratings, such as benefit, penalty, cost, and risk (each rated on a relative scale from a low of 1 to a high of 9).$>$
 
-HTBAC should be bale to support O(1000) concurrent tasks on Blue Waters. It is important to note that depending on the stage of the workflow, all resources might not be in use at the same time. This is due to the tasks requiring various core counts.
+Hyperspace-RCT should enable execution of O(2**7) - O(2**12) concurrent tasks on Summit. It is important to note that depending on the stage of the workflow, all resources might not be in use at the same time. This is due to the tasks requiring various core counts.
 
 
 \subsection{Stimulus/Response Sequences}
