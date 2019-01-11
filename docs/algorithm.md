@@ -10,5 +10,5 @@
   * Determine new outliers
   * Calculate RMSD
   * If conditions are met (len(traj) <10K and outliers present, and if GPU available): 
-  * **Tasks**: (Simulations for outliers) 
+  * **Simulation of Outliers Tasks**: Each simulation uses `OpenMM` and executes on a single GPU
   * Increase the iteration counter
