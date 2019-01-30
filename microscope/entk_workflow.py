@@ -7,8 +7,8 @@ import radical.utils as ru
 import shutil
 
 
-# convert tabs to spaces (no tabs)
-
+# suspend pipelines:  
+# https://github.com/radical-cybertools/radical.entk/blob/master/examples/misc/suspend_pipelines.py
 
 # ------------------------------------------------------------------------------
 # Set default verbosity
@@ -28,6 +28,7 @@ class md_pipeline(Pipeline):
         self.name = name 
 
 
+
 class cvae_pipeline(Pipeline):
     def __init__(self, name):
         super(cvae_pipelinevae, self).__init__()
@@ -38,6 +39,27 @@ class md_stage(Stage):
     def __init__(self, name):
         super(md_stage, self).__init__()
         self.name = name
+        self.post_exec = {
+        'condition': self.func_condition(),
+        'on_true': self.func_on_true(),
+        'on_false': self.func_on_false()
+        }
+
+    def func_condition(self):
+
+        self.parent_pipeline.suspend()
+        print 'Suspending pipeline %s for 10 seconds' %self.parent_pipeline.uid
+        sleep(10)
+        return True
+
+    def func_on_true(self):
+
+        print 'Resuming pipeline %s' %self.parent_pipeline.uid
+        self.parent_pipeline.resume()
+
+    def func_on_false(self):
+        pass
+
         
 class cvae_train_stage(Stage):
     def __init__(self, name):
@@ -48,6 +70,27 @@ class cvae_inference_stage(Stage):
     def __init__(self, name):
         super(cvae_stage, self).__init__()
         self.name = name
+        self.post_exec = {
+        'condition': self.func_condition(),
+        'on_true': self.func_on_true(),
+        'on_false': self.func_on_false()
+    }
+
+    def func_condition(self):
+
+        self.parent_pipeline.suspend()
+        print 'Suspending pipeline %s for 10 seconds' %self.parent_pipeline.uid
+        sleep(10)
+        return True
+
+    def func_on_true(self):
+
+        print 'Resuming pipeline %s' %self.parent_pipeline.uid
+        self.parent_pipeline.resume()
+
+    def func_on_false(self):
+        pass
+
 
 
 class md_task(Task):
@@ -96,17 +139,11 @@ if __name__ == '__main__':
     final_hparams = list()
     final_hparams += number_of_hyperparameters * [initial_hparams[0]]
 
-
-    # EnTK single pipeline of two stages 
-
-    # pipelines = set()
-    
-    # Stage 1: generate all combinations of search subspaces (hyperspaces)
+    # Pipelines, Stages, Tasks 
 
     md_p = md_pipeline(name = 'MD_simulation_pipeline')
     cvae_p = cvae_pipe(name = 'CVAE_pipeline')
 
-    
     md_s1 = md_stage(name = 'MD_simulation_long_dur')
     md_s2 = md_stage(name = 'MD_simulation_short_dur')
 
