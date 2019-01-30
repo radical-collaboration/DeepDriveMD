@@ -1,6 +1,7 @@
 ## MicroScope Workflow 
 
 * MD/CVAE [Code](https://github.com/hengma1001/CVAE_pilot_MD)
+* Workflow [Diagram](https://docs.google.com/drawings/d/1NjNfeQi1ypQ8eVDmS9t4X8S3-Wy4mzcBbcR76Qh-NcE/edit?usp=sharing) 
 
 ## Hyperspace-RCT
 Hyperspace (ORNL) and RCT collaboration 
