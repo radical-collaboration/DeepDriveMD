@@ -31,7 +31,7 @@ class md_pipeline(Pipeline):
 
 class cvae_pipeline(Pipeline):
     def __init__(self, name):
-        super(cvae_pipelinevae, self).__init__()
+        super(cvae_pipeline, self).__init__()
         self.name = name 
 
 
@@ -99,7 +99,7 @@ class md_task(Task):
         self.name = name   
         self.pre_exec = ['export PATH=/home/dakka/stress-ng-0.09.40:$PATH']
         self.executable = ['stress-ng']
-        self.arguments = ['-c', '28', '-t', '{}'.format(duration)]
+        self.arguments = ['-c', '32', '-t', '{}'.format(duration)]
         self.cpu_reqs = {'processes': 1, 'thread_type': None, 'threads_per_process': 32, 'process_type': None}  
         self.gpu_reqs = {'processes': 1}  
         self.copy_input_data = []
@@ -111,7 +111,7 @@ class cvae_training_task(Task):
         self.name = name   
         self.pre_exec = ['export PATH=/home/dakka/stress-ng-0.09.40:$PATH']
         self.executable = ['stress-ng']
-        self.arguments = ['-c', '24', '-t', '6000'] 
+        self.arguments = ['-c', '32', '-t', '6000'] 
         self.cpu_reqs = {'processes': 1, 'thread_type': None, 'threads_per_process': 32, 'process_type': None}
         self.gpu_reqs = {'processes': 1}
         self.copy_input_data = []
@@ -123,8 +123,8 @@ class cvae_inference_task(Task):
         self.name = name   
         self.pre_exec = ['export PATH=/home/dakka/stress-ng-0.09.40:$PATH']
         self.executable = ['stress-ng']
-        self.arguments = ['-c', '24', '-t', '6000'] 
-        self.cpu_reqs = {'processes': 1, 'thread_type': None, 'threads_per_process': 32, 'process_type': None}
+        self.arguments = ['-c', '1', '-t', '6000'] 
+        self.cpu_reqs = {'processes': 1, 'thread_type': None, 'threads_per_process': 1, 'process_type': None}
         self.copy_input_data = []
 
 
@@ -209,13 +209,17 @@ if __name__ == '__main__':
     # Create Application Manager
     appman = AppManager(hostname=hostname, port=port)
 
+    total_cpus = 2**len(final_hparams)*32 + 28*32
+
     res_dict = {
 
-            'resource': 'local.localhost',
-            'walltime': 1,
-            'cpus': 1
+        'resource': 'xsede.bridges',
+        'project' : 'mc3bggp',
+        'queue' : 'GPU',
+        'walltime': walltime,
+        'cpus': total_cpus,
+        'access_schema': 'gsissh'
     }
-
 
     # Assign resource manager to the Application Manager
     appman.resource_desc = res_dict
