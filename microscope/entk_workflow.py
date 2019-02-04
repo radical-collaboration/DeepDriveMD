@@ -29,8 +29,11 @@ class MD_pipeline:
     def __init__(self, name = 'MD_pipeline'):
 
         self.name = name
-        self.engine = None
-        self.system = None
+        self.engine = None # OpenMM
+        self.system = None 
+
+        # benchmark example for OpenMM: 
+        # https://github.com/radical-cybertools/htbac/blob/master/examples/inputs/benchmark.py#L17-L18 
 
         self.processes = None
         self.gpu_processes = None
@@ -66,7 +69,7 @@ class MD_pipeline:
     def generate_stage(self):
         s = Stage()
         s.name = 'MD_stage'
-        s.add_tasks(self.generate_task()) 
+        tasks = [s.add_tasks(self.generate_task() for i in range(28))] 
         s.post_exec = {
             'condition': self.func_condition(),
             'on_true': self.func_on_true(),
@@ -137,7 +140,7 @@ class CVAE_pipeline:
     def generate_stage(self):
         s = Stage()
         s.name = 'MD_stage'
-        s.add_tasks(self.generate_task(task_no = "i")) 
+        tasks = [s.add_tasks(self.generate_task(task_no = "i") for i in range(28))] 
         s.post_exec = {
             'condition': self.func_condition(),
             'on_true': self.func_on_true(),
@@ -172,19 +175,40 @@ if __name__ == '__main__':
     # Create a dictionary describe four mandatory keys:
     # resource, walltime, cores and project
     # resource is 'local.localhost' to execute locally
+    # res_dict = {
+
+    #     'resource': 'local.localhost',
+    #     'walltime': 15,
+    #     'cpus': 2,
+    # }
+
+    hyperparams = 5 # typically 5
+    walltime = 30 
+    cpus_for_hyperspace = 2**len(hyperparams)*32 
+    cpus_for_md = 28*32
+    total_cpus = cpus_for_hyperspace + cpus_for_md
+
     res_dict = {
 
-        'resource': 'local.localhost',
-        'walltime': 15,
-        'cpus': 2,
+        'resource': 'xsede.bridges',
+        'project' : 'mc3bggp',
+        'queue' : 'GPU',
+        'walltime': walltime,
+        'cpus': total_cpus,
+        'access_schema': 'gsissh'
     }
+
 
     # Create Application Manager
     appman = AppManager(hostname=hostname, port=port)
     appman.resource_desc = res_dict
 
     md_p = MD_pipeline() 
-    p = md_p.generate_pipeline()
+    p1 = md_p.generate_pipeline()
+
+
+    cvae_p = CVAE_pipeline() 
+    p2 = cvae_p.generate_pipeline()
 
 
     # Assign the workflow as a set of Pipelines to the Application Manager
