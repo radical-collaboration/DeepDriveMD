@@ -69,7 +69,7 @@ class MD_pipeline:
     def generate_stage(self):
         s = Stage()
         s.name = 'MD_stage'
-        tasks = [s.add_tasks(self.generate_task() for i in range(28))] 
+        s.add_tasks(self.generate_task())
         s.post_exec = {
             'condition': self.func_condition(),
             'on_true': self.func_on_true(),
@@ -140,7 +140,7 @@ class CVAE_pipeline:
     def generate_stage(self):
         s = Stage()
         s.name = 'MD_stage'
-        tasks = [s.add_tasks(self.generate_task(task_no = "i") for i in range(28))] 
+        s.add_tasks(self.generate_task(task_no = "i"))
         s.post_exec = {
             'condition': self.func_condition(),
             'on_true': self.func_on_true(),
@@ -184,7 +184,7 @@ if __name__ == '__main__':
 
     hyperparams = 5 # typically 5
     walltime = 30 
-    cpus_for_hyperspace = 2**len(hyperparams)*32 
+    cpus_for_hyperspace = (2**hyperparams)*32 
     cpus_for_md = 28*32
     total_cpus = cpus_for_hyperspace + cpus_for_md
 
