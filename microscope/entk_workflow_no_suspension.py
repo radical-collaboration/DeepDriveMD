@@ -37,12 +37,12 @@ class MD_pipeline:
 
         self.processes = 1
         self.gpu_processes = None
-        self.threads_per_process = 28
+        self.threads_per_process = 14
         self.gpu_threads_per_process = None
-        self.duration = 120 
+        self.duration = 3600 
         self.p = Pipeline()
         self.p.name = name
-        self.md_tasks = 3
+        self.md_tasks = 18
         
     @property
     def md_cpus(self):
@@ -94,10 +94,10 @@ class CVAE_pipeline:
         self.gpu_processes = None
         self.threads_per_process = 28
         self.gpu_threads_per_process = None
-        self.duration = 120 
+        self.duration = 7200 
         self.p = Pipeline()
         self.p.name = name
-        self.cvae_tasks = 3
+        self.cvae_tasks = 10
     
     @property
     def cvae_cpus(self):
@@ -181,7 +181,7 @@ if __name__ == '__main__':
         'resource': 'xsede.bridges',
         'project' : 'mc3bggp',
         'queue' : 'RM',
-        'walltime': md_p.duration + 10,
+        'walltime': 130,
         'cpus': total_cpus,
         'access_schema': 'gsissh'
     }

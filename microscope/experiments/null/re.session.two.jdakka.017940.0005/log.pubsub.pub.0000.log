@@ -1,0 +1,18 @@
+2019-02-13 22:51:57,705: log.pubsub.pub.0000 : update.0                        : MainThread     : INFO    : python.interpreter   version: 2.7.12 (default, Nov 12 2018, 14:36:49) [GCC 5.4.0 20160609]
+2019-02-13 22:51:57,705: log.pubsub.pub.0000 : update.0                        : MainThread     : INFO    :                      pid/tid: 20862/MainThread
+2019-02-13 22:51:57,705: log.pubsub.pub.0000 : update.0                        : MainThread     : INFO    : create log_pubsub - pub - tcp://138.201.86.166:39343
+2019-02-13 22:51:57,707: log.pubsub.pub.0000 : update.0                        : MainThread     : DEBUG   : start process
+2019-02-13 22:51:57,707: log.pubsub.pub.0000 : update.0                        : MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2019-02-13 22:51:57,708: log.pubsub.pub.0000 : update.0                        : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
+2019-02-13 22:51:57,708: log.pubsub.pub.0000 : update.0                        : MainThread     : DEBUG   : process class started (no child)
+2019-02-13 22:51:58,533: log.pubsub.pub.0000 : MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.12 (default, Nov 12 2018, 14:36:49) [GCC 5.4.0 20160609]
+2019-02-13 22:51:58,533: log.pubsub.pub.0000 : MainProcess                     : MainThread     : INFO    :                      pid/tid: 20716/MainThread
+2019-02-13 22:51:58,533: log.pubsub.pub.0000 : MainProcess                     : MainThread     : INFO    : create log_pubsub - pub - tcp://138.201.86.166:39343
+2019-02-13 22:51:58,578: log.pubsub.pub.0000 : MainProcess                     : MainThread     : DEBUG   : start process
+2019-02-13 22:51:58,578: log.pubsub.pub.0000 : MainProcess                     : MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2019-02-13 22:51:58,578: log.pubsub.pub.0000 : MainProcess                     : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
+2019-02-13 22:51:58,578: log.pubsub.pub.0000 : MainProcess                     : MainThread     : DEBUG   : process class started (no child)
+2019-02-14 08:48:28,802: log.pubsub.pub.0000 : MainProcess                     : MainThread     : INFO    : parent stops child  20716 -> None [log.pubsub.pub.0000]
+2019-02-14 08:48:28,802: log.pubsub.pub.0000 : MainProcess                     : MainThread     : DEBUG   : ru_finalize_parent (NOOP)
+2019-02-14 08:48:29,023: log.pubsub.pub.0000 : update.0                        : MainThread     : INFO    : parent stops child  20862 -> None [log.pubsub.pub.0000]
+2019-02-14 08:48:29,023: log.pubsub.pub.0000 : update.0                        : MainThread     : DEBUG   : ru_finalize_parent (NOOP)

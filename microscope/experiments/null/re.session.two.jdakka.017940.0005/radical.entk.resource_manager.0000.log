@@ -1,0 +1,11 @@
+2019-02-13 22:51:56,010: radical.entk.resource_manager.0000: MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.12 (default, Nov 12 2018, 14:36:49) [GCC 5.4.0 20160609]
+2019-02-13 22:51:56,011: radical.entk.resource_manager.0000: MainProcess                     : MainThread     : INFO    :                      pid/tid: 20716/MainThread
+2019-02-13 22:51:56,031: radical.entk.resource_manager.0000: MainProcess                     : MainThread     : INFO    : Created resource manager object: resource_manager.0000
+2019-02-13 22:51:56,032: radical.entk.resource_manager.0000: MainProcess                     : MainThread     : INFO    : Resource description validated
+2019-02-13 22:52:03,667: radical.entk.resource_manager.0000: MainProcess                     : MainThread     : INFO    : Pilot pilot.0000 state: PMGR_LAUNCHING_PENDING
+2019-02-13 22:52:03,669: radical.entk.resource_manager.0000: MainProcess                     : MainThread     : INFO    : Resource request submission successful.. waiting for pilot to go Active
+2019-02-13 22:52:03,671: radical.entk.resource_manager.0000: MainProcess                     : pmgr.0000.subscriber._state_sub_cb: INFO    : Pilot pilot.0000 state: PMGR_LAUNCHING
+2019-02-13 22:52:17,852: radical.entk.resource_manager.0000: MainProcess                     : pmgr.0000.subscriber._state_sub_cb: INFO    : Pilot pilot.0000 state: PMGR_ACTIVE_PENDING
+2019-02-14 06:47:03,857: radical.entk.resource_manager.0000: MainProcess                     : pmgr.0000.idler._state_pull_cb: INFO    : Pilot pilot.0000 state: PMGR_ACTIVE
+2019-02-14 06:47:03,911: radical.entk.resource_manager.0000: MainProcess                     : MainThread     : INFO    : Pilot is now active
+2019-02-14 08:48:25,500: radical.entk.resource_manager.0000: MainProcess                     : pmgr.0000.idler._state_pull_cb: INFO    : Pilot pilot.0000 state: CANCELED
