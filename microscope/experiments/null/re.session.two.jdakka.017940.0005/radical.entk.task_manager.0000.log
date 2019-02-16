@@ -1,0 +1,1085 @@
+2019-02-14 06:47:03,923: radical.entk.task_manager.0000: MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.12 (default, Nov 12 2018, 14:36:49) [GCC 5.4.0 20160609]
+2019-02-14 06:47:03,923: radical.entk.task_manager.0000: MainProcess                     : MainThread     : INFO    :                      pid/tid: 20716/MainThread
+2019-02-14 06:47:03,958: radical.entk.task_manager.0000: MainProcess                     : MainThread     : INFO    : Created task manager object: task_manager.0000
+2019-02-14 06:47:03,960: radical.entk.task_manager.0000: MainProcess                     : MainThread     : INFO    : Starting task manager process
+2019-02-14 06:47:03,962: radical.entk.task_manager.0000: MainProcess                     : MainThread     : INFO    : Starting heartbeat thread
+2019-02-14 06:47:03,969: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Task Manager process started
+2019-02-14 06:47:03,970: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:47:03,986: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:47:03,986: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:47:05,312: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0000 to new state SUBMITTING successful
+2019-02-14 06:47:05,315: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0001 to new state SUBMITTING successful
+2019-02-14 06:47:05,322: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0002 to new state SUBMITTING successful
+2019-02-14 06:47:05,326: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0003 to new state SUBMITTING successful
+2019-02-14 06:47:05,329: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0004 to new state SUBMITTING successful
+2019-02-14 06:47:05,334: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0005 to new state SUBMITTING successful
+2019-02-14 06:47:05,337: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0006 to new state SUBMITTING successful
+2019-02-14 06:47:05,341: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0007 to new state SUBMITTING successful
+2019-02-14 06:47:05,344: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0008 to new state SUBMITTING successful
+2019-02-14 06:47:05,348: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0009 to new state SUBMITTING successful
+2019-02-14 06:47:05,351: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0010 to new state SUBMITTING successful
+2019-02-14 06:47:05,355: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0011 to new state SUBMITTING successful
+2019-02-14 06:47:05,358: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0012 to new state SUBMITTING successful
+2019-02-14 06:47:05,361: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0013 to new state SUBMITTING successful
+2019-02-14 06:47:05,365: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0014 to new state SUBMITTING successful
+2019-02-14 06:47:05,369: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0015 to new state SUBMITTING successful
+2019-02-14 06:47:05,373: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0016 to new state SUBMITTING successful
+2019-02-14 06:47:05,378: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0017 to new state SUBMITTING successful
+2019-02-14 06:47:05,382: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0018 to new state SUBMITTING successful
+2019-02-14 06:47:05,385: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0019 to new state SUBMITTING successful
+2019-02-14 06:47:05,389: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0020 to new state SUBMITTING successful
+2019-02-14 06:47:05,392: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0021 to new state SUBMITTING successful
+2019-02-14 06:47:05,395: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0022 to new state SUBMITTING successful
+2019-02-14 06:47:05,399: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0023 to new state SUBMITTING successful
+2019-02-14 06:47:05,402: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0024 to new state SUBMITTING successful
+2019-02-14 06:47:05,406: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0025 to new state SUBMITTING successful
+2019-02-14 06:47:05,409: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0026 to new state SUBMITTING successful
+2019-02-14 06:47:05,413: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0027 to new state SUBMITTING successful
+2019-02-14 06:47:05,648: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0000 to new state SUBMITTED successful
+2019-02-14 06:47:05,655: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0001 to new state SUBMITTED successful
+2019-02-14 06:47:05,659: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0002 to new state SUBMITTED successful
+2019-02-14 06:47:05,662: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0003 to new state SUBMITTED successful
+2019-02-14 06:47:05,666: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0004 to new state SUBMITTED successful
+2019-02-14 06:47:05,669: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0005 to new state SUBMITTED successful
+2019-02-14 06:47:05,672: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0006 to new state SUBMITTED successful
+2019-02-14 06:47:05,676: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0007 to new state SUBMITTED successful
+2019-02-14 06:47:05,678: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0008 to new state SUBMITTED successful
+2019-02-14 06:47:05,680: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0009 to new state SUBMITTED successful
+2019-02-14 06:47:05,684: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0010 to new state SUBMITTED successful
+2019-02-14 06:47:05,686: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0011 to new state SUBMITTED successful
+2019-02-14 06:47:05,688: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0012 to new state SUBMITTED successful
+2019-02-14 06:47:05,692: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0013 to new state SUBMITTED successful
+2019-02-14 06:47:05,696: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0014 to new state SUBMITTED successful
+2019-02-14 06:47:05,700: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0015 to new state SUBMITTED successful
+2019-02-14 06:47:05,703: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0016 to new state SUBMITTED successful
+2019-02-14 06:47:05,707: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0017 to new state SUBMITTED successful
+2019-02-14 06:47:05,710: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0018 to new state SUBMITTED successful
+2019-02-14 06:47:05,713: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0019 to new state SUBMITTED successful
+2019-02-14 06:47:05,718: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0020 to new state SUBMITTED successful
+2019-02-14 06:47:05,722: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0021 to new state SUBMITTED successful
+2019-02-14 06:47:05,726: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0022 to new state SUBMITTED successful
+2019-02-14 06:47:05,729: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0023 to new state SUBMITTED successful
+2019-02-14 06:47:05,731: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0024 to new state SUBMITTED successful
+2019-02-14 06:47:05,734: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0025 to new state SUBMITTED successful
+2019-02-14 06:47:05,736: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0026 to new state SUBMITTED successful
+2019-02-14 06:47:05,738: radical.entk.task_manager.0000: task-manager                    : Thread-1       : INFO    : Transition of task.0027 to new state SUBMITTED successful
+2019-02-14 06:47:33,973: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:47:33,973: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:47:33,974: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:47:33,974: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:48:03,974: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:48:03,975: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:48:03,975: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:48:03,976: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:48:33,978: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:48:33,979: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:48:33,979: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:48:33,980: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:49:03,983: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:49:03,983: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:49:03,984: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:49:03,984: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:49:33,986: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:49:33,988: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:49:33,987: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:49:33,988: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:50:03,990: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:50:03,992: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:50:03,992: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:50:03,992: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:50:33,992: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:50:33,993: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:50:33,993: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:50:33,994: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:51:03,995: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:51:03,996: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:51:03,996: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:51:03,996: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:51:33,997: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:51:33,998: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:51:33,998: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:51:33,998: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:52:03,999: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:52:03,999: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:52:04,000: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:52:04,000: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:52:34,000: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:52:34,001: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:52:34,001: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:52:34,002: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:53:04,002: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:53:04,002: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:53:04,003: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:53:04,003: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:53:34,003: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:53:34,004: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:53:34,004: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:53:34,004: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:54:04,005: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:54:04,006: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:54:04,006: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:54:04,006: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:54:34,007: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:54:34,008: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:54:34,008: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:54:34,008: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:55:04,010: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:55:04,011: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:55:04,012: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:55:04,012: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:55:34,014: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:55:34,015: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:55:34,016: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:55:34,016: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:56:04,016: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:56:04,017: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:56:04,017: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:56:04,018: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:56:34,019: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:56:34,020: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:56:34,020: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:56:34,020: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:57:04,020: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:57:04,021: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:57:04,022: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:57:04,022: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:57:34,022: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:57:34,023: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:57:34,024: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:57:34,024: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:58:04,024: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:58:04,025: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:58:04,025: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:58:04,026: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:58:34,026: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:58:34,028: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:58:34,028: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:58:34,028: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:59:04,029: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:59:04,029: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:59:04,030: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:59:04,030: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 06:59:34,031: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 06:59:34,032: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 06:59:34,032: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 06:59:34,033: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:00:04,033: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:00:04,034: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:00:04,034: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:00:04,034: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:00:34,034: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:00:34,035: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:00:34,036: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:00:34,036: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:01:04,036: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:01:04,037: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:01:04,038: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:01:04,038: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:01:34,038: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:01:34,039: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:01:34,040: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:01:34,040: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:02:04,040: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:02:04,041: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:02:04,042: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:02:04,042: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:02:34,042: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:02:34,043: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:02:34,043: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:02:34,043: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:03:04,044: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:03:04,044: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:03:04,045: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:03:04,045: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:03:34,045: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:03:34,046: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:03:34,046: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:03:34,046: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:04:04,047: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:04:04,048: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:04:04,048: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:04:04,048: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:04:34,048: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:04:34,049: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:04:34,050: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:04:34,050: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:05:04,050: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:05:04,051: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:05:04,051: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:05:04,051: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:05:34,051: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:05:34,052: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:05:34,053: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:05:34,053: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:06:04,053: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:06:04,054: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:06:04,054: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:06:04,055: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:06:34,055: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:06:34,056: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:06:34,056: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:06:34,056: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:07:04,057: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:07:04,057: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:07:04,058: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:07:04,058: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:07:34,058: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:07:34,059: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:07:34,060: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:07:34,060: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:08:04,060: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:08:04,061: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:08:04,061: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:08:04,062: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:08:34,063: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:08:34,064: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:08:34,064: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:08:34,064: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:09:04,065: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:09:04,066: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:09:04,066: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:09:04,067: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:09:34,066: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:09:34,067: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:09:34,068: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:09:34,068: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:10:04,068: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:10:04,095: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:10:04,095: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:10:04,096: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:10:34,096: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:10:34,097: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:10:34,097: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:10:34,098: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:11:04,098: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:11:04,099: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:11:04,099: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:11:04,100: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:11:34,100: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:11:34,101: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:11:34,102: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:11:34,102: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:12:04,101: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:12:04,102: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:12:04,103: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:12:04,103: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:12:34,103: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:12:34,103: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:12:34,104: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:12:34,104: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:13:04,104: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:13:04,106: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:13:04,106: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:13:04,106: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:13:34,106: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:13:34,107: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:13:34,108: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:13:34,108: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:14:04,108: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:14:04,109: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:14:04,110: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:14:04,110: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:14:34,110: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:14:34,111: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:14:34,111: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:14:34,112: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:15:04,112: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:15:04,112: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:15:04,113: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:15:04,113: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:15:34,113: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:15:34,114: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:15:34,114: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:15:34,115: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:16:04,115: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:16:04,115: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:16:04,115: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:16:04,115: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:16:34,116: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:16:34,117: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:16:34,117: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:16:34,118: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:17:04,118: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:17:04,119: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:17:04,120: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:17:04,120: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:17:34,120: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:17:34,121: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:17:34,121: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:17:34,122: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:18:04,122: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:18:04,123: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:18:04,123: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:18:04,123: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:18:34,124: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:18:34,124: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:18:34,125: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:18:34,125: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:19:04,125: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:19:04,126: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:19:04,126: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:19:04,127: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:19:34,127: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:19:34,128: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:19:34,128: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:19:34,128: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:20:04,129: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:20:04,129: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:20:04,130: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:20:04,130: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:20:34,130: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:20:34,132: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:20:34,132: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:20:34,132: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:21:04,132: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:21:04,133: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:21:04,133: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:21:04,134: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:21:34,134: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:21:34,135: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:21:34,135: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:21:34,136: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:22:04,136: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:22:04,137: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:22:04,137: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:22:04,137: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:22:34,137: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:22:34,138: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:22:34,139: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:22:34,139: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:23:04,139: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:23:04,140: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:23:04,140: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:23:04,140: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:23:34,141: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:23:34,142: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:23:34,142: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:23:34,142: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:24:04,142: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:24:04,143: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:24:04,143: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:24:04,144: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:24:34,143: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:24:34,144: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:24:34,145: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:24:34,145: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:25:04,145: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:25:04,146: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:25:04,146: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:25:04,146: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:25:34,146: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:25:34,147: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:25:34,148: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:25:34,148: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:26:04,150: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:26:04,151: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:26:04,152: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:26:04,152: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:26:34,152: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:26:34,154: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:26:34,154: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:26:34,154: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:27:04,155: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:27:04,156: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:27:04,156: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:27:04,156: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:27:34,157: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:27:34,158: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:27:34,158: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:27:34,159: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:28:04,159: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:28:04,160: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:28:04,160: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:28:04,160: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:28:34,161: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:28:34,161: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:28:34,162: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:28:34,162: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:29:04,162: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:29:04,163: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:29:04,163: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:29:04,163: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:29:34,164: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:29:34,165: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:29:34,165: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:29:34,165: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:30:04,166: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:30:04,166: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:30:04,167: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:30:04,167: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:30:34,167: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:30:34,168: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:30:34,169: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:30:34,169: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:31:04,169: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:31:04,170: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:31:04,171: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:31:04,171: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:31:34,171: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:31:34,172: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:31:34,173: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:31:34,173: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:32:04,173: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:32:04,174: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:32:04,174: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:32:04,175: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:32:34,175: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:32:34,176: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:32:34,176: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:32:34,177: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:33:04,177: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:33:04,178: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:33:04,179: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:33:04,179: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:33:34,179: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:33:34,180: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:33:34,182: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:33:34,182: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:34:04,180: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:34:04,181: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:34:04,182: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:34:04,182: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:34:34,182: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:34:34,183: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:34:34,184: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:34:34,184: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:35:04,184: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:35:04,185: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:35:04,186: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:35:04,186: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:35:34,186: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:35:34,187: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:35:34,188: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:35:34,188: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:36:04,188: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:36:04,189: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:36:04,190: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:36:04,190: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:36:34,190: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:36:34,191: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:36:34,191: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:36:34,192: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:37:04,192: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:37:04,192: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:37:04,193: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:37:04,193: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:37:34,194: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:37:34,194: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:37:34,195: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:37:34,195: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:38:04,195: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:38:04,196: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:38:04,197: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:38:04,197: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:38:34,197: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:38:34,198: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:38:34,198: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:38:34,198: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:39:04,199: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:39:04,200: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:39:04,200: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:39:04,200: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:39:34,200: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:39:34,201: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:39:34,202: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:39:34,202: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:40:04,203: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:40:04,204: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:40:04,204: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:40:04,204: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:40:34,205: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:40:34,205: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:40:34,206: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:40:34,206: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:41:04,206: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:41:04,207: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:41:04,207: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:41:04,208: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:41:34,208: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:41:34,209: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:41:34,209: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:41:34,209: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:42:04,209: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:42:04,210: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:42:04,211: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:42:04,211: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:42:34,211: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:42:34,212: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:42:34,212: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:42:34,213: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:43:04,213: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:43:04,214: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:43:04,214: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:43:04,214: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:43:34,214: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:43:34,215: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:43:34,216: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:43:34,216: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:44:04,216: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:44:04,216: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:44:04,216: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:44:04,217: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:44:34,217: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:44:34,218: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:44:34,218: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:44:34,219: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:45:04,219: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:45:04,219: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:45:04,219: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:45:04,220: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:45:34,220: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:45:34,221: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:45:34,221: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:45:34,221: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:46:04,221: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:46:04,223: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:46:04,223: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:46:04,223: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:46:34,224: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:46:34,224: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:46:34,225: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:46:34,225: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:47:04,225: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:47:04,226: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:47:04,226: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:47:04,227: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:47:24,183: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0006 to new state EXECUTED successful
+2019-02-14 07:47:24,183: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0006 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 07:47:24,191: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0007 to new state EXECUTED successful
+2019-02-14 07:47:24,192: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0007 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 07:47:24,211: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0000 to new state EXECUTED successful
+2019-02-14 07:47:24,212: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0000 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 07:47:24,220: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0002 to new state EXECUTED successful
+2019-02-14 07:47:24,220: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0002 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 07:47:25,380: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0003 to new state EXECUTED successful
+2019-02-14 07:47:25,380: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0003 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 07:47:25,387: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0001 to new state EXECUTED successful
+2019-02-14 07:47:25,388: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0001 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 07:47:25,395: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0004 to new state EXECUTED successful
+2019-02-14 07:47:25,395: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0004 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 07:47:25,403: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0010 to new state EXECUTED successful
+2019-02-14 07:47:25,403: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0010 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 07:47:26,646: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0005 to new state EXECUTED successful
+2019-02-14 07:47:26,646: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0005 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 07:47:26,655: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0011 to new state EXECUTED successful
+2019-02-14 07:47:26,656: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0011 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 07:47:26,663: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0012 to new state EXECUTED successful
+2019-02-14 07:47:26,664: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0012 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 07:47:26,673: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0014 to new state EXECUTED successful
+2019-02-14 07:47:26,673: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0014 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 07:47:27,918: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0013 to new state EXECUTED successful
+2019-02-14 07:47:27,919: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0013 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 07:47:27,928: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0015 to new state EXECUTED successful
+2019-02-14 07:47:27,929: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0015 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 07:47:27,938: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0017 to new state EXECUTED successful
+2019-02-14 07:47:27,938: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0017 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 07:47:27,946: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0016 to new state EXECUTED successful
+2019-02-14 07:47:27,947: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0016 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 07:47:27,955: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0008 to new state EXECUTED successful
+2019-02-14 07:47:27,955: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0008 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 07:47:27,970: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0009 to new state EXECUTED successful
+2019-02-14 07:47:27,970: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0009 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 07:47:34,227: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:47:34,228: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:47:34,228: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:47:34,229: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:48:04,229: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:48:04,230: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:48:04,230: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:48:04,230: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:48:34,231: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:48:34,231: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:48:34,247: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:48:34,247: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:49:04,232: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:49:04,233: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:49:04,234: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:49:04,234: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:49:34,235: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:49:34,237: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:49:34,237: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:49:34,237: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:50:04,237: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:50:04,238: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:50:04,239: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:50:04,239: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:50:34,240: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:50:34,241: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:50:34,242: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:50:34,242: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:51:04,242: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:51:04,243: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:51:04,244: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:51:04,244: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:51:34,244: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:51:34,245: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:51:34,246: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:51:34,246: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:52:04,246: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:52:04,246: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:52:04,246: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:52:04,247: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:52:34,270: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:52:34,271: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:52:34,271: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:52:34,272: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:53:04,272: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:53:04,273: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:53:04,274: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:53:04,274: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:53:34,274: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:53:34,275: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:53:34,276: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:53:34,276: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:54:04,276: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:54:04,278: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:54:04,278: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:54:04,278: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:54:34,279: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:54:34,280: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:54:34,280: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:54:34,280: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:55:04,280: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:55:04,281: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:55:04,282: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:55:04,282: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:55:34,282: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:55:34,283: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:55:34,283: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:55:34,284: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:56:04,284: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:56:04,285: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:56:04,285: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:56:04,285: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:56:34,286: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:56:34,287: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:56:34,287: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:56:34,287: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:57:04,287: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:57:04,288: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:57:04,289: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:57:04,289: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:57:34,289: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:57:34,291: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:57:34,292: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:57:34,292: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:58:04,292: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:58:04,293: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:58:04,293: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:58:04,294: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:58:34,294: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:58:34,295: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:58:34,295: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:58:34,296: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:59:04,296: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:59:04,296: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:59:04,297: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:59:04,297: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 07:59:34,297: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 07:59:34,298: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 07:59:34,299: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 07:59:34,299: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:00:04,299: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:00:04,300: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:00:04,300: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:00:04,301: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:00:34,301: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:00:34,302: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:00:34,302: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:00:34,302: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:01:04,302: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:01:04,303: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:01:04,303: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:01:04,303: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:01:34,303: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:01:34,304: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:01:34,305: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:01:34,305: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:02:04,306: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:02:04,307: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:02:04,307: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:02:04,308: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:02:34,308: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:02:34,309: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:02:34,309: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:02:34,309: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:03:04,310: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:03:04,311: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:03:04,311: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:03:04,311: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:03:34,311: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:03:34,313: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:03:34,313: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:03:34,313: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:04:04,313: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:04:04,314: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:04:04,314: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:04:04,315: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:04:34,315: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:04:34,316: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:04:34,317: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:04:34,317: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:05:04,317: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:05:04,318: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:05:04,319: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:05:04,319: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:05:34,319: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:05:34,320: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:05:34,320: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:05:34,320: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:06:04,320: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:06:04,321: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:06:04,322: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:06:04,322: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:06:34,322: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:06:34,323: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:06:34,323: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:06:34,324: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:07:04,324: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:07:04,324: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:07:04,325: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:07:04,325: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:07:34,325: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:07:34,326: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:07:34,326: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:07:34,326: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:08:04,327: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:08:04,328: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:08:04,328: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:08:04,328: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:08:34,328: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:08:34,330: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:08:34,330: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:08:34,330: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:09:04,330: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:09:04,331: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:09:04,332: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:09:04,332: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:09:34,333: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:09:34,334: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:09:34,334: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:09:34,335: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:10:04,335: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:10:04,336: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:10:04,336: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:10:04,337: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:10:34,337: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:10:34,337: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:10:34,338: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:10:34,338: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:11:04,338: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:11:04,339: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:11:04,339: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:11:04,340: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:11:34,340: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:11:34,341: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:11:34,341: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:11:34,342: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:12:04,342: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:12:04,343: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:12:04,343: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:12:04,344: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:12:34,344: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:12:34,345: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:12:34,345: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:12:34,346: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:13:04,346: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:13:04,347: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:13:04,347: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:13:04,348: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:13:34,348: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:13:34,349: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:13:34,349: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:13:34,349: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:14:04,349: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:14:04,350: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:14:04,351: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:14:04,351: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:14:34,351: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:14:34,352: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:14:34,352: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:14:34,352: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:15:04,353: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:15:04,353: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:15:04,354: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:15:04,354: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:15:34,354: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:15:34,355: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:15:34,355: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:15:34,355: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:16:04,356: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:16:04,357: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:16:04,357: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:16:04,357: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:16:34,357: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:16:34,358: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:16:34,358: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:16:34,359: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:17:04,359: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:17:04,360: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:17:04,361: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:17:04,361: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:17:34,362: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:17:34,363: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:17:34,363: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:17:34,363: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:18:04,364: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:18:04,364: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:18:04,365: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:18:04,365: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:18:34,365: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:18:34,366: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:18:34,366: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:18:34,367: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:19:04,367: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:19:04,368: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:19:04,368: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:19:04,368: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:19:34,368: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:19:34,369: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:19:34,370: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:19:34,370: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:20:04,370: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:20:04,370: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:20:04,371: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:20:04,371: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:20:34,371: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:20:34,373: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:20:34,373: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:20:34,373: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:21:04,374: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:21:04,493: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:21:04,493: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:21:04,493: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:21:34,493: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:21:34,495: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:21:34,495: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:21:34,495: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:22:04,495: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:22:04,497: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:22:04,498: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:22:04,498: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:22:34,497: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:22:34,498: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:22:34,499: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:22:34,499: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:23:04,499: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:23:04,500: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:23:04,500: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:23:04,500: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:23:34,500: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:23:34,501: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:23:34,502: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:23:34,502: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:24:04,502: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:24:04,503: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:24:04,503: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:24:04,503: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:24:34,503: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:24:34,504: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:24:34,505: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:24:34,505: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:25:04,505: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:25:04,506: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:25:04,506: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:25:04,506: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:25:34,507: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:25:34,508: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:25:34,508: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:25:34,508: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:26:04,509: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:26:04,510: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:26:04,510: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:26:04,510: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:26:34,511: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:26:34,512: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:26:34,512: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:26:34,512: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:27:04,512: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:27:04,513: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:27:04,514: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:27:04,514: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:27:34,514: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:27:34,515: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:27:34,515: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:27:34,516: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:28:04,516: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:28:04,517: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:28:04,517: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:28:04,518: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:28:34,518: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:28:34,519: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:28:34,520: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:28:34,520: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:29:04,520: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:29:04,521: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:29:04,522: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:29:04,522: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:29:34,522: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:29:34,523: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:29:34,524: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:29:34,524: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:30:04,524: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:30:04,525: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:30:04,526: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:30:04,526: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:30:34,528: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:30:34,530: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:30:34,530: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:30:34,530: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:31:04,531: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:31:04,531: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:31:04,532: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:31:04,533: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:31:34,532: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:31:34,533: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:31:34,533: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:31:34,533: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:32:04,534: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:32:04,535: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:32:04,535: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:32:04,536: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:32:34,537: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:32:34,538: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:32:34,539: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:32:34,539: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:33:04,539: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:33:04,540: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:33:04,541: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:33:04,541: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:33:34,541: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:33:34,542: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:33:34,542: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:33:34,542: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:34:04,542: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:34:04,544: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:34:04,544: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:34:04,544: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:34:34,545: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:34:34,545: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:34:34,546: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:34:34,546: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:35:04,546: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:35:04,547: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:35:04,548: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:35:04,548: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:35:34,548: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:35:34,549: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:35:34,549: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:35:34,549: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:36:04,550: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:36:04,551: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:36:04,551: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:36:04,551: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:36:34,551: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:36:34,553: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:36:34,553: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:36:34,553: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:37:04,553: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:37:04,554: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:37:04,554: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:37:04,555: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:37:34,555: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:37:34,556: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:37:34,556: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:37:34,557: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:38:04,557: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:38:04,558: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:38:04,558: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:38:04,559: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:38:34,559: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:38:34,560: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:38:34,561: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:38:34,561: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:39:04,561: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:39:04,562: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:39:04,562: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:39:04,562: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:39:34,563: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:39:34,565: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:39:34,565: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:39:34,566: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:40:04,566: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:40:04,567: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:40:04,567: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:40:04,568: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:40:34,568: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:40:34,569: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:40:34,569: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:40:34,570: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:41:04,570: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:41:04,571: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:41:04,572: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:41:04,572: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:41:34,572: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:41:34,573: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:41:34,574: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:41:34,574: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:42:04,574: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:42:04,574: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:42:04,575: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:42:04,576: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:42:34,576: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:42:34,578: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:42:34,578: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:42:34,578: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:43:04,578: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:43:04,579: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:43:04,579: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:43:04,579: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:43:34,581: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:43:34,582: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:43:34,582: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:43:34,582: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:44:04,582: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:44:04,583: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:44:04,584: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:44:04,584: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:44:34,584: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:44:34,585: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:44:34,585: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:44:34,586: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:45:04,586: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:45:04,587: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:45:04,587: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:45:04,588: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:45:34,588: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:45:34,588: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:45:34,589: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:45:34,589: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:46:04,589: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:46:04,590: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:46:04,590: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:46:04,590: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:46:34,591: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:46:34,592: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:46:34,592: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:46:34,593: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:47:04,593: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:47:04,593: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:47:04,594: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Received heartbeat request
+2019-02-14 08:47:04,594: radical.entk.task_manager.0000: task-manager                    : MainThread     : INFO    : Sent heartbeat response
+2019-02-14 08:47:22,904: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0018 to new state EXECUTED successful
+2019-02-14 08:47:22,905: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0018 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 08:47:22,912: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0023 to new state EXECUTED successful
+2019-02-14 08:47:22,913: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0023 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 08:47:22,921: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0019 to new state EXECUTED successful
+2019-02-14 08:47:22,921: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0019 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 08:47:22,928: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0021 to new state EXECUTED successful
+2019-02-14 08:47:22,929: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0021 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 08:47:22,937: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0024 to new state EXECUTED successful
+2019-02-14 08:47:22,937: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0024 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 08:47:22,945: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0022 to new state EXECUTED successful
+2019-02-14 08:47:22,946: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0022 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 08:47:22,955: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0025 to new state EXECUTED successful
+2019-02-14 08:47:22,955: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0025 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 08:47:22,965: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0020 to new state EXECUTED successful
+2019-02-14 08:47:22,966: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0020 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 08:47:22,977: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0026 to new state EXECUTED successful
+2019-02-14 08:47:22,978: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0026 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 08:47:25,459: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Transition of task.0027 to new state EXECUTED successful
+2019-02-14 08:47:25,459: radical.entk.task_manager.0000: task-manager                    : umgr.0000.subscriber._state_sub_cb: INFO    : Pushed task task.0027 with state EXECUTED to completed queue re.session.two.jdakka.017940.0005-completedq-1
+2019-02-14 08:47:34,595: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Received heartbeat response
+2019-02-14 08:47:34,596: radical.entk.task_manager.0000: MainProcess                     : heartbeat      : INFO    : Sent heartbeat request
+2019-02-14 08:47:41,935: radical.entk.task_manager.0000: MainProcess                     : MainThread     : INFO    : Task manager process closed
+2019-02-14 08:48:04,600: radical.entk.task_manager.0000: MainProcess                     : MainThread     : INFO    : Hearbeat thread terminated

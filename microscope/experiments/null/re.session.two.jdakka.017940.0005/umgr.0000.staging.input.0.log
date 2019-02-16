@@ -1,0 +1,83 @@
+2019-02-14 06:47:04,066: umgr.0000.staging.input.0: task-manager                    : Thread-1       : INFO    : python.interpreter   version: 2.7.12 (default, Nov 12 2018, 14:36:49) [GCC 5.4.0 20160609]
+2019-02-14 06:47:04,066: umgr.0000.staging.input.0: task-manager                    : Thread-1       : INFO    :                      pid/tid: 23824/Thread-1
+2019-02-14 06:47:04,066: umgr.0000.staging.input.0: task-manager                    : Thread-1       : DEBUG   : alive check in term
+2019-02-14 06:47:04,066: umgr.0000.staging.input.0: task-manager                    : Thread-1       : DEBUG   : start process
+2019-02-14 06:47:04,205: umgr.0000.staging.input.0: task-manager                    : Thread-1       : INFO    : recv message: alive
+2019-02-14 06:47:04,205: umgr.0000.staging.input.0: task-manager                    : Thread-1       : INFO    : initialize umgr.0000.staging.input.0
+2019-02-14 06:47:04,208: umgr.0000.staging.input.0: task-manager                    : Thread-1       : INFO    : cfg: {'agents': {},
+ u'bridges': {u'control_pubsub': {'addr_in': 'tcp://138.201.86.166:41339',
+                                  'addr_out': 'tcp://138.201.86.166:43036',
+                                  u'bulk_size': 0,
+                                  u'log_level': u'error',
+                                  u'stall_hwm': 1},
+              u'log_pubsub': {'addr_in': 'tcp://138.201.86.166:39343',
+                              'addr_out': 'tcp://138.201.86.166:33062',
+                              u'bulk_size': 0,
+                              u'log_level': u'error',
+                              u'stall_hwm': 1},
+              u'state_pubsub': {'addr_in': 'tcp://138.201.86.166:34796',
+                                'addr_out': 'tcp://138.201.86.166:45913',
+                                u'bulk_size': 0,
+                                u'log_level': u'error',
+                                u'stall_hwm': 1},
+              u'umgr_reschedule_pubsub': {'addr_in': 'tcp://138.201.86.166:34599',
+                                          'addr_out': 'tcp://138.201.86.166:39908',
+                                          u'bulk_size': 0,
+                                          u'log_level': u'error',
+                                          u'stall_hwm': 1},
+              u'umgr_scheduling_queue': {'addr_in': 'tcp://138.201.86.166:42857',
+                                         'addr_out': 'tcp://138.201.86.166:46784',
+                                         u'bulk_size': 0,
+                                         u'log_level': u'error',
+                                         u'stall_hwm': 1},
+              u'umgr_staging_input_queue': {'addr_in': 'tcp://138.201.86.166:42779',
+                                            'addr_out': 'tcp://138.201.86.166:34395',
+                                            u'bulk_size': 0,
+                                            u'log_level': u'error',
+                                            u'stall_hwm': 1},
+              u'umgr_staging_output_queue': {'addr_in': 'tcp://138.201.86.166:42056',
+                                             'addr_out': 'tcp://138.201.86.166:36855',
+                                             u'bulk_size': 0,
+                                             u'log_level': u'error',
+                                             u'stall_hwm': 1},
+              u'umgr_unschedule_pubsub': {'addr_in': 'tcp://138.201.86.166:33217',
+                                          'addr_out': 'tcp://138.201.86.166:41039',
+                                          u'bulk_size': 0,
+                                          u'log_level': u'error',
+                                          u'stall_hwm': 1}},
+ u'bulk_collection_size': 100,
+ u'bulk_collection_time': 1.0,
+ 'cname': u'UMGRStagingInputComponent',
+ u'components': {},
+ u'count': 1,
+ u'db_poll_sleeptime': 1.0,
+ 'number': 0,
+ 'owner': 'umgr.0000',
+ u'scheduler': u'round_robin',
+ 'uid': 'umgr.0000'}
+2019-02-14 06:47:04,208: umgr.0000.staging.input.0: task-manager                    : Thread-1       : DEBUG   : alive check in term
+2019-02-14 06:47:04,208: umgr.0000.staging.input.0: task-manager                    : Thread-1       : DEBUG   : START: umgr.0000.staging.input.0 register publisher log_pubsub
+2019-02-14 06:47:04,208: umgr.0000.staging.input.0: task-manager                    : Thread-1       : DEBUG   : using addr tcp://138.201.86.166:39343 for pubsub log_pubsub
+2019-02-14 06:47:04,210: umgr.0000.staging.input.0: task-manager                    : Thread-1       : DEBUG   : registered publisher : log_pubsub : log.pubsub.pub.0003
+2019-02-14 06:47:04,210: umgr.0000.staging.input.0: task-manager                    : Thread-1       : DEBUG   : alive check in term
+2019-02-14 06:47:04,210: umgr.0000.staging.input.0: task-manager                    : Thread-1       : DEBUG   : START: umgr.0000.staging.input.0 register publisher state_pubsub
+2019-02-14 06:47:04,210: umgr.0000.staging.input.0: task-manager                    : Thread-1       : DEBUG   : using addr tcp://138.201.86.166:34796 for pubsub state_pubsub
+2019-02-14 06:47:04,234: umgr.0000.staging.input.0: task-manager                    : Thread-1       : DEBUG   : registered publisher : state_pubsub : state.pubsub.pub.0003
+2019-02-14 06:47:04,234: umgr.0000.staging.input.0: task-manager                    : Thread-1       : DEBUG   : alive check in term
+2019-02-14 06:47:04,234: umgr.0000.staging.input.0: task-manager                    : Thread-1       : DEBUG   : START: umgr.0000.staging.input.0 register publisher control_pubsub
+2019-02-14 06:47:04,234: umgr.0000.staging.input.0: task-manager                    : Thread-1       : DEBUG   : using addr tcp://138.201.86.166:41339 for pubsub control_pubsub
+2019-02-14 06:47:04,236: umgr.0000.staging.input.0: task-manager                    : Thread-1       : DEBUG   : registered publisher : control_pubsub : control.pubsub.pub.0003
+2019-02-14 06:47:04,236: umgr.0000.staging.input.0: task-manager                    : Thread-1       : DEBUG   : parent name: umgr.0000.staging.input.0.watch
+2019-02-14 06:47:04,236: umgr.0000.staging.input.0: task-manager                    : Thread-1       : DEBUG   : start thread
+2019-02-14 06:47:04,236: umgr.0000.staging.input.0: task-manager                    : umgr.0000.staging.input.0.watch: DEBUG   : child name: umgr.0000.staging.input.0.watch.thread
+2019-02-14 06:47:04,236: umgr.0000.staging.input.0: task-manager                    : umgr.0000.staging.input.0.watch: INFO    : child (me) initializing
+2019-02-14 06:47:04,236: umgr.0000.staging.input.0: task-manager                    : umgr.0000.staging.input.0.watch: DEBUG   : ru_initialize_common (NOOP)
+2019-02-14 06:47:04,237: umgr.0000.staging.input.0: task-manager                    : umgr.0000.staging.input.0.watch: DEBUG   : ru_initialize_child (NOOP)
+2019-02-14 06:47:04,237: umgr.0000.staging.input.0: task-manager                    : umgr.0000.staging.input.0.watch: INFO    : send alive
+2019-02-14 06:47:04,237: umgr.0000.staging.input.0: task-manager                    : umgr.0000.staging.input.0.watch: INFO    : put message: [umgr.0000.staging.input.0.watch.thread] alive
+2019-02-14 06:47:04,237: umgr.0000.staging.input.0: task-manager                    : Thread-1       : INFO    : get msg: alive
+2019-02-14 06:47:04,237: umgr.0000.staging.input.0: task-manager                    : Thread-1       : DEBUG   : ru_initialize_common (NOOP)
+2019-02-14 06:47:04,238: umgr.0000.staging.input.0: task-manager                    : Thread-1       : DEBUG   : ru_initialize_parent (NOOP)
+2019-02-14 06:47:04,238: umgr.0000.staging.input.0: task-manager                    : Thread-1       : DEBUG   : child thread umgr.0000.staging.input.0.watch started
+2019-02-14 06:47:04,238: umgr.0000.staging.input.0: task-manager                    : Thread-1       : INFO    : child is alive
+2019-02-14 06:47:04,238: umgr.0000.staging.input.0: task-manager                    : Thread-1       : DEBUG   : process class started child

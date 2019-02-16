@@ -1,0 +1,16 @@
+2019-02-14 00:46:57,187: control.pubsub.pub.0002: agent_0.staging.input.0         : MainThread     : INFO    : python.interpreter   version: 2.7.11 (default, Feb 23 2016, 17:47:07) [GCC 4.8.5 20150623 (Red Hat 4.8.5-4)]
+2019-02-14 00:46:57,190: control.pubsub.pub.0002: agent_0.staging.input.0         : MainThread     : INFO    :                      pid/tid: 29631/MainThread
+2019-02-14 00:46:57,190: control.pubsub.pub.0002: agent_0.staging.input.0         : MainThread     : INFO    : create control_pubsub - pub - tcp://10.4.116.12:39596
+2019-02-14 00:46:57,190: control.pubsub.pub.0002: agent_0.staging.input.0         : MainThread     : DEBUG   : start process
+2019-02-14 00:46:57,190: control.pubsub.pub.0002: agent_0.staging.input.0         : MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2019-02-14 00:46:57,191: control.pubsub.pub.0002: agent_0.staging.input.0         : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
+2019-02-14 00:46:57,191: control.pubsub.pub.0002: agent_0.staging.input.0         : MainThread     : DEBUG   : process class started (no child)
+2019-02-14 00:46:57,239: control.pubsub.pub.0002: MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.11 (default, Feb 23 2016, 17:47:07) [GCC 4.8.5 20150623 (Red Hat 4.8.5-4)]
+2019-02-14 00:46:57,241: control.pubsub.pub.0002: MainProcess                     : MainThread     : INFO    :                      pid/tid: 29469/MainThread
+2019-02-14 00:46:57,241: control.pubsub.pub.0002: MainProcess                     : MainThread     : INFO    : create control_pubsub - pub - tcp://10.4.116.12:39596
+2019-02-14 00:46:57,242: control.pubsub.pub.0002: MainProcess                     : MainThread     : DEBUG   : start process
+2019-02-14 00:46:57,242: control.pubsub.pub.0002: MainProcess                     : MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2019-02-14 00:46:57,242: control.pubsub.pub.0002: MainProcess                     : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
+2019-02-14 00:46:57,242: control.pubsub.pub.0002: MainProcess                     : MainThread     : DEBUG   : process class started (no child)
+2019-02-14 02:48:07,422: control.pubsub.pub.0002: agent_0.staging.input.0         : agent_0.staging.input.0.child.subscriber._cancel_monitor_cb: INFO    : parent stops child  29631 -> None [control.pubsub.pub.0002]
+2019-02-14 02:48:07,422: control.pubsub.pub.0002: agent_0.staging.input.0         : agent_0.staging.input.0.child.subscriber._cancel_monitor_cb: DEBUG   : ru_finalize_parent (NOOP)

@@ -1,0 +1,10 @@
+#time,event,comp,thread,uid,state,msg
+1550094716.0656,sync_abs,radical.entk.wfprocessor.0000-obj,MainThread,,,localhost.localdomain:138.201.86.166:1550094716.06:1550094716.06:ntp
+1550094716.0657,create wfp obj,radical.entk.wfprocessor.0000-obj,MainThread,wfprocessor.0000,,
+1550094716.0660,wfp obj created,radical.entk.wfprocessor.0000-obj,MainThread,wfprocessor.0000,,
+1550094716.0660,initializing workflow,radical.entk.wfprocessor.0000-obj,MainThread,wfprocessor.0000,,
+1550094716.0701,workflow initialized,radical.entk.wfprocessor.0000-obj,MainThread,wfprocessor.0000,,
+1550123223.9131,creating wfp process,radical.entk.wfprocessor.0000-obj,MainThread,wfprocessor.0000,,
+1550123223.9177,starting wfp process,radical.entk.wfprocessor.0000-obj,MainThread,wfprocessor.0000,,
+1550130445.5363,wfp process terminated,radical.entk.wfprocessor.0000-obj,MainThread,wfprocessor.0000,,
+1550130445.5363,END,radical.entk.wfprocessor.0000-obj,MainThread,,,

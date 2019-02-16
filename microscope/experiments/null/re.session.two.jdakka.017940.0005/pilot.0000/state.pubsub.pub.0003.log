@@ -1,0 +1,16 @@
+2019-02-14 00:46:58,405: state.pubsub.pub.0003: update.0                        : MainThread     : INFO    : python.interpreter   version: 2.7.11 (default, Feb 23 2016, 17:47:07) [GCC 4.8.5 20150623 (Red Hat 4.8.5-4)]
+2019-02-14 00:46:58,408: state.pubsub.pub.0003: update.0                        : MainThread     : INFO    :                      pid/tid: 29656/MainThread
+2019-02-14 00:46:58,408: state.pubsub.pub.0003: update.0                        : MainThread     : INFO    : create state_pubsub - pub - tcp://10.4.116.12:37330
+2019-02-14 00:46:58,408: state.pubsub.pub.0003: update.0                        : MainThread     : DEBUG   : start process
+2019-02-14 00:46:58,409: state.pubsub.pub.0003: update.0                        : MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2019-02-14 00:46:58,409: state.pubsub.pub.0003: update.0                        : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
+2019-02-14 00:46:58,409: state.pubsub.pub.0003: update.0                        : MainThread     : DEBUG   : process class started (no child)
+2019-02-14 00:46:58,506: state.pubsub.pub.0003: MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.11 (default, Feb 23 2016, 17:47:07) [GCC 4.8.5 20150623 (Red Hat 4.8.5-4)]
+2019-02-14 00:46:58,508: state.pubsub.pub.0003: MainProcess                     : MainThread     : INFO    :                      pid/tid: 29469/MainThread
+2019-02-14 00:46:58,508: state.pubsub.pub.0003: MainProcess                     : MainThread     : INFO    : create state_pubsub - pub - tcp://10.4.116.12:37330
+2019-02-14 00:46:58,509: state.pubsub.pub.0003: MainProcess                     : MainThread     : DEBUG   : start process
+2019-02-14 00:46:58,509: state.pubsub.pub.0003: MainProcess                     : MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2019-02-14 00:46:58,509: state.pubsub.pub.0003: MainProcess                     : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
+2019-02-14 00:46:58,509: state.pubsub.pub.0003: MainProcess                     : MainThread     : DEBUG   : process class started (no child)
+2019-02-14 02:48:07,421: state.pubsub.pub.0003: update.0                        : update.0.child.subscriber._cancel_monitor_cb: INFO    : parent stops child  29656 -> None [state.pubsub.pub.0003]
+2019-02-14 02:48:07,421: state.pubsub.pub.0003: update.0                        : update.0.child.subscriber._cancel_monitor_cb: DEBUG   : ru_finalize_parent (NOOP)
