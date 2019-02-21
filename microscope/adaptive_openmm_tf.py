@@ -152,10 +152,10 @@ if __name__ == '__main__':
 
             'resource': 'xsede.bridges',
             'project' : 'mc3bggp',
-            'queue' : 'RM',
+            'queue' : 'GPU',
             'walltime': 30,
-            'cpus': 32*3,
-            'gpus': 6 
+            'cpus': 32,
+            'gpus': 2,
             'access_schema': 'gsissh'
     }
 
