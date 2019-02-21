@@ -30,7 +30,7 @@ def generate_MD_pipeline():
         # for i in range(3):
 
         task = Task()
-        task.name = 'md_{}'.format(i)
+        task.name = 'md'
 
         task.pre_exec = []
         task.pre_exec   += ['export PATH="/home/dakka/miniconda3/bin:$PATH"']
@@ -116,7 +116,7 @@ def generate_ML_pipeline():
     # for i in range(3):
 
     task = Task()
-    task.name = 'cvae_train_task_{}'.format(i)
+    task.name = 'cvae_train_task_'
 
     task.pre_exec = []
     task.pre_exec += ['module purge']
