@@ -27,42 +27,42 @@ def generate_MD_pipeline():
 
         # Each Task() is an OpenMM executable that will run on a single GPU.
         # Set sleep time for local testing
-        for i in range(3):
+        # for i in range(3):
 
-            task = Task()
-            task.name = 'md_{}'.format(i)
+        task = Task()
+        task.name = 'md_{}'.format(i)
 
-            task.pre_exec = []
-            task.pre_exec   += ['export PATH="/home/dakka/miniconda3/bin:$PATH"']
-            task.pre_exec   += ['export LD_LIBRARY_PATH="/home/dakka/miniconda3/lib:$LD_LIBRARY_PATH"']
-            task.pre_exec   += ['module load mpi/gcc_openmpi']
-            task.pre_exec   += ['source activate ve_hyperspace']
-            task.pre_exec   += ['module load cuda/9.0']
-            task.pre_exec   += ['export OPENMM_CUDA_COMPILER=`which nvcc`']
+        task.pre_exec = []
+        task.pre_exec   += ['export PATH="/home/dakka/miniconda3/bin:$PATH"']
+        task.pre_exec   += ['export LD_LIBRARY_PATH="/home/dakka/miniconda3/lib:$LD_LIBRARY_PATH"']
+        task.pre_exec   += ['module load mpi/gcc_openmpi']
+        task.pre_exec   += ['source activate ve_hyperspace']
+        task.pre_exec   += ['module load cuda/9.0']
+        task.pre_exec   += ['export OPENMM_CUDA_COMPILER=`which nvcc`']
 
-            task.executable = ['python']
-            task.arguments = ['-m', 'simtk.testInstallation']
-            task.cpu_reqs = {'processes': 1,
-                             'process_type': None,
-                             'threads_per_process': 4,
-                             'thread_type': None
-                             }
+        task.executable = ['python']
+        task.arguments = ['-m', 'simtk.testInstallation']
+        task.cpu_reqs = {'processes': 1,
+                         'process_type': None,
+                         'threads_per_process': 4,
+                         'thread_type': None
+                         }
 
-            task.gpu_reqs = {'processes': 1,
-                             'process_type': None,
-                             'threads_per_process': 1,
-                             'thread_type': None
-                             }
+        task.gpu_reqs = {'processes': 1,
+                         'process_type': None,
+                         'threads_per_process': 1,
+                         'thread_type': None
+                         }
 
-            # Add the MD task to the Docking Stage
-            s.add_tasks(task)
+        # Add the MD task to the Docking Stage
+        s.add_tasks(task)
 
         # Add post-exec to the Stage
-        s.post_exec = {
-                            'condition': func_condition,
-                            'on_true': func_on_true,
-                            'on_false': func_on_false
-                        }
+        # s.post_exec = {
+        #                     'condition': func_condition,
+        #                     'on_true': func_on_true,
+        #                     'on_false': func_on_false
+        #                 }
 
         # Add MD stage to the MD Pipeline
         p.add_stages(s)
@@ -113,31 +113,31 @@ def generate_ML_pipeline():
     s = Stage()
     s.name = 'CVAE'
 
-    for i in range(3):
+    # for i in range(3):
 
-        task = Task()
-        task.name = 'cvae_train_task_{}'.format(i)
+    task = Task()
+    task.name = 'cvae_train_task_{}'.format(i)
 
-        task.pre_exec = []
-        task.pre_exec += ['module purge']
-        task.pre_exec += ['module load tensorflow/1.5_gpu']
-        task.pre_exec += ['source activate']
-        
-        task.executable = ['python'] 
-        task.arguments = ['/pylon5/mc3bggp/dakka/test_tf.py']
-        task.cpu_reqs = {'processes': 1,
-                         'process_type': None,
-                         'threads_per_process': 4,
-                         'thread_type': None
-                         }
+    task.pre_exec = []
+    task.pre_exec += ['module purge']
+    task.pre_exec += ['module load tensorflow/1.5_gpu']
+    task.pre_exec += ['source activate']
+    
+    task.executable = ['python'] 
+    task.arguments = ['/pylon5/mc3bggp/dakka/test_tf.py']
+    task.cpu_reqs = {'processes': 1,
+                     'process_type': None,
+                     'threads_per_process': 4,
+                     'thread_type': None
+                     }
 
-        task.gpu_reqs = {'processes': 1,
-                         'process_type': None,
-                         'threads_per_process': 1,
-                         'thread_type': None
-                         }
+    task.gpu_reqs = {'processes': 1,
+                     'process_type': None,
+                     'threads_per_process': 1,
+                     'thread_type': None
+                     }
 
-        s.add_tasks(task)
+    s.add_tasks(task)
 
     # Add Stage to the Pipeline
     p.add_stages(s)
@@ -153,7 +153,7 @@ if __name__ == '__main__':
             'resource': 'xsede.bridges',
             'project' : 'mc3bggp',
             'queue' : 'GPU',
-            'walltime': 30,
+            'walltime': 20,
             'cpus': 32,
             'gpus': 2,
             'access_schema': 'gsissh'
