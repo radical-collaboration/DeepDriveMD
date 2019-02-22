@@ -33,12 +33,11 @@ def generate_MD_pipeline():
         task.name = 'md'
 
         task.pre_exec = []
-        task.pre_exec   += ['export PATH="/home/dakka/miniconda3/bin:$PATH"']
-        task.pre_exec   += ['export LD_LIBRARY_PATH="/home/dakka/miniconda3/lib:$LD_LIBRARY_PATH"']
-        task.pre_exec   += ['module load mpi/gcc_openmpi']
-        task.pre_exec   += ['source activate ve_hyperspace']
+        task.pre_exec   += ['export PATH="/pylon5/mc3bggp/dakka/miniconda2/bin:$PATH"']
         task.pre_exec   += ['module load cuda/9.0']
-        task.pre_exec   += ['export OPENMM_CUDA_COMPILER=`which nvcc`']
+        # task.pre_exec   += ['export OPENMM_CUDA_COMPILER=`which nvcc`']
+        task.pre_exec   += ['source activate cvae']
+        
 
         task.executable = ['python']
         task.arguments = ['-m', 'simtk.testInstallation']
@@ -119,17 +118,21 @@ def generate_ML_pipeline():
     task.name = 'cvae_train_task_'
 
     task.pre_exec = []
-    task.pre_exec += ['module purge']
-    task.pre_exec += ['module load tensorflow/1.5_gpu']
-    task.pre_exec += ['source activate']
+    # task.pre_exec += ['module purge']
+    # task.pre_exec += ['module load tensorflow/1.5_gpu']
+    # task.pre_exec += ['source activate']
     
+    task.pre_exec   += ['module load keras/2.2.0_tf1.7_py2_gpu tensorflow/1.7_py2_gpu']
+    task.pre_exec   += ['module load cuda/9.0']
+    task.pre_exec   += ['export PATH="/pylon5/mc3bggp/dakka/miniconda2/bin:$PATH"']
+    task.pre_exec   += ['source activate cvae']
     task.executable = ['python'] 
-    task.arguments = ['/pylon5/mc3bggp/dakka/test_tf.py']
-    task.cpu_reqs = {'processes': 1,
+    task.arguments  = ['/pylon5/mc3bggp/dakka/test_tf.py']
+    task.cpu_reqs   = {'processes': 1,
                      'process_type': None,
                      'threads_per_process': 4,
                      'thread_type': None
-                     }
+                      }
 
     task.gpu_reqs = {'processes': 1,
                      'process_type': None,
