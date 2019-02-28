@@ -22,49 +22,60 @@ def generate_MD_pipeline():
         p.name = 'MD'
 
         # MD stage
-        s = Stage()
-        s.name = 'OpenMM'
+        s1 = Stage()
+        s1.name = 'OpenMM'
 
         # Each Task() is an OpenMM executable that will run on a single GPU.
         # Set sleep time for local testing
-        # for i in range(3):
+        for i in range(18):
 
-        task = Task()
-        task.name = 'md'
+            task = Task()
+            task.name = 'md_{}'.format(i) 
 
-        task.pre_exec = []
-        task.pre_exec   += ['module load gcc/5.3.0']
-        task.pre_exec   += ['module load cuda/9.0']
-        # task.pre_exec   += ['export OPENMM_CUDA_COMPILER=`which nvcc`']
-        task.pre_exec   += ['export PATH="/pylon5/mc3bggp/dakka/miniconda2/bin:$PATH"']
-        task.pre_exec   += ['source activate cvae']
-    
-        task.executable = ['python']
-        task.arguments = ['-m', 'simtk.testInstallation']
-        task.cpu_reqs = {'processes': 1,
-                         'process_type': None,
-                         'threads_per_process': 4,
-                         'thread_type': None
-                         }
+            task.pre_exec = []
+            task.pre_exec   += ['module load gcc/5.3.0']
+            task.pre_exec   += ['module load cuda/9.0']
+            # task.pre_exec   += ['export OPENMM_CUDA_COMPILER=`which nvcc`']
+            task.pre_exec   += ['export PATH="/pylon5/mc3bggp/dakka/miniconda2/bin:$PATH"']
+            task.pre_exec   += ['source activate cvae']
+        
+            task.executable = ['python']
+            task.arguments = ['/pylon5/mc3bggp/dakka/openmm_benchmark/fs-pep/simulation.py']
+            task.cpu_reqs = {'processes': 1,
+                             'process_type': None,
+                             'threads_per_process': 1,
+                             'thread_type': None
+                             }
 
-        task.gpu_reqs = {'processes': 1,
-                         'process_type': None,
-                         'threads_per_process': 1,
-                         'thread_type': None
-                         }
+            task.gpu_reqs = {'processes': 1,
+                             'process_type': None,
+                             'threads_per_process': 1,
+                             'thread_type': None
+                             }
 
-        # Add the MD task to the Docking Stage
-        s.add_tasks(task)
-
-        # Add post-exec to the Stage
-        # s.post_exec = {
-        #                     'condition': func_condition,
-        #                     'on_true': func_on_true,
-        #                     'on_false': func_on_false
-        #                 }
+            # Add the MD task to the Docking Stage
+            s1.add_tasks(task)
 
         # Add MD stage to the MD Pipeline
-        p.add_stages(s)
+        p.add_stages(s1)
+
+        # s2 = Stage()
+        # s2.name = 'collection_stage'
+
+        # task = Task()
+        # task.name = 'collection_traj'
+
+        # task.executable = ['/bin/bash']    
+        # task.arguments = ['-l', '-c', 'grep -o . output.txt | sort | uniq -c > ccount.txt']  
+        # # t2.copy_input_data = ['$Pipeline_%s_Stage_%s_Task_%s/output.log'%(p.uid, s1.uid, t1.uid)]
+        # task.cpu_reqs = {'processes': 1,
+        #                  'process_type': None,
+        #                  'threads_per_process': 1,
+        #                  'thread_type': None
+        #                  }
+
+        # s2.add_tasks(task) 
+
 
         return p
 
@@ -156,9 +167,9 @@ if __name__ == '__main__':
             'resource': 'xsede.bridges',
             'project' : 'mc3bggp',
             'queue' : 'GPU',
-            'walltime': 20,
-            'cpus': 32,
-            'gpus': 2,
+            'walltime': 60,
+            'cpus': 32*9,
+            'gpus': 18,
             'access_schema': 'gsissh'
     }
 
