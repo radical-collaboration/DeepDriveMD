@@ -74,7 +74,7 @@ def generate_MD_pipeline():
 
         p.add_stages(s2)
 
-        return p1
+        return p
 
     def func_condition():
         '''
