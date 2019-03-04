@@ -1,17 +1,36 @@
 import simtk.unit as u
 import sys, os, shutil 
-import errno
+import argparse 
 
 sys.path.append('../')
-
 from MD_utils.openmm_simulation import openmm_simulate_amber_fs_pep 
 
-top_file = None
-pdb_file = os.path.abspath('./pdb/100-fs-peptide-400K.pdb')
-ref_pdb_file = os.path.abspath('./pdb/fs-peptide.pdb')
+parser = argparse.ArgumentParser() 
+parser.add_argument("-f", help="pdb file") 
+parser.add_argument("-p", help="topology file") 
+parser.add_argument("-c", help="check point file to restart simulation") 
+
+args = parser.parse_args() 
+
+if args.f: 
+    pdb_file = os.path.abspath(args.f) 
+else: 
+    raise Error("No pdb file assigned") 
+
+if args.p: 
+    top_file = os.path.abspath(args.p) 
+else: 
+    top_file = None 
+
+if args.c: 
+    check_point = os.path.abspath(args.c) 
+else: 
+    check_point = None 
+# pdb_file = os.path.abspath('./pdb/100-fs-peptide-400K.pdb')
+# ref_pdb_file = os.path.abspath('./pdb/fs-peptide.pdb')
 
 gpu_index = 0
-check_point = None
+# check_point = None
 openmm_simulate_amber_fs_pep(pdb_file,
                              check_point = check_point,
                              GPU_index=gpu_index,
