@@ -22,7 +22,7 @@ saga                 : 0.50.0-v0.50.0-22-g8c260f8@feature-summit
 RCT Stack:
 
 ```
-pip install radical.utils
+pip install radical.utils==0.50.3
 git clone https://github.com/radical-cybertools/saga-python.git
 cd saga-python;git reset --hard g8c260f8;pip install .;cd ..
 git clone https://github.com/radical-cybertools/radical.pilot.git
