@@ -50,12 +50,23 @@ export RADICAL_ENTK_REPORT=True
 debugging
 
 #### OpenMM installation
-
+* Load modules/environment: 
+```
+* module load python/2.7.15-anaconda2-5.3.0
+* module load cuda/9.1.85
+* module load gcc/6.4.0
+* conda create --name <venv>
+* conda activate <venv>
+* conda install python=2.7.15
+* conda install cython
+* conda install numpy
+```
 * Download the package from GitHub 
 
    ```bash 
    git clone https://github.com/pandegroup/openmm.git 
    ```
+
 
 * Compile the code using `cmake` (version >= 3.12.0) 
 
@@ -84,7 +95,6 @@ debugging
    
    make PythonInstall
    ```
-
 * Test the installation 
 
    ```bash 
