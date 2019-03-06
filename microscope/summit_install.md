@@ -48,3 +48,51 @@ export RADICAL_ENTK_REPORT=True
 
 `python <microscope.py> >>debug.log 2>>debug.log` saves the logs for later 
 debugging
+
+#### OpenMM installation
+
+* Download the package from GitHub 
+
+   ```bash 
+   git clone https://github.com/pandegroup/openmm.git 
+   ```
+
+* Compile the code using `cmake` (version >= 3.12.0) 
+
+   ```bash 
+   cd openmm
+   
+   mkdir -p build_openmm
+   
+   cd build_openmm
+   
+   >>> Summitdev
+   cmake .. -DCUDA_HOST_COMPILER=/sw/summitdev/gcc/7.1.1-20170802/bin/gcc -DCUDA_SDK_ROOT_DIR=/sw/summitdev/cuda/9.0.69/samples -DCUDA_TOOLKIT_ROOT_DIR=/sw/summitdev/cuda/9.0.69 -DCMAKE_CXX_COMPILER=/sw/summitdev/gcc/7.1.1-20170802/bin/g++ -DCMAKE_C_COMPILER=/sw/summitdev/gcc/7.1.1-20170802/bin/gcc -DCMAKE_INSTALL_PREFIX=${openmm_install_path (/ccs/home/hm0/anaconda2_ppc)} 
+   
+   >>>Summit
+   cmake .. -DCUDA_HOST_COMPILER=/sw/summitdev/gcc/7.1.1-20170802/bin/gcc -DCUDA_SDK_ROOT_DIR=/sw/summit/cuda/9.1.85/samples -DCUDA_TOOLKIT_ROOT_DIR=/sw/summit/cuda/9.1.85/ -DCMAKE_CXX_COMPILER=/sw/summitdev/gcc/7.1.1-20170802/bin/g++ -DCMAKE_C_COMPILER=/sw/summitdev/gcc/7.1.1-20170802/bin/gcc -DCMAKE_INSTALL_PREFIX=/ccs/home/hm0/.conda/envs/hm0
+   ```
+
+   SUMMIT is using different CUDA from SummitDev. The gcc from SD can still be used to compile the code. 
+
+* Build the package 
+
+   ```bash 
+   make -j 40 
+   
+   make install 
+   
+   make PythonInstall
+   ```
+
+* Test the installation 
+
+   ```bash 
+   python -m simtk.testInstallation 
+   make test
+   ```
+Collapse
+
+
+
+
