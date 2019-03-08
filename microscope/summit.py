@@ -3,6 +3,8 @@ from radical.entk import Pipeline, Stage, Task, AppManager
 
 # ------------------------------------------------------------------------------
 # Set default verbosity
+hostname = os.environ.get('RMQ_HOSTNAME', 'csc190specfem.marble.ccs.ornl.gov')
+port = int(os.environ.get('RMQ_PORT', 30672))
 
 if os.environ.get('RADICAL_ENTK_VERBOSE') is None:
     os.environ['RADICAL_ENTK_REPORT'] = 'True'
@@ -75,7 +77,7 @@ if __name__ == '__main__':
     }
 
     # Create Application Manager
-    appman = AppManager()
+    appman = AppManager(hostname=hostname, port=port)
     appman.resource_desc = res_dict
 
     p1 = generate_MD_pipeline()
