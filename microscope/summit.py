@@ -72,7 +72,7 @@ if __name__ == '__main__':
             'queue' : 'batch',
             'walltime': 60,
             'cpus': 126,
-            'gpus': 18,
+            # 'gpus': 18,
             'access_schema': 'local'
     }
 
