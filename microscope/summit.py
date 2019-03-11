@@ -32,9 +32,9 @@ def generate_MD_pipeline():
             task.pre_exec   += ['module load cuda/9.1.85']
             task.pre_exec   += ['module load gcc/6.4.0']
             task.pre_exec   += ['source activate openmm']
-        
+            # task.pre_exec   += ['cd /gpfs/alpine/scratch/jdakka/bip178/benchmarks/MD_exps/fs-pep']
             task.executable = 'python'
-            task.arguments = ['/gpfs/alpine/scratch/jdakka/bip178/CVAE_pilot_MD/Fs-pep']
+	    task.arguments = ['/gpfs/alpine/scratch/jdakka/bip178/benchmarks/MD_exps/fs-pep/run_openmm.py', '-f', '/gpfs/alpine/scratch/jdakka/bip178/benchmarks/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb']
             task.cpu_reqs = {'processes': 1,
                              'process_type': None,
                              'threads_per_process': 1,
