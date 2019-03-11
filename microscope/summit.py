@@ -26,6 +26,10 @@ def generate_MD_pipeline():
             task.name = 'md_{}'.format(i) 
 
             task.pre_exec = []
+
+            task.pre_exec   += ['export MINICONDA=/gpfs/alpine/scratch/jdakka/bip178/miniconda']
+            task.pre_exec   += ['export PATH=$MINICONDA/bin:$PATH']
+            task.pre_exec   += ['export LD_LIBRARY_PATH=$MINICONDA/lib:$LD_LIBRARY_PATH']
             task.pre_exec   += ['module load python/2.7.15-anaconda2-5.3.0']
             task.pre_exec   += ['module load cuda/9.1.85']
             task.pre_exec   += ['module load gcc/6.4.0']
