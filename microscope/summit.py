@@ -3,6 +3,8 @@ from radical.entk import Pipeline, Stage, Task, AppManager
 
 # ------------------------------------------------------------------------------
 # Set default verbosity
+hostname = os.environ.get('RMQ_HOSTNAME', 'csc190specfem.marble.ccs.ornl.gov')
+port = int(os.environ.get('RMQ_PORT', 30672))
 
 if os.environ.get('RADICAL_ENTK_VERBOSE') is None:
     os.environ['RADICAL_ENTK_REPORT'] = 'True'
@@ -34,9 +36,9 @@ def generate_MD_pipeline():
             task.pre_exec   += ['module load cuda/9.1.85']
             task.pre_exec   += ['module load gcc/6.4.0']
             task.pre_exec   += ['source activate openmm']
-        
+            # task.pre_exec   += ['cd /gpfs/alpine/scratch/jdakka/bip178/benchmarks/MD_exps/fs-pep']
             task.executable = 'python'
-            task.arguments = ['/gpfs/alpine/scratch/jdakka/bip178/CVAE_pilot_MD/Fs-pep']
+	    task.arguments = ['/gpfs/alpine/scratch/jdakka/bip178/benchmarks/MD_exps/fs-pep/run_openmm.py', '-f', '/gpfs/alpine/scratch/jdakka/bip178/benchmarks/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb']
             task.cpu_reqs = {'processes': 1,
                              'process_type': None,
                              'threads_per_process': 1,
@@ -74,12 +76,12 @@ if __name__ == '__main__':
             'queue' : 'batch',
             'walltime': 60,
             'cpus': 126,
-            'gpus': 18,
+            # 'gpus': 18,
             'access_schema': 'local'
     }
 
     # Create Application Manager
-    appman = AppManager()
+    appman = AppManager(hostname=hostname, port=port)
     appman.resource_desc = res_dict
 
     p1 = generate_MD_pipeline()
