@@ -27,7 +27,7 @@ def generate_MD_pipeline():
             task = Task()
             task.name = 'md_{}'.format(i) 
 
-            task.pre_exec = []
+            task.pre_exec    = []
 
             task.pre_exec   += ['export MINICONDA=/gpfs/alpine/scratch/jdakka/bip178/miniconda']
             task.pre_exec   += ['export PATH=$MINICONDA/bin:$PATH']
@@ -37,10 +37,10 @@ def generate_MD_pipeline():
             task.pre_exec   += ['module load gcc/6.4.0']
             task.pre_exec   += ['source activate openmm']
             task.pre_exec   += ['which python']
-            task.pre_exec   += ['cd /gpfs/alpine/scratch/jdakka/bip178/benchmarks/MD_exps/fs-pep']
-            task.executable = 'pwd'
-            task.executable = ['']
-            # task.arguments = ['/gpfs/alpine/scratch/jdakka/bip178/benchmarks/MD_exps/fs-pep/run_openmm.py', '-f', '/gpfs/alpine/scratch/jdakka/bip178/benchmarks/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb']
+            # task.pre_exec   += ['cd /gpfs/alpine/scratch/jdakka/bip178/benchmarks/MD_exps/fs-pep']
+            task.executable  = 'python'
+            task.arguments   = ['hello_world.py']
+            # task.arguments = ['run_openmm.py', '-f', '/gpfs/alpine/scratch/jdakka/bip178/benchmarks/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb']
             task.cpu_reqs = {'processes': 1,
                              'process_type': None,
                              'threads_per_process': 1,
