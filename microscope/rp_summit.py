@@ -80,6 +80,14 @@ if __name__ == '__main__':
         # report.info('create %d unit description(s)\n\t' % n)
 
         cud = rp.ComputeUnitDescription()
+        cud.pre_exec         = []
+        cud.pre_exec        += ['export MINICONDA=/gpfs/alpine/scratch/jdakka/bip178/miniconda']
+        cud.pre_exec        += ['export PATH=$MINICONDA/bin:$PATH']
+        cud.pre_exec        += ['export LD_LIBRARY_PATH=$MINICONDA/lib:$LD_LIBRARY_PATH']
+        cud.pre_exec        += ['module load python/2.7.15-anaconda2-5.3.0']
+        cud.pre_exec        += ['module load cuda/9.1.85']
+        cud.pre_exec        += ['module load gcc/6.4.0']
+        cud.pre_exec        += ['source activate openmm']
         cud.executable       = 'python'
         cud.arguments        = ['-m', 'simtk.testInstallation']
         cud.gpu_processes    = 1
