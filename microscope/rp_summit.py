@@ -77,7 +77,7 @@ if __name__ == '__main__':
         # Create a workload of ComputeUnits.
         # Each compute unit runs '/bin/date'.
 
-        report.info('create %d unit description(s)\n\t' % n)
+        # report.info('create %d unit description(s)\n\t' % n)
 
         cud = rp.ComputeUnitDescription()
         cud.executable       = 'python'
