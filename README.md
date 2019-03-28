@@ -2,7 +2,7 @@
 
 * MD/CVAE [Code](https://github.com/hengma1001/CVAE_pilot_MD)
 * Workflow [Diagram](https://docs.google.com/drawings/d/1NjNfeQi1ypQ8eVDmS9t4X8S3-Wy4mzcBbcR76Qh-NcE/edit?usp=sharing) 
-
+* TensorFlow Installation on [`Summit`](https://github.com/inspiremd/radical-inspire/blob/master/tensorflow_install_summit.md)
 ## Hyperspace-RCT
 Hyperspace (ORNL) and RCT collaboration 
 
