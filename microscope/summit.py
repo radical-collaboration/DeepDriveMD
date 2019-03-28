@@ -12,7 +12,7 @@ if os.environ.get('RADICAL_ENTK_VERBOSE') is None:
 
 def generate_MD_pipeline():
 
-    def describe_MD_pipline():
+    def describe_MD_pipeline():
         p = Pipeline()
         p.name = 'MD'
 
