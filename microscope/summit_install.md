@@ -6,6 +6,7 @@
 module load python/2.7.15-anaconda2-5.3.0
 module load cuda/9.1.85
 module load gcc/6.4.0
+module load cmake
 conda create --name <venv>
 source activate or conda activate <venv>
 ```
