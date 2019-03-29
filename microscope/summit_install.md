@@ -102,6 +102,14 @@ debugging
    python -m simtk.testInstallation 
    make test
    ```
+* Some additional builds needed: 
+```
+conda install matplotlib scipy
+pip install --upgrade numpy
+pip install MDAnalysis MDAnalysisTests
+python -c 'import MDAnalysis as mda'
+pip install h5py 
+```
 Collapse
 
 
