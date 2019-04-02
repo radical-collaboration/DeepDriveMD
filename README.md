@@ -4,6 +4,7 @@
 * MD specific [Code](https://github.com/radical-collaboration/hyperspace/tree/MD/microscope/experiments/MD_exps/fs-pep)
 * Workflow [Diagram](https://docs.google.com/drawings/d/1NjNfeQi1ypQ8eVDmS9t4X8S3-Wy4mzcBbcR76Qh-NcE/edit?usp=sharing) 
 * TensorFlow Installation on [`Summit`](https://github.com/inspiremd/radical-inspire/blob/master/tensorflow_install_summit.md)
+* OpenMM Installation on [`Summit`](https://github.com/radicalcollaboration/hyperspace/blob/master/microscope/summit_install.md) 
 ## Hyperspace-RCT
 Hyperspace (ORNL) and RCT collaboration 
 
