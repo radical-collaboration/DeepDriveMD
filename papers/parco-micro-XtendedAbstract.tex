@@ -1,0 +1,340 @@
+%\documentclass[sigconf]{acmart}
+\documentclass[conference,final]{IEEEtran}
+
+\usepackage{booktabs} % For formal tables
+\usepackage{listings}
+\usepackage{fancyvrb}
+% \lstset{language=,xleftmargin=5mm,framexleftmargin=5mm}
+% \usepackage{minted}
+
+%\usepackage{hyperef}
+
+% Copyright
+%\setcopyright{none}
+%\setcopyright{acmcopyright}
+%\setcopyright{acmlicensed}
+% \setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+
+% DOI
+% \acmDOI{ }
+%
+% % ISBN
+% \acmISBN{ }
+%
+% %Conference
+% \acmConference[HPDC'18]{ACM The 27th International Symposium on High-Performance Parallel and Distributed Computing, Tempe, Arizona, USA}
+% \acmYear{2018}
+% \copyrightyear{2018}
+
+
+% \acmArticle{4}
+% \acmPrice{15.00}
+
+% These commands are optional
+%\acmBooktitle{Transactions of the ACM Woodstock conference}
+% \editor{Jennifer B. Sartor}
+% \editor{Theo D'Hondt}
+% \editor{Wolfgang De Meuter}
+
+
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{ifpdf}
+%\usepackage{mdwlist}
+
+%\usepackage{dcolumn}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{subfigure}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{moresize}
+%\usepackage{setspace}
+
+
+%\usepackage[numbers, sort, compress]{natbib}
+%\usepackage{latex8}
+%\usepackage{float}
+%\usepackage{times}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{paralist}
+\usepackage{wrapfig}
+%\usepackage[footnotesize,it]{caption}
+\usepackage{multirow}
+\usepackage{ifpdf}
+%\usepackage{srcltx}
+%\usepackage{subfigure}
+\usepackage{xspace}
+\usepackage{keyval}
+\usepackage{color}
+
+\definecolor{listinggray}{gray}{0.95}
+\definecolor{darkgray}{gray}{0.7}
+\definecolor{commentgreen}{rgb}{0, 0.4, 0}
+\definecolor{darkblue}{rgb}{0, 0, 0.4}
+\definecolor{middleblue}{rgb}{0, 0, 0.7}
+\definecolor{darkred}{rgb}{0.4, 0, 0}
+\definecolor{brown}{rgb}{0.5, 0.5, 0}
+
+\usepackage[normalem]{ulem}
+\makeatletter
+\def\cyanuwave{\bgroup \markoverwith{\lower3.5\p@\hbox{\sixly \textcolor{cyan}{\char58}}}\ULon}
+\def\reduwave{\bgroup \markoverwith{\lower3.5\p@\hbox{\sixly \textcolor{red}{\char58}}}\ULon}
+\def\blueuwave{\bgroup \markoverwith{\lower3.5\p@\hbox{\sixly \textcolor{blue}{\char58}}}\ULon}
+\font\sixly=lasy6 % does not re-load if already loaded, so no memory problem.
+\makeatother
+
+\usepackage{xcolor}
+\usepackage[colorlinks]{hyperref}
+\AtBeginDocument{%
+  \hypersetup{
+    citecolor=blue,
+    linkcolor=blue,   
+    urlcolor=blue}}
+
+
+
+\newif\ifdraft
+\drafttrue
+\ifdraft
+\definecolor{ocolor}{rgb}{1,0,0.4}
+\newcommand{\onote}[1]{ {\textcolor{ocolor} { (***Ole: #1) }}}
+\newcommand{\terminology}[1]{ {\textcolor{red} {(Terminology used: \textbf{#1}) }}}
+\newcommand{\owave}[1]{ {\cyanuwave{#1}}}
+\newcommand{\jwave}[1]{ {\reduwave{#1}}}
+\newcommand{\alwave}[1]{ {\blueuwave{#1}}}
+\newcommand{\jhanote}[1]{ {\textcolor{red} { ***shantenu: #1 }}}
+%\newcommand{\alnote}[1]{}
+\newcommand{\alnote}[1]{ {\textcolor{blue} { ***andreL: #1 }}}
+\newcommand{\amnote}[1]{ {\textcolor{blue} { ***andreM: #1 }}}
+\newcommand{\georgenote}[1]{ {\textcolor{brown} { ***sharath: #1 }}}
+% \newcommand{\revOneNote}[1]{ {\textcolor{brown} { ***Reviewer 1: #1 }}}
+% \newcommand{\revTwoNote}[1]{ {\textcolor{cyan} { ***Reviewer 2: #1 }}}
+% \newcommand{\revThreeNote}[1]{ {\textcolor{purple} { ***Reviewer 3: #1 }}}
+\newcommand{\revThreeNote}[1]{ {\textcolor{purple}{}}} 
+\newcommand{\revOneNote}[1]{ {\textcolor{purple}{}}} 
+\newcommand{\revTwoNote}[1]{ {\textcolor{purple}{}}} 
+\definecolor{orange}{rgb}{1,.5,0}
+\newcommand{\aznote}[1]{ {\textcolor{orange} { ***ashley: #1 }}}
+\definecolor{dandelion}{cmyk}{0,0.29,0.84,0}
+\newcommand{\mtnote}[1]{ {\textcolor{dandelion} { ***matteo: #1 }}}
+\newcommand{\note}[1]{ {\textcolor{magenta} { ***Note: #1 }}}
+\else
+\newcommand{\onote}[1]{}
+\newcommand{\terminology}[1]{}
+\newcommand{\owave}[1]{#1}
+\newcommand{\jwave}[1]{#1}
+\newcommand{\alnote}[1]{}
+\newcommand{\amnote}[1]{}
+\newcommand{\athotanote}[1]{}
+\newcommand{\georgenote}[1]{}
+\newcommand{\pmnote}[1]{}
+\newcommand{\jhanote}[1]{}
+\newcommand{\msnote}[1]{}
+\newcommand{\mrnote}[1]{}
+\newcommand{\aznote}[1]{}
+\newcommand{\mtnote}[1]{}
+\newcommand{\note}[1]{}
+\newcommand{\revOneNote}[1]{}
+\newcommand{\revTwoNote}[1]{}
+\newcommand{\revThreeNote}[1]{} 
+\fi
+
+\newcommand{\cloud}{cloud\xspace}
+\newcommand{\clouds}{clouds\xspace}
+\newcommand{\pilot}{Pilot\xspace}
+\newcommand{\pilots}{Pilots\xspace}
+\newcommand{\pilotjob}{Pilot-Job\xspace}
+\newcommand{\pilotjobs}{Pilot-Jobs\xspace}
+\newcommand{\pilotcompute}{Pilot-Compute\xspace}
+\newcommand{\pilotcomputedescription}{Pilot-Compute Description\xspace}
+\newcommand{\pilotdescription}{Pilot-Description\xspace}
+\newcommand{\pilotcomputes}{Pilot-Computes\xspace}
+\newcommand{\pilotdata}{Pilot-Data\xspace}
+\newcommand{\pilotdatainmem}{Pilot-Data Memory\xspace}
+\newcommand{\pilotdatadescription}{Pilot-Data Description\xspace}
+\newcommand{\pilotdataservice}{Pilot-Data Service\xspace}
+\newcommand{\pilotcomputeservice}{Pilot-Compute Service\xspace}
+\newcommand{\computedataservice}{Compute-Data Service\xspace}
+\newcommand{\computedatamanager}{Compute-Data Manager\xspace}
+\newcommand{\computeunitdescription}{Compute-Unit Description\xspace}
+\newcommand{\dataunitdescription}{Data-Unit Description\xspace}
+\newcommand{\pilotmapreduce}{PilotMapReduce\xspace}
+\newcommand{\mrmg}{MR-Manager\xspace}
+\newcommand{\pstar}{P*\xspace}
+\newcommand{\pd}{PD\xspace}
+\newcommand{\pc}{PC\xspace}
+\newcommand{\pcs}{PCs\xspace}
+\newcommand{\pj}{PJ\xspace}
+\newcommand{\pjs}{PJs\xspace}
+\newcommand{\pds}{Pilot Data Service\xspace}
+\newcommand{\computeunit}{Compute-Unit\xspace}
+\newcommand{\computeunits}{Compute-Units\xspace}
+\newcommand{\dataunit}{Data-Unit\xspace}
+\newcommand{\dataunits}{Data-Units\xspace}
+\newcommand{\du}{DU\xspace}
+\newcommand{\dus}{DUs\xspace}
+\newcommand{\dud}{DUD\xspace}
+\newcommand{\cu}{CU\xspace}
+\newcommand{\cus}{CUs\xspace}
+\newcommand{\cud}{CUD\xspace}
+\newcommand{\su}{SU\xspace}
+\newcommand{\sus}{SUs\xspace}
+\newcommand{\schedulableunit}{Schedulable Unit\xspace}
+\newcommand{\schedulableunits}{Schedulable Units\xspace}
+\newcommand{\cc}{c\&c\xspace}
+\newcommand{\CC}{C\&C\xspace}
+\newcommand{\up}{\vspace*{-1em}}
+\newcommand{\upp}{\vspace*{-0.5em}}
+\newcommand{\numrep}{8 }
+\newcommand{\samplenum}{4 }
+\newcommand{\tmax}{$T_{max}$ }
+\newcommand{\tc}{$T_{C}$ }
+\newcommand{\tcnsp}{$T_{C}$}
+\newcommand{\bj}{BigJob\xspace}
+\newcommand{\irods}{iRODS\xspace}
+
+\newcommand{\I}[1]{\textit{#1}\xspace}
+\newcommand{\B}[1]{\textbf{#1}\xspace}
+\newcommand{\T}[1]{\texttt{#1}\xspace}
+%\newcommand{\C}[1]{\textsc{#1}\xspace}
+
+\lstdefinestyle{myListing}{
+  frame=single,
+  backgroundcolor=\color{listinggray},
+  %float=t,
+  language=C,
+  basicstyle=\ttfamily \footnotesize,
+  breakautoindent=true,
+  breaklines=true
+  tabsize=2,
+  captionpos=b,
+  aboveskip=0em,
+  belowskip=-2em,
+  %numbers=left,
+  %numberstyle=\tiny
+}
+
+\lstdefinestyle{myPythonListing}{
+  frame=single,
+  backgroundcolor=\color{listinggray},
+  %float=t,
+  language=Python,
+  basicstyle=\ttfamily \scriptsize,
+  breakautoindent=true,
+  breaklines=true
+  tabsize=2,
+  captionpos=b,
+  %numbers=left,
+  %numberstyle=\tiny
+}
+
+
+
+%  \setlength{\parskip}{0.05ex} % 1ex plus 0.5ex minus 0.2ex}
+%  \setlength{\parsep}{0pt}
+%  %\setlength{\headsep}{0pt}
+%  \setlength{\topskip}{0pt}
+%  \setlength{\topmargin}{0pt}
+%  %\setlength{\topsep}{0pt}
+%  \setlength{\partopsep}{0pt}
+
+% This is now the recommended way for checking for PDFLaTeX:
+
+
+\ifpdf
+\DeclareGraphicsExtensions{.pdf, .jpg, .tif}
+\else
+\DeclareGraphicsExtensions{.ps,  .eps, .jpg}
+\fi
+
+\tolerance=1000
+\hyphenpenalty=10
+
+
+\usepackage{listings}
+\usepackage{paralist}
+%\setlength{\parindent}{0em}
+
+\lstnewenvironment{code}[1][]%
+{
+\noindent
+%\minipage{0.98 \linewidth}
+\minipage{1.0 \linewidth}
+\vspace{0.5\baselineskip}
+\lstset{
+    language=Python,
+%    numbers=left,
+%    numbersep=4pt,
+    frame=single,
+    captionpos=b,
+    stringstyle=\ttfamily,
+    basicstyle=\scriptsize\ttfamily,
+    showstringspaces=false,#1}
+}
+{\endminipage}
+
+%\usepackage{draftwatermark}
+%\SetWatermarkText{DRAFT}
+%\SetWatermarkScale{0.5}
+
+
+\defaultleftmargin{1em}{}{}{}
+%\usepackage{fullpage}
+% test commit by pradeep - will remove it again
+\begin{document}
+
+\title{A Next Generation Microscope: By Antonie van Leeuwenhoek}
+
+%\titlenote{Extended Abstract}
+%\subtitle{}
+% \subtitlenote{}
+
+\author{\\
+   {\footnotesize{\emph{$^{1}$RADICAL, ECE, Rutgers University, Piscataway,NJ 08854, USA}}}\\
+   \footnotesize{\emph{$^{2}$}}\\
+   \footnotesize{\emph{$^{3}$}}\\
+   \footnotesize{\emph{$^{4}$}\upp\upp\upp}
+   }
+
+
+\date{}
+\maketitle
+
+% \section{Introduction}
+
+Stream processing capabilities are crucial to analyze and
+derive real-time insights on incoming data from experiments, simulations, and
+Internet-of-Things (IoT) sensors~\cite{streaming2015}. Prominent examples are
+synchrotron light source experiments, such as those at the National
+Synchrotron Light Sources II (NSLS-II) or the X-Ray Free Electron Laser (XFEL)
+light sources. Some experiments at these light sources are projected to
+generate data at rates of 20\,GB/sec~\cite{nsls}. This data needs to be
+processed in a time-sensitive if not real-time manner, to support steering of
+the experiments and computations~\cite{lcls_data}. 
+
+
+%\setlength{\bibsep}{0pt}
+%\bibliographystyle{unsrt}
+%\bibliographystyle{ACM-Reference-Format}
+\bibliographystyle{unsrt}
+%\bibliographystyle{abbrv}
+%\setstretch{1}
+%\setlength\bibitemsep{0pt}
+\bibliography{benchmark,saga,saga-related,pilotjob,radical_rutgers,radical_publications,bigdata,local,streaming}
+
+\end{document}
+
+
