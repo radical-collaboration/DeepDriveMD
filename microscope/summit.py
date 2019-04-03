@@ -22,38 +22,39 @@ def generate_MD_pipeline():
 
         # Each Task() is an OpenMM executable that will run on a single GPU.
         # Set sleep time for local testing
-        # for i in range(18):
+        for i in range(18):
 
-        task = Task()
-        # task.name = 'md_{}'.format(i) 
-        task.name = 'md'
+            task = Task()
+            task.name = 'md_{}'.format(i) 
+            
+            task.pre_exec    = []
 
-        task.pre_exec    = []
+            # task.pre_exec   += ['export MINICONDA=/gpfs/alpine/scratch/jdakka/bip178/miniconda']
+            # task.pre_exec   += ['export PATH=$MINICONDA/bin:$PATH']
+            # task.pre_exec   += ['export LD_LIBRARY_PATH=$MINICONDA/lib:$LD_LIBRARY_PATH']
+            task.pre_exec   += ['module load python/2.7.15-anaconda2-5.3.0']
+            task.pre_exec   += ['module load cuda/9.1.85']
+            task.pre_exec   += ['module load gcc/6.4.0']
+            task.pre_exec   += ['source activate openmm']
+            task.pre_exec   += ['cd /gpfs/alpine/scratch/jdakka/bip178/benchmarks/MD_exps/fs-pep']
+            task.executable  = '/ccs/home/jdakka/.conda/envs/openmm/bin/python'
+            task.arguments = ['run_openmm.py', '-f', 
+            '/gpfs/alpine/scratch/jdakka/bip178/benchmarks/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb',
+            '-i {}.'].format(i)
+            task.cpu_reqs = {'processes': 1,
+                             'process_type': None,
+                             'threads_per_process': 1,
+                             'thread_type': None
+                             }
 
-        # task.pre_exec   += ['export MINICONDA=/gpfs/alpine/scratch/jdakka/bip178/miniconda']
-        # task.pre_exec   += ['export PATH=$MINICONDA/bin:$PATH']
-        # task.pre_exec   += ['export LD_LIBRARY_PATH=$MINICONDA/lib:$LD_LIBRARY_PATH']
-        task.pre_exec   += ['module load python/2.7.15-anaconda2-5.3.0']
-        task.pre_exec   += ['module load cuda/9.1.85']
-        task.pre_exec   += ['module load gcc/6.4.0']
-        task.pre_exec   += ['source activate openmm']
-        task.pre_exec   += ['cd /gpfs/alpine/scratch/jdakka/bip178/benchmarks/MD_exps/fs-pep']
-        task.executable  = '/ccs/home/jdakka/.conda/envs/openmm/bin/python'
-        task.arguments = ['run_openmm.py', '-f', '/gpfs/alpine/scratch/jdakka/bip178/benchmarks/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb']
-        task.cpu_reqs = {'processes': 1,
-                         'process_type': None,
-                         'threads_per_process': 1,
-                         'thread_type': None
-                         }
+            task.gpu_reqs = {'processes': 1,
+                             'process_type': None,
+                             'threads_per_process': 1,
+                             'thread_type': 'CUDA'
+                            }
 
-        task.gpu_reqs = {'processes': 1,
-                         'process_type': None,
-                         'threads_per_process': 1,
-                         'thread_type': 'CUDA'
-                         }
-
-        # Add the MD task to the Docking Stage
-        s1.add_tasks(task)
+            # Add the MD task to the Docking Stage
+            s1.add_tasks(task)
 
         # Add MD stage to the MD Pipeline
         p.add_stages(s1)
