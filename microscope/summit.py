@@ -40,7 +40,7 @@ def generate_MD_pipeline():
             task.executable  = '/ccs/home/jdakka/.conda/envs/openmm/bin/python'
             task.arguments = ['run_openmm.py', '-f', 
             '/gpfs/alpine/scratch/jdakka/bip178/benchmarks/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb',
-            '-i {}.'].format(i)
+            '-i {}'.format(i)]
             task.cpu_reqs = {'processes': 1,
                              'process_type': None,
                              'threads_per_process': 1,
