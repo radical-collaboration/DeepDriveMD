@@ -66,6 +66,7 @@ debugging
 
    ```bash 
    git clone https://github.com/pandegroup/openmm.git 
+   git checkout bd788d900b6105c383cb0c72d7d977feaa828be4
    ```
 
 
