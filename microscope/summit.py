@@ -61,7 +61,7 @@ def generate_MD_pipeline():
         return p
 
     
-    p = describe_MD_pipline()
+    p = describe_MD_pipeline()
     return p
 
 
