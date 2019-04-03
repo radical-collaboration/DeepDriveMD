@@ -103,6 +103,7 @@ debugging
    python -m simtk.testInstallation 
    make test
    ```
+   
 * Some additional builds needed: 
 ```
 conda install matplotlib scipy
@@ -111,6 +112,11 @@ pip install MDAnalysis MDAnalysisTests
 python -c 'import MDAnalysis as mda'
 pip install h5py 
 ```
+
+* Run executable: 
+
+`jsrun --smpiargs="off" -n 1 -a 1 -g 1 /ccs/home/jdakka/.conda/envs/openmm/bin/python run_openmm.py -f pdb/100-fs-peptide-400K.pdb` 
+
 Collapse
 
 
