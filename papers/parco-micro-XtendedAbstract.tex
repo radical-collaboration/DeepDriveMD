@@ -41,9 +41,9 @@ etc.). While there are numerous approaches to cluster simulations (such as
 Markov State Models and variational approach for molecular processes) to
 characterize transition pathways from ensembles of bio-molecular simulations,
 we recently developed a deep learning based approach that uses convolutions
-and a variational autoencoder to effectively cluster simulations. We have
-shown that our approach can automatically discover intermediate states from
-protein folding pathways; further, the learned latent dimensions also
+and a variational autoencoder to effectively cluster simulations.~\cite{bhowmik2018deep} 
+We have shown that our approach can automatically discover intermediate states 
+from protein folding pathways; further, the learned latent dimensions also
 correspond to biophysically relevant features (such as number of native
 contacts).
 
@@ -64,20 +64,26 @@ the Oak Ridge Leadership Computing Facility.
 % ---------------------------------------------------------------------------
 \section{Methods} 
 
-TDB\@.
+TDB\@. Two key components in the workflow are MD simulation and CVAE. 
+To fully utilize the computational power of Summit with NVIDIA Tesla V100 
+accelerators, we explicitly choose software compiled for GPUs to carry out 
+these two set of tasks. 
+
 
 \subsection{Molecular Dynamics simulation}
 
-The simulations are performed on Graphic Processing Units (GPUs) with OpenMM
-7.3.0[ref]. The FS-peptide system is described with Amberff99sb-ildn force
-field in implicit Onufriev-Bashford-Case GBSA solvent model. The non-bonded
+The MD simulations are performed on GPUs with OpenMM
+7.3.0~\cite{eastman2017openmm}. The Fs-peptide system is described with 
+Amberff99sb-ildn force field in implicit Onufriev-Bashford-Case GBSA solvent 
+model. The non-bonded 
 interactions are cut off at 1.0 nm and no periodic boundary condition is
 applied. All the bonds to hydrogen are fixed to their equilibrium value to
 enable 2 fs time step. Langevin integrator is used to maintain the system
-temperature at 300 K with friction coefficient at 1 ps-1. Other than
-trajectories, a new reporter that outputs the contact map of protein alpha-C,
-a two-dimensional matrix, in hdf5 format is designed using MDAnalysis module
-and added to the simulation.
+temperature at 300 K with friction coefficient at 1 ps$^{-1}$. Other than
+trajectories, a new reporter is added to the simulation that calculates the 
+contact matrix of protein $C_{\alpha}$s using 
+MDAnalysis~\cite{michaud2011mdanalysis,gowers2016mdanalysis} 
+module and output it into hdf5 format. 
 
 \subsection{Convolutional Variational Autoencoder}
 
@@ -95,9 +101,16 @@ dataset. Convolutional layers are added before the feedforward layers,
 applying a filter to the input contact maps, which can improve the robustness
 of the network in recognizing the local patterns that represents local
 interactions between C-alpha from neighboring residues regardless of their
-positions. Each CVAE neural network is constructed with Keras/TensorFlow
-packages and trained for 100 epochs.
+positions.~\cite{bhowmik2018deep}  Each CVAE neural network is constructed with Keras/TensorFlow~\cite{chollet2015keras,abadi2016tensorflow}
+packages and trained on GPU for 100 epochs.
 
+
+\begin{figure*}
+	\centering
+	\includegraphics[width=.8\textwidth]{MicroScope_Workflow_Diagram}
+	\caption{The workflow diagram. Each frame in MD simulations is equivalent to 50 ps. }
+	\label{fig:microscopeworkflowdiagram}
+\end{figure*}
 % ---------------------------------------------------------------------------
 \section{Software and Platforms}
 
@@ -134,6 +147,9 @@ offering 44 CPU cores and 6 GPUs per node.
 Our workflow uses 18 concurrent OpenMM instances and requires 18 GPUs. Once
 we execute all OpenMM instances we aggregate all simulation results and pass
 them to a CVAE task that uses these results to train a CVAE model.
+
+
+
 
 \bibliographystyle{unsrt}
 \bibliography{parco-micro}
