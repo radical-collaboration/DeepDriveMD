@@ -1,0 +1,128 @@
+\documentclass[conference,final]{IEEEtran}
+
+\input{head}
+\input{include}
+
+\begin{document}
+
+\title{Title}
+
+\author{\\
+   {\footnotesize{\emph{$^{1}$RADICAL, ECE, Rutgers University, Piscataway,NJ 08854, USA}}}\\
+   \footnotesize{\emph{$^{2}$}}\\
+   \footnotesize{\emph{$^{3}$}}\\
+   \footnotesize{\emph{$^{4}$}\upp\upp\upp}
+   }
+
+
+\date{}
+\maketitle
+
+% ---------------------------------------------------------------------------
+\section{Scientific  and Computational Motivation}
+
+Multiscale molecular simulations are widely used to model complex biological phenomena, such as protein folding, protein-ligand (e.g., small molecule, ligand/ drug, protein) interactions, and self-assembly. However, much of these phenomena occur at timescales that are fundamentally challenging for molecular simulations to access, even with advances in both hardware and software technologies. Hence, there is a need to develop scalable, adaptive simulation strategies that can enable sampling of timescales relevant to these biological phenomena. 
+
+Many adaptive sampling techniques have been proposed and these techniques share some similar characteristics, including (a) the need for (efficient) automated approaches to identify a small number of relevant conformational coordinates (either through clustering and/or dimensionality reduction techniques), and (b) the identification of the ‘next’ set of simulations to run such that more trajectories are successful in attaining a specific end goal (e.g., protein that is well folded, protein bound to its target ligand, etc.). While there are numerous approaches to cluster simulations (such as Markov State Models and variational approach for molecular processes) to characterize transition pathways from ensembles of bio-molecular simulations, we recently developed a deep learning based approach that uses convolutions and a variational autoencoder (CVAE) to cluster simulations in an unsupervised manner~\cite{bhowmik2018deep}. We have shown that our CVAE can discover intermediate states from protein folding pathways; further, the CVAE-learned latent dimensions cluster conformations into biophysically relevant features (such as number of native contacts, or root mean squared deviation to native state). 
+
+We posit that the latent features learned by the CVAE can be used to drive adaptive sampling within molecular dynamics (MD) simulations, where the next set of simulations to run are decided based on a measure of ‘novelty’ of the simulation/ trajectory frame observed. In this paper, we implement our deep learning driven adaptive sampling framework within the RADICAL-Ensemble toolkit~\cite{balasubramanian2018harnessing} to specify and execute a workflow with multiple instances of MD simulations and CVAEs. Our contributions can be summarized as follows: 
+\begin{itemize}
+\item We demonstrate that deep learning based approaches can be used to drive adaptive MD simulations at scale. We demonstrate our approach in folding small proteins and show that it is possible to fold them in a small number of iterations of the adaptive sampling than using traditional approaches. 
+\item We highlight how the workflow characterization is quite unique as the training of deep learning algorithms can take almost as much time as running simulations, necessitating novel developments within RADICAL-Ensemble toolkit to deal with resource allocation, scheduling and management. 
+\end{itemize}
+
+
+% ---------------------------------------------------------------------------
+\section{Methods} 
+
+TDB\@. Two key components in the workflow are MD simulation and CVAE. 
+To fully utilize the computational power of Summit with NVIDIA Tesla V100 
+accelerators, we explicitly choose software compiled for GPUs to carry out 
+these two set of tasks. 
+
+
+\subsection{Molecular Dynamics simulation}
+
+The MD simulations are performed on GPUs with OpenMM
+7.3.0~\cite{eastman2017openmm}. The Fs-peptide system is described with 
+Amberff99sb-ildn force field in implicit Onufriev-Bashford-Case GBSA solvent 
+model. The non-bonded 
+interactions are cut off at 1.0 nm and no periodic boundary condition is
+applied. All the bonds to hydrogen are fixed to their equilibrium value to
+enable 2 fs time step. Langevin integrator is used to maintain the system
+temperature at 300 K with friction coefficient at 1 ps$^{-1}$. Other than
+trajectories, a new reporter is added to the simulation that calculates the 
+contact matrix of protein $C_{\alpha}$s using 
+MDAnalysis~\cite{michaud2011mdanalysis,gowers2016mdanalysis} 
+module and output it into hdf5 format. 
+
+\subsection{Convolutional Variational Autoencoder}
+
+Autoencoder is a deep neural network architecture that can represent high
+dimensional data in a low dimensional latent space while retaining the key
+information. With its unique hourglass shaped architecture, an autoencoder
+compresses input data into a latent space with reduced dimension and
+reconstructs it to the original data. Since output of the network is the
+reconstruction of input features, it can handle the unlabeled data sets and
+capture essential information in the latent space. Additionally, the
+variational layer constraints the data points to a normal distribution in
+latent space, in which way the latent embeddings will be evenly distributed
+and it links to any points in latent space to patterns in the original
+dataset. Convolutional layers are added before the feedforward layers,
+applying a filter to the input contact maps, which can improve the robustness
+of the network in recognizing the local patterns that represents local
+interactions between C-alpha from neighboring residues regardless of their
+positions.~\cite{bhowmik2018deep}  Each CVAE neural network is constructed with Keras/TensorFlow~\cite{chollet2015keras,abadi2016tensorflow}
+packages and trained on GPU for 100 epochs.
+
+
+\begin{figure*}
+	\centering
+	\includegraphics[width=.8\textwidth]{MicroScope_Workflow_Diagram}
+	\caption{The workflow diagram. Each frame in MD simulations is equivalent to 50 ps. }
+	\label{fig:microscopeworkflowdiagram}
+\end{figure*}
+% ---------------------------------------------------------------------------
+\section{Software and Platforms}
+
+EnTK exposed an application programming interfaces that enables users to
+specify workflows in terms of pipelines, stages and tasks. Each pipeline is
+composed by a sequences of stages and each stage is a set of tasks. Sequences
+and set encode the execution priority among tasks: stage \#2 must execute
+after stage \#1 but all tasks of each stage can execute concurrently. Each
+task encapsulates a program, not a method or a function. We use the OpenMM
+simulation engine to execute our MD simulations. Each OpenMM executable runs
+on a single GPU and simulates an independent physical system. Each OpenMM
+executable and CVAE is run as a self-contained, independent executable that,
+in turn, can use multithreading and/or multiprocessing. In this way, each
+task can use multiple CPUs or GPUs as needed.
+
+EnTK uses RADICAL-Pilot (RP) as its runtime system~\cite{merzky2018using}. RP
+is a pilot systems, i.e., it enables the decoupling between the acquisition
+of HPC resources and the scheduling of tasks on those
+resources~\cite{turilli2018comprehensive}. RP acquires resources by
+submitting a job to the batch system of the target resource and then uses a
+private scheduler to schedule tasks on those resources. In this way, tasks do
+not have to wait on the resource batch queue to be executed, enabling
+high-throughput on high-performance computing resources within the boundaries
+of the fair usage policies of the target machine.
+
+We executed our workflow on Summit, the new leadership-class machine managed
+by OLCF at ORNL\@. Currently, Summit is the largest HPC machine in the world,
+offering 44 CPU cores and 6 GPUs per node.
+
+
+% ---------------------------------------------------------------------------
+\section{Results and Future Work}
+
+Our workflow uses 18 concurrent OpenMM instances and requires 18 GPUs. Once
+we execute all OpenMM instances we aggregate all simulation results and pass
+them to a CVAE task that uses these results to train a CVAE model.
+
+
+
+
+\bibliographystyle{unsrt}
+\bibliography{parco-micro}
+
+\end{document}
