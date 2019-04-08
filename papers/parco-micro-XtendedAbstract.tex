@@ -117,25 +117,30 @@ offering 44 CPU cores and 6 GPUs per node.
 
 Our workflow uses 18 concurrent OpenMM instances and requires 18 GPUs. Once
 we execute all OpenMM instances we aggregate all simulation results and pass
-them to a CVAE task that uses these results to train a CVAE model. 
+them to a CVAE task % that uses these results 
+to train a CVAE model.
 
-We show preliminary results that indicates the ability to integrate the 
-simulation component of the workflow into RADICAL-Cybertools.  We profile the 
-performance of RADICAL-Cybertools using a single OpenMM instance on ORNL Summit. 
-Specifically, we benchmark the FS-Peptide system and run the 
-simulations for 100 nanoseconds (ns) on a single Tesla V100 GPU. We include the 
-overheads of EnTK and RP, using our in-house profiling tool (RADICAL-Analytics). 
-In addition, we include the task execution time reported by the OpenMM logs. 
-% Performance of RADICAL-Cybertools using 
-    % FS-Peptide OpenMM benchmark on ORNL Summit
+We show preliminary results that indicates the ability to integrate the
+simulation component of the workflow into RADICAL-Cybertools, and the
+relatively low overheads of our tools.  As a baseline, we profile the
+performance of RADICAL-Cybertools using a single OpenMM instance on ORNL
+Summit. Specifically, we benchmark the FS-Peptide system and run the
+simulations for 100 ns on a single Tesla V100 GPU. 
+
+Fig.~\ref{fig:single_openmm} shows the task execution time as reported in the
+OpenMM logs and the overheads of EnTK and RP, measured using
+RADICAL-Analytics, our in-house profiling tool. OpenMM tasks executed for
+5837s $\sigma$, while EnTK overhead was 1.2s $\sigma$, and
+RADICAL-Pilot overhead 5837s $\sigma$. From this baseline we can
+conclude that RADICAL-Cybertools overheads are negligible and that we are
+ready to move to executing the workflow at scale.
+
 \begin{figure*}
     \centering
     \includegraphics[width=.8\textwidth]{single_openmm}
     \caption{}
     \label{fig:single_openmm}
 \end{figure*}
-
-
 
 \bibliographystyle{unsrt}
 \bibliography{parco-micro}
