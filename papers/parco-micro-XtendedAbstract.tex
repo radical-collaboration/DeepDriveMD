@@ -90,12 +90,7 @@ specify workflows in terms of pipelines, stages and tasks. Each pipeline is
 composed of a sequences of stages, and each stage is a set of tasks.
 Sequences and set encode the execution priority among tasks: stage \#2 must
 execute after stage \#1 but all tasks of a stage can execute concurrently.
-Each task encapsulates a program, not a method or a function. We use the
-OpenMM simulation engine to execute our MD simulations. Each OpenMM
-executable runs on a single GPU and simulates an independent physical system.
-Each OpenMM executable and CVAE runs as a self-contained, independent
-executable that, in turn, can use multithreading and/or multiprocessing. In
-this way, each task can use multiple CPUs or GPUs as needed.
+Each task encapsulates a program, not a method or a function.
 
 EnTK uses RADICAL-Pilot (RP) as its runtime system~\cite{merzky2018using}. RP
 is a pilot systems, i.e., it enables the decoupling between the acquisition
@@ -107,6 +102,24 @@ not have to wait on the resource batch queue to be executed, enabling
 high-throughput on high-performance computing resources within the boundaries
 of the fair usage policies of the target machine.
 
+Fig.~\ref{fig:microscopeworkflowdiagram} shows a diagrammatic representation
+of our workflow. We use the OpenMM simulation engine to execute our MD
+simulations. Each OpenMM executable runs on a single GPU and simulates an
+independent physical system. Our CVAE implementation gets as input a
+aggregated set of simulations' trajectories and uses it to train its model.
+Multiple trainings are concurrently repeated until, upon successful inference
+of the hyperspace, CVAE output is used to drive a new set of simulations.
+
+Both OpenMM and CVAE run as self-contained, independent executables that, in
+turn, can use multithreading and/or multiprocessing. In this way, each task
+can use multiple CPUs or GPUs as needed. Currently, our workflow uses 18
+concurrent OpenMM instances and requires 18 GPUs. The CVAE implementation
+uses 1 GPUs and the whole hyerspace optimization takes $2^5$ CVAE trainings
+for a total of 32 GPUs. Our workflow is implemented in EnTK with two
+pipelines, one for MD simulations and the other for CVAE trainings and
+hyperspace optimization. The two pipelines execute concurrently, each
+requiring at every point in time a minimum of 18 and 32 GPUs respectively.
+
 We executed our workflow on Summit, the new leadership-class machine managed
 by OLCF at ORNL\@. Currently, Summit is the largest HPC machine in the world,
 offering 44 CPU cores, each with 4 hardware threads, and 6 GPUs per node.
@@ -114,11 +127,6 @@ offering 44 CPU cores, each with 4 hardware threads, and 6 GPUs per node.
 
 % ---------------------------------------------------------------------------
 \section{Results and Future Work}
-
-Our workflow uses 18 concurrent OpenMM instances and requires 18 GPUs. Once
-we execute all OpenMM instances we aggregate all simulation results and pass
-them to a CVAE task % that uses these results 
-to train a CVAE model.
 
 We show preliminary results that indicates the ability to integrate the
 simulation component of the workflow into RADICAL-Cybertools, and the
