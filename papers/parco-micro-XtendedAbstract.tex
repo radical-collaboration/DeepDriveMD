@@ -8,10 +8,11 @@
 %\title{Integrating Convolutional Autoencoders with Molecular Dynamics
 %Simulations on HPC Platforms}
 \title{Deep Generative Model driven Protein Folding Simulations on HPC Platforms}
-\author{Vivek Balasubramanian$^{1}$, Debsindhu Bhowmik$^{2}$, Jumana Dakka$^{1}$, Shantenu Jha$^{1}$, \\ Hyungro Lee$^{1}$, Heng Ma$^{2}$, Arvind Ramanathan$^{4}$, Matteo Turilli$^{1}$, Michael T. Young$^{2}$ \\
+\author{Vivek Balasubramanian$^{1}$, Debsindhu Bhowmik$^{2}$, Jumana Dakka$^{1}$, Shantenu Jha$^{1,4}$, \\ Hyungro Lee$^{1}$, Heng Ma$^{2}$, Arvind Ramanathan$^{4}$, Matteo Turilli$^{1}$, Michael T. Young$^{2}$ \\
    {\footnotesize{\emph{$^{1}$RADICAL, ECE, Rutgers University, Piscataway,NJ 08854, USA}}}\\
    \footnotesize{\emph{$^{2}$}}Computational Sciences and Engineering, Oak Ridge National Laboratory, Oak Ridge, TN 37830\\
    \footnotesize{\emph{$^{3}$}}Data Science and Learning, Argonne National Laboratory, Lemont, IL 60439\\
+   \footnotesize{\emph{$^{3}$}}Brookhaven National Laboratory, Upton, New York, 11973\\
    %\footnotesize{\emph{$^{4}$}\upp\upp\upp}
    }
 
@@ -24,12 +25,38 @@
 
 Multiscale molecular simulations are widely used to model complex biological phenomena, such as protein folding, protein-ligand (e.g., small molecule, ligand/ drug, protein) interactions, and self-assembly. However, much of these phenomena occur at timescales that are fundamentally challenging for molecular simulations to access, even with advances in both hardware and software technologies. Hence, there is a need to develop scalable, adaptive simulation strategies that can enable sampling of timescales relevant to these biological phenomena. 
 
-Many adaptive sampling techniques have been proposed and these techniques share some similar characteristics, including (a) the need for (efficient) automated approaches to identify a small number of relevant conformational coordinates (either through clustering and/or dimensionality reduction techniques), and (b) the identification of the ‘next’ set of simulations to run such that more trajectories are successful in attaining a specific end goal (e.g., protein that is well folded, protein bound to its target ligand, etc.). While there are numerous approaches to cluster simulations (such as Markov State Models and variational approach for molecular processes) to characterize transition pathways from ensembles of bio-molecular simulations, we recently developed a deep learning based approach that uses convolutions and a variational autoencoder (CVAE) to cluster simulations in an unsupervised manner~\cite{bhowmik2018deep}. We have shown that our CVAE can discover intermediate states from protein folding pathways; further, the CVAE-learned latent dimensions cluster conformations into biophysically relevant features (such as number of native contacts, or root mean squared deviations). 
+Many adaptive sampling techniques have been proposed and these techniques
+share some similar characteristics, including (a) the need for (efficient)
+automated approaches to identify a small number of relevant conformational
+coordinates (either through clustering and/or dimensionality reduction
+techniques), and (b) the identification of the ‘next’ set of simulations to
+run such that more trajectories are successful in attaining a specific end
+goal (e.g., protein that is well folded, protein bound to its target ligand,
+etc.). There are numerous approaches to cluster simulations to characterize
+transition pathways from ensembles of bio-molecular simulations, such as
+Markov State Models and variational approach for molecular processes. We
+recently developed a deep learning based approach that uses convolutions and a
+variational autoencoder (CVAE) to cluster simulations in an unsupervised
+manner~\cite{bhowmik2018deep}. We have shown that our CVAE can discover
+intermediate states from protein folding pathways; further, the CVAE-learned
+latent dimensions cluster conformations into biophysically relevant features
+(such as number of native contacts, or root mean squared deviations).
 
-We posit that the CVAE learned latent features CVAE can be used to drive adaptive sampling within molecular dynamics (MD) simulations, where the next set of simulations to run are decided based on a measure of ‘novelty’ of the simulation/ trajectory frame observed. In this paper, we implement our deep learning driven adaptive sampling framework within the RADICAL-Ensemble toolkit~\cite{balasubramanian2018harnessing} to specify and execute a workflow with multiple instances of MD simulations and CVAEs. Our contributions can be summarized as follows: 
+We posit that the CVAE learned latent features can be used to drive adaptive
+sampling within molecular dynamics (MD) simulations, where the next set of
+simulations to run are decided based on a measure of ‘novelty’ of the
+simulation/ trajectory frame observed. In this paper, we implement our deep
+learning driven adaptive sampling framework using RADICAL-Ensemble
+toolkit~\cite{balasubramanian2018harnessing} to specify and execute a workflow
+with multiple concurrent instances of MD simulations and CVAEs. Our
+contributions can be summarized as follows:
 \begin{itemize}
 \item We demonstrate that deep learning based approaches can be used to drive adaptive MD simulations at scale. We demonstrate our approach in folding small proteins and show that it is possible to fold them in a small number of iterations of the adaptive sampling than using traditional approaches. 
-\item We highlight how the workflow characterization is quite unique as the training of deep learning algorithms can take almost as much time as running simulations, necessitating novel developments within RADICAL-Ensemble toolkit to deal with resource allocation, scheduling and management. 
+\item We highlight parallel computing challenges arising from the
+unique characteristics of the worklfow, viz.., training of deep learning
+algorithms can take almost as much time as running simulations, necessitating
+novel developments to deal with heterogeneous task placement, resource
+management and scheduling.
 \end{itemize}
 
 
