@@ -115,19 +115,19 @@ packages and trained on GPU for 100 epochs.
 
 RADICAL-Ensemble toolkit (EnTK) exposes an application programming interfaces
 that enables users to specify workflows in terms of pipelines, stages and
-tasks. Each pipeline is composed of a sequences of stages, and each stage is a
-set of tasks. Sequences and set encode the execution priority among tasks:
+tasks. Each pipeline is composed of a sequences of stages, and each stage is
+a set of tasks. Sequences and set encode the execution priority among tasks:
 stage \#2 must execute after stage \#1 but all tasks of a stage can execute
 concurrently. Each task encapsulates a program, not a method or a function.
 
 EnTK uses RADICAL-Pilot (RP) as its runtime system~\cite{merzky2018using}. RP
 is a pilot system, i.e., it enables the decoupling between the acquisition of
 HPC resources and the scheduling of tasks on those
-resources~\cite{turilli2018comprehensive}. RP acquires resources by submitting
-a job to the batch system of the target resource and then internally schedules
-tasks on those resources. In this way, RP manages the resources and thereby
-exercises control over task execution and scheduling, while enabling
-high-throughput task execution on high-performance resources.
+resources~\cite{turilli2018comprehensive}. RP acquires resources by
+submitting a job to the batch system of the target resource and then
+internally schedules tasks on those resources. In this way, RP manages the
+resources and thereby exercises control over task execution and scheduling,
+while enabling high-throughput task execution on high-performance resources.
 
 Fig.~\ref{fig:microscopeworkflowdiagram} shows a diagrammatic representation
 of our workflow. We use the OpenMM simulation engine to execute our MD
@@ -148,8 +148,8 @@ hyperspace optimization. The two pipelines execute concurrently, each
 requiring at every point in time a minimum of 18 and 32 GPUs respectively.
 
 We executed our workflow on Summit, the new leadership-class machine at
-ORNL\@. Currently, Summit is the largest HPC machine in the world, offering 44
-CPU cores, each with 4 hardware threads, and 6 GPUs per node.
+ORNL\@. Currently, Summit is the largest HPC machine in the world, offering
+44 CPU cores, each with 4 hardware threads, and 6 GPUs per node.
 
 
 % ---------------------------------------------------------------------------
@@ -166,7 +166,7 @@ Fig.~\ref{fig:single_openmm} shows the task execution time as reported in the
 OpenMM logs and the overheads of EnTK and RP, measured using
 RADICAL-Analytics, our in-house profiling tool. OpenMM tasks executed for
 5837s $\pm$20.3, while EnTK overhead was 1.2s $\pm$0.05, and
-RADICAL-Pilot overhead 5837s $\pm$5.8. From this baseline we can
+RADICAL-Pilot overhead 68.9s $\pm$5.8. From this baseline we can
 conclude that RADICAL-Cybertools overheads are negligible and that we are
 ready to move to executing the workflow at scale.
 
