@@ -25,7 +25,7 @@ def generate_MD_pipeline():
         # for i in range(18):
 
         task = Task()
-        task.name = 'md'.format(i) 
+        task.name = 'md' 
         
         task.pre_exec    = []
 
@@ -36,7 +36,7 @@ def generate_MD_pipeline():
         task.pre_exec   += ['module load cuda/9.1.85']
         task.pre_exec   += ['module load gcc/6.4.0']
         task.pre_exec   += ['source activate openmm']
-        task.pre_exec   += ['cd /gpfs/alpine/scratch/jdakka/bip178/benchmarks/MD_exps/fs-pep']
+        task.pre_exec   += ['cd /gpfs/alpine/scratch/jdakka/bip178/benchmarks/MD_exps/fs-pep/']
         task.executable  = '/ccs/home/jdakka/.conda/envs/openmm/bin/python'
         task.arguments = ['run_openmm.py', '-f', 
         '/gpfs/alpine/scratch/jdakka/bip178/benchmarks/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb']
@@ -75,8 +75,8 @@ if __name__ == '__main__':
             'resource': 'ornl.summit',
             'project' : 'BIP178',
             'queue' : 'batch',
-            'walltime': 60,
-            'cpus': 126,
+            'walltime': 120,
+            'cpus': 42,
             # 'gpus': 18,
             'access_schema': 'local'
     }
