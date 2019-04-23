@@ -29,7 +29,7 @@ else:
 # pdb_file = os.path.abspath('./pdb/100-fs-peptide-400K.pdb')
 # ref_pdb_file = os.path.abspath('./pdb/fs-peptide.pdb')
 
-gpu_index = 1
+gpu_index = 0
 # check_point = None
 openmm_simulate_amber_fs_pep(pdb_file,
                              check_point = check_point,
