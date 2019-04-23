@@ -56,9 +56,7 @@ def generate_MD_pipeline():
         s2 = Stage()
         s2.name = 'tf'
 
-        # Each Task() is an OpenMM executable that will run on a single GPU.
-        # Set sleep time for local testing
-        # for i in range(18):
+        # Task 2 is TF benchmark
 
         t2 = Task()
         t2.name = 'tf' 
