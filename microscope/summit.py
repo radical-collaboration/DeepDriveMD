@@ -68,9 +68,9 @@ def generate_MD_pipeline():
         t2.pre_exec   += ['module load cuda/9.1.85']
         t2.pre_exec   += ['module load gcc/6.4.0']
         t2.pre_exec   += ['source activate openmm']
-        t2.pre_exec   += ['cd /gpfs/alpine/scratch/jdakka/bip178']
+        t2.pre_exec   += ['cd /gpfs/alpine/scratch/jdakka/bip178/cvae_heng/hyperspace/microscope/experiments/CVAE_exps']
         t2.executable  = '/ccs/home/jdakka/.conda/envs/openmm/bin/python'
-        t2.arguments = ['tf.py']
+        t2.arguments = ['train_cvae.py', '-f', 'cvae_input.h5']
         t2.cpu_reqs = {'processes': 1,
                          'process_type': None,
                          'threads_per_process': 1,
