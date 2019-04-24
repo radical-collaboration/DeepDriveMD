@@ -3,7 +3,7 @@
 * Summit Experiments and RADICAL-Analytics [Workflow](https://github.com/radical-experiments/hyperspace_experiments/tree/master/summit) 
 * CVAE working code [Code](https://github.com/radical-collaboration/hyperspace/tree/MD/microscope/experiments/CVAE_exps)
 * MD working code [Code](https://github.com/radical-collaboration/hyperspace/tree/MD/microscope/experiments/MD_exps/fs-pep)
-* Other MD/CVAE [Code](* MD/CVAE [Code](https://github.com/hengma1001/CVAE_pilot_MD))
+* Other MD/CVAE [Code](https://github.com/hengma1001/CVAE_pilot_MD)
 * Workflow [Diagram](https://docs.google.com/drawings/d/1NjNfeQi1ypQ8eVDmS9t4X8S3-Wy4mzcBbcR76Qh-NcE/edit?usp=sharing) 
 * TensorFlow Installation on [`Summit`](https://github.com/inspiremd/radical-inspire/blob/master/tensorflow_install_summit.md)
 * OpenMM Installation on [`Summit`](https://github.com/radical-collaboration/hyperspace/blob/master/microscope/summit_install.md) 
