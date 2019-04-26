@@ -13,8 +13,8 @@ source activate or conda activate <venv>
 #### Working Stack:
 
 ```
-radical.entk         : 0.7.13
-radical.pilot        : 0.50.19-v0.50.19-101-g936422e@feature-summit_am
+radical.entk         : 0.7.14-0.7.15-2-g5e5b1cb@fix-1830
+radical.pilot        : 0.50.22-v0.50.22-189-g3ac6a19@fix-issue_1830
 radical.utils        : 0.50.3
 saga                 : 0.50.0-v0.50.0-22-g8c260f8@feature-summit
 
