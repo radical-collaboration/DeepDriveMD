@@ -44,11 +44,11 @@ train_data_length = [cm_data.shape[1] for cm_data in cm_data_lists]
 cvae_data_length = len(cvae_input)
 
 # # Write the traj info 
-# omm_log = 'openmm_log.txt' 
-# log = open(omm_log, 'w')
-# for i, n_frame in enumerate(train_data_length):
-#     log.writelines("{} {}\n".format(cm_files[i], n_frame))
-# log.close()
+omm_log = 'openmm_log.txt' 
+log = open(omm_log, 'w')
+for i, n_frame in enumerate(train_data_length):
+    log.writelines("{} {}\n".format(cm_files[i], n_frame))
+log.close()
 
 # Create .h5 as cvae input
 cvae_input_file = 'cvae_input.h5'
