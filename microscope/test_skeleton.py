@@ -8,7 +8,7 @@ if os.environ.get('RADICAL_ENTK_VERBOSE') is None:
     os.environ['RADICAL_ENTK_REPORT'] = 'True'
 
 # Assumptions:
-# - # of MD steps: 4
+# - # of MD steps: 2
 # - Each MD step runtime: 15 minutes
 # - Summit's scheduling policy [1]
 #
@@ -33,9 +33,10 @@ def generate_training_pipeline():
         s1.name = 'simulating'
 
         # MD tasks
-        for i in range(4):
+        for i in range(2):
             t1 = Task()
-            t1.executable = ['sleep']  # MD executable
+            # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/MD_exps/fs-pep/run_openmm.py
+            t1.executable = ['sleep']  # run_openmm.py
             t1.arguments = ['60']
 
             # Add the MD task to the Docking Stage
@@ -54,8 +55,8 @@ def generate_training_pipeline():
 
         # Aggregation task
         t2 = Task()
-        t2.executable = ['sleep']  # Executable to aggregate Trajectories +
-                                   # Contact maps
+        # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/MD_to_CVAE/MD_to_CVAE.py
+        t2.executable = ['sleep']  # MD_to_CVAE.py
 
         t2.arguments = ['30']
 
@@ -69,7 +70,8 @@ def generate_training_pipeline():
 
         # Aggregation task
         t3 = Task()
-        t3.executable = ['sleep']  # CVAE executable
+        # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/CVAE_exps/train_cvae.py
+        t3.executable = ['sleep']  # train_cvae.py
         t3.arguments = ['30']
 
         # Add MD stage to the MD Pipeline
