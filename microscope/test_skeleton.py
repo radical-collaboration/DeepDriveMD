@@ -23,118 +23,110 @@ if os.environ.get('RADICAL_ENTK_VERBOSE') is None:
 
 def generate_training_pipeline():
 
-    def describe_training_pipline():
-        p = Pipeline()
-        p.name = 'training'
+    p = Pipeline()
+    p.name = 'training'
 
-        # --------------------------
-        # MD stage
-        s1 = Stage()
-        s1.name = 'simulating'
+    # --------------------------
+    # MD stage
+    s1 = Stage()
+    s1.name = 'simulating'
 
-        # MD tasks
-        for i in range(2):
-            t1 = Task()
-            # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/MD_exps/fs-pep/run_openmm.py
-            t1.executable = ['sleep']  # run_openmm.py
-            t1.arguments = ['60']
+    # MD tasks
+    for i in range(2):
+        t1 = Task()
+        # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/MD_exps/fs-pep/run_openmm.py
+        t1.executable = ['sleep']  # run_openmm.py
+        t1.arguments = ['60']
 
-            # Add the MD task to the Docking Stage
-            s1.add_tasks(t1)
-
-        # Add the Docking task to the Docking Stage
+        # Add the MD task to the Docking Stage
         s1.add_tasks(t1)
 
-        # Add Docking stage to the pipeline
-        p.add_stages(s1)
+    # Add Docking stage to the pipeline
+    p.add_stages(s1)
 
-        # --------------------------
-        # Aggregate stage
-        s2 = Stage()
-        s2.name = 'aggregating'
+    # --------------------------
+    # Aggregate stage
+    s2 = Stage()
+    s2.name = 'aggregating'
 
-        # Aggregation task
-        t2 = Task()
-        # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/MD_to_CVAE/MD_to_CVAE.py
-        t2.executable = ['sleep']  # MD_to_CVAE.py
+    # Aggregation task
+    t2 = Task()
+    # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/MD_to_CVAE/MD_to_CVAE.py
+    t2.executable = ['sleep']  # MD_to_CVAE.py
 
-        t2.arguments = ['30']
+    t2.arguments = ['30']
 
-        # Add MD stage to the MD Pipeline
-        p.add_stages(s2)
+    # Add MD stage to the MD Pipeline
+    p.add_stages(s2)
 
-        # --------------------------
-        # Learning stage
-        s3 = Stage()
-        s3.name = 'learning'
+    # --------------------------
+    # Learning stage
+    s3 = Stage()
+    s3.name = 'learning'
 
-        # Aggregation task
-        t3 = Task()
-        # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/CVAE_exps/train_cvae.py
-        t3.executable = ['sleep']  # train_cvae.py
-        t3.arguments = ['30']
+    # Aggregation task
+    t3 = Task()
+    # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/CVAE_exps/train_cvae.py
+    t3.executable = ['sleep']  # train_cvae.py
+    t3.arguments = ['30']
 
-        # Add MD stage to the MD Pipeline
-        p.add_stages(s3)
+    # Add MD stage to the MD Pipeline
+    p.add_stages(s3)
 
-        return p
+    return p
 
 
 def generate_MDML_pipeline():
 
-    def describe_MDML_pipline():
-        p = Pipeline()
-        p.name = 'MDML'
+    p = Pipeline()
+    p.name = 'MDML'
 
-        # --------------------------
-        # MD stage
-        s1 = Stage()
-        s1.name = 'simulating'
+    # --------------------------
+    # MD stage
+    s1 = Stage()
+    s1.name = 'simulating'
 
-        # MD tasks
-        for i in range(4):
-            t1 = Task()
-            t1.executable = ['sleep']  # MD executable
-            t1.arguments = ['60']
+    # MD tasks
+    for i in range(4):
+        t1 = Task()
+        t1.executable = ['sleep']  # MD executable
+        t1.arguments = ['60']
 
-            # Add the MD task to the Docking Stage
-            s1.add_tasks(t1)
-
-        # Add the Docking task to the Docking Stage
+        # Add the MD task to the Docking Stage
         s1.add_tasks(t1)
 
-        # Add Docking stage to the pipeline
-        p.add_stages(s1)
+    # Add Docking stage to the pipeline
+    p.add_stages(s1)
 
-        # --------------------------
-        # Aggregate stage
-        s2 = Stage()
-        s2.name = 'aggregating'
+    # --------------------------
+    # Aggregate stage
+    s2 = Stage()
+    s2.name = 'aggregating'
 
-        # Aggregation task
-        t2 = Task()
-        t2.executable = ['sleep']  # Executable to aggregate Trajectories +
-                                   # Contact maps
+    # Aggregation task
+    t2 = Task()
+    t2.executable = ['sleep']  # Executable to aggregate Trajectories +
+                               # Contact maps
 
-        t2.arguments = ['30']
+    t2.arguments = ['30']
 
-        # Add MD stage to the MD Pipeline
-        p.add_stages(s2)
+    # Add MD stage to the MD Pipeline
+    p.add_stages(s2)
 
-        # --------------------------
-        # Learning stage
-        s3 = Stage()
-        s3.name = 'inferring'
+    # --------------------------
+    # Learning stage
+    s3 = Stage()
+    s3.name = 'inferring'
 
-        # Aggregation task
-        t3 = Task()
-        t3.executable = ['sleep']  # CVAE executable
-        t3.arguments = ['30']
+    # Aggregation task
+    t3 = Task()
+    t3.executable = ['sleep']  # CVAE executable
+    t3.arguments = ['30']
 
-        # Add MD stage to the MD Pipeline
-        p.add_stages(s3)
+    # Add MD stage to the MD Pipeline
+    p.add_stages(s3)
 
-        return p
+    return p
 
 
 if __name__ == '__main__':
@@ -157,11 +149,11 @@ if __name__ == '__main__':
     appman.resource_desc = res_dict
 
     p1 = generate_training_pipeline()
-    p2 = generate_MDML_pipeline()
+    # p2 = generate_MDML_pipeline()
 
-    pipelines = ()
+    pipelines = []
     pipelines.append(p1)
-    pipelines.append(p2)
+    # pipelines.append(p2)
 
     # Assign the workflow as a list of Pipelines to the Application Manager. In
     # this way, all the pipelines in the list will execute concurrently.
