@@ -100,7 +100,7 @@ def generate_MDML_pipeline():
         # Add the MD task to the Docking Stage
         s1.add_tasks(t1)
 
-    # Add Docking stage to the pipeline
+    # Add simulating stage to the pipeline
     p.add_stages(s1)
 
     # --------------------------
@@ -115,7 +115,10 @@ def generate_MDML_pipeline():
 
     t2.arguments = ['30']
 
-    # Add MD stage to the MD Pipeline
+    # Add the aggregating task to the aggreagating stage
+    s2.add_tasks(t2)
+
+    # Add aggregation stage to the to the pipeline
     p.add_stages(s2)
 
     # --------------------------
@@ -123,12 +126,15 @@ def generate_MDML_pipeline():
     s3 = Stage()
     s3.name = 'inferring'
 
-    # Aggregation task
+    # Inferring task
     t3 = Task()
     t3.executable = ['sleep']  # CVAE executable
     t3.arguments = ['30']
 
-    # Add MD stage to the MD Pipeline
+    # Add the infer task to the learning stage
+    s3.add_tasks(t3)
+
+    # Add the learning stage to the pipeline
     p.add_stages(s3)
 
     return p
