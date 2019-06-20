@@ -38,10 +38,10 @@ def generate_training_pipeline():
         t1.executable = ['sleep']  # run_openmm.py
         t1.arguments = ['60']
 
-        # Add the MD task to the Docking Stage
+        # Add the MD task to the simulating stage
         s1.add_tasks(t1)
 
-    # Add Docking stage to the pipeline
+    # Add simulating stage to the training pipeline
     p.add_stages(s1)
 
     # --------------------------
@@ -53,10 +53,12 @@ def generate_training_pipeline():
     t2 = Task()
     # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/MD_to_CVAE/MD_to_CVAE.py
     t2.executable = ['sleep']  # MD_to_CVAE.py
-
     t2.arguments = ['30']
 
-    # Add MD stage to the MD Pipeline
+    # Add the aggregation task to the aggreagating stage
+    s2.add_tasks(t2)
+
+    # Add the aggregating stage to the training pipeline
     p.add_stages(s2)
 
     # --------------------------
@@ -64,13 +66,16 @@ def generate_training_pipeline():
     s3 = Stage()
     s3.name = 'learning'
 
-    # Aggregation task
+    # learn task
     t3 = Task()
     # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/CVAE_exps/train_cvae.py
     t3.executable = ['sleep']  # train_cvae.py
     t3.arguments = ['30']
 
-    # Add MD stage to the MD Pipeline
+    # Add the learn task to the learning stage
+    s3.add_tasks(t3)
+
+    # Add the learning stage to the pipeline
     p.add_stages(s3)
 
     return p
@@ -135,7 +140,6 @@ if __name__ == '__main__':
     # resource, walltime, cores and project
     # resource is 'local.localhost' to execute locally
     res_dict = {
-
             'resource': 'local.summit',
             'queue'   : 'batch',
             'schema'  : 'local',
