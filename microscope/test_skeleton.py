@@ -146,12 +146,12 @@ if __name__ == '__main__':
     # resource, walltime, cores and project
     # resource is 'local.localhost' to execute locally
     res_dict = {
-            'resource': 'local.summit',
+            'resource': 'ornl.summit',
             'queue'   : 'batch',
             'schema'  : 'local',
             'walltime': 15,
             'cpus'    : 48,
-            'gpus'    : 4
+            'project' : 'BIP178'
     }
 
     # Create Application Manager
