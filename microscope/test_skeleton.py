@@ -35,8 +35,8 @@ def generate_training_pipeline():
     for i in range(2):
         t1 = Task()
         # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/MD_exps/fs-pep/run_openmm.py
-        t1.executable = ['sleep']  # run_openmm.py
-        t1.arguments = ['60']
+        t1.executable = ['/usr/bin/echo']  # run_openmm.py
+        t1.arguments = ['Hello World', '>', 'test_File']
 
         # Add the MD task to the simulating stage
         s1.add_tasks(t1)
@@ -150,12 +150,13 @@ if __name__ == '__main__':
             'queue'   : 'batch',
             'schema'  : 'local',
             'walltime': 15,
-            'cpus'    : 48,
-            'project' : 'BIP178'
+            'cpus'    : 42,
+            'project' : 'BIP179'
     }
 
     # Create Application Manager
-    appman = AppManager()
+    # appman = AppManager()
+    appman = AppManager(hostname=os.environ.get('RMQ_HOSTNAME'), port=os.environ.get('RMQ_PORT'))
     appman.resource_desc = res_dict
 
     p1 = generate_training_pipeline()
