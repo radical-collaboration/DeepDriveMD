@@ -19,6 +19,12 @@ if os.environ.get('RADICAL_ENTK_VERBOSE') is None:
 #
 # [1] https://www.olcf.ornl.gov/for-users/system-user-guides/summit/summit-user-guide/scheduling-policy
 # [2] https://docs.google.com/document/d/1XFgg4rlh7Y2nckH0fkiZTxfauadZn_zSn3sh51kNyKE/
+#
+# export RMQ_HOSTNAME=two.radical-project.org 
+# export RMQ_PORT=33235 
+# export RADICAL_PILOT_DBURL=mongodb://user:user@ds223760.mlab.com:23760/adaptivity 
+#
+#
 
 
 def generate_training_pipeline():
@@ -38,7 +44,7 @@ def generate_training_pipeline():
         t1.pre_exec = [] 
         t1.pre_exec += ['module load cuda/9.1.85']
         t1.pre_exec += ['source activate omm'] 
-        t1.pre_exec += ['export CUDA_VISIBLE_DEVICE=0'] 
+#         t1.pre_exec += ['export CUDA_VISIBLE_DEVICE=0'] 
         t1.pre_exec += ['cd /gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep'] 
 #         t1.pre_exec += ['which python']
 #         t1.executable = ['/ccs/home/hm0/Research/CUDA/device'] 
