@@ -1,4 +1,4 @@
-import os
+import os, time 
 from radical.entk import Pipeline, Stage, Task, AppManager
 
 # ------------------------------------------------------------------------------
@@ -44,26 +44,27 @@ def generate_training_pipeline():
         t1.pre_exec = [] 
         t1.pre_exec += ['module load cuda/9.1.85']
         t1.pre_exec += ['source activate omm'] 
-#         t1.pre_exec += ['export CUDA_VISIBLE_DEVICE=0'] 
+        t1.pre_exec += ['export PYTHONPATH=/gpfs/alpine/scratch/hm0/bip179/entk_test/hyperspace/microscope/experiments/MD_exps:$PYTHONPATH'] 
+        t1.pre_exec += ['export CUDA_VISIBLE_DEVICE=%d' % i] 
         t1.pre_exec += ['cd /gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep'] 
+        time_stampe = int(time.time())
+        t1.pre_exec += ['mkdir -p omm_runs_%d && cd omm_runs_%d' % (time_stampe, time_stampe)]
 #         t1.pre_exec += ['which python']
 #         t1.executable = ['/ccs/home/hm0/Research/CUDA/device'] 
 #         t1.arguments = ['python'] 
         t1.executable = ['/ccs/home/hm0/.conda/envs/omm/bin/python']  # run_openmm.py
-        t1.arguments = ['run_openmm.py', '-f', 'pdb/100-fs-peptide-400K.pdb']
+        t1.arguments = ['/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep/run_openmm.py', 
+                '-f', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb']
 
-#         t1.cpu_reqs = {'processes': 1,
-#                          'process_type': None,
-#                          'threads_per_process': 1,
-#                          'thread_type': None
-#                          }
-# 
-#         t1.gpu_reqs = {'processes': 1,
-#                          'process_type': None,
-#                          'threads_per_process': 1,
-#                          'thread_type': 'CUDA'
-#                         }
-# 
+        t1.cpu_reqs = {'processes': 1,
+                          'threads_per_process': 1,
+                          'thread_type': 'OpenMP'
+                          }
+        t1.gpu_reqs = {'processes': 1,
+                          'threads_per_process': 1,
+                          'thread_type': 'CUDA'
+                         }
+                          
         # Add the MD task to the simulating stage
         s1.add_tasks(t1)
 

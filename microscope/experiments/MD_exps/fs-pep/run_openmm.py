@@ -2,7 +2,6 @@ import simtk.unit as u
 import sys, os, shutil 
 import argparse 
 
-sys.path.append('../')
 from MD_utils.openmm_simulation import openmm_simulate_amber_fs_pep 
 
 parser = argparse.ArgumentParser() 
@@ -38,6 +37,6 @@ openmm_simulate_amber_fs_pep(pdb_file,
                              output_log="output.log",
                              output_cm='output_cm.h5',
                              report_time=50*u.picoseconds,
-                             sim_time=10000*u.nanoseconds)
+                             sim_time=100*u.nanoseconds)
 
 
