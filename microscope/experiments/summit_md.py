@@ -45,7 +45,7 @@ def generate_training_pipeline():
         t1.pre_exec += ['module load cuda/9.1.85']
         t1.pre_exec += ['source activate omm'] 
         t1.pre_exec += ['export PYTHONPATH=/gpfs/alpine/scratch/hm0/bip179/entk_test/hyperspace/microscope/experiments/MD_exps:$PYTHONPATH'] 
-        t1.pre_exec += ['export CUDA_VISIBLE_DEVICE=%d' % i] 
+        t1.pre_exec += ['export CUDA_VISIBLE_DEVICES=0'] 
         t1.pre_exec += ['cd /gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep'] 
         time_stampe = int(time.time())
         t1.pre_exec += ['mkdir -p omm_runs_%d && cd omm_runs_%d' % (time_stampe, time_stampe)]
@@ -73,31 +73,41 @@ def generate_training_pipeline():
 
     # --------------------------
     # Aggregate stage
-#     s2 = Stage()
-#     s2.name = 'aggregating'
-# 
-#     # Aggregation task
-#     t2 = Task()
-#     # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/MD_to_CVAE/MD_to_CVAE.py
-#     t2.executable = ['sleep']  # MD_to_CVAE.py
-#     t2.arguments = ['30']
-# 
-#     # Add the aggregation task to the aggreagating stage
-#     s2.add_tasks(t2)
-# 
-#     # Add the aggregating stage to the training pipeline
-#     p.add_stages(s2)
-# 
-#     # --------------------------
-#     # Learning stage
-#     s3 = Stage()
-#     s3.name = 'learning'
-# 
-#     # learn task
-#     t3 = Task()
-#     # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/CVAE_exps/train_cvae.py
-#     t3.executable = ['sleep']  # train_cvae.py
-#     t3.arguments = ['30']
+    s2 = Stage()
+    s2.name = 'aggregating'
+
+    # Aggregation task
+    t2 = Task()
+    # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/MD_to_CVAE/MD_to_CVAE.py
+    t2.pre_exec = [] 
+    t2.pre_exec += ['source activate omm'] 
+    t2.pre_exec += ['cd /gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_to_CVAE']
+    t2.executable = ['/ccs/home/hm0/.conda/envs/omm/bin/python']  # MD_to_CVAE.py
+    t2.arguments = ['/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_to_CVAE/MD_to_CVAE.py', 
+            '-f', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep']
+
+    # Add the aggregation task to the aggreagating stage
+    s2.add_tasks(t2)
+
+    # Add the aggregating stage to the training pipeline
+    p.add_stages(s2)
+
+    # --------------------------
+    # Learning stage
+    s3 = Stage()
+    s3.name = 'learning'
+
+    # learn task
+    t3 = Task()
+    # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/CVAE_exps/train_cvae.py
+    t3.pre_exec = []
+    t3.pre_exec += ['module load cuda/9.1.85']
+    t3.pre_exec += ['source activate omm']
+    t3.pre_exec += ['cd /gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/CVAE_exps']
+    t3.executable = ['/ccs/home/hm0/.conda/envs/omm/bin/python']  # train_cvae.py
+    t3.arguments = ['/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/CVAE_exps/train_cvae.py', 
+            '-f', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_to_CVAE/cvae_input.h5', 
+            '-d', '3'] 
 # 
 #     # Add the learn task to the learning stage
 #     s3.add_tasks(t3)
