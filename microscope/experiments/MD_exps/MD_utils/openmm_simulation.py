@@ -212,7 +212,7 @@ def openmm_simulate_amber_fs_pep(pdb_file, check_point=None, GPU_index=0,
 
     simulation = app.Simulation(pdb.topology, system, integrator, platform, properties)
 
-    simulation.context.setPositions(pdb.get_coordinates()[GPU_index])
+    simulation.context.setPositions(random.choice(pdb.get_coordinates()))
 
     simulation.minimizeEnergy()
 
