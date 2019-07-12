@@ -21,8 +21,7 @@ if args.dim:
 else: 
     hyper_dim = 3
 
-gpu_id = os.environ["CUDA_VISIBLE_DEVICES"] 
-print gpu_id
+gpu_id = 0 # os.environ["CUDA_VISIBLE_DEVICES"] 
 
 
 if __name__ == '__main__': 

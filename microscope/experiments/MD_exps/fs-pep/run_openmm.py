@@ -28,8 +28,8 @@ else:
 # pdb_file = os.path.abspath('./pdb/100-fs-peptide-400K.pdb')
 # ref_pdb_file = os.path.abspath('./pdb/fs-peptide.pdb')
 
-gpu_index = os.environ["CUDA_VISIBLE_DEVICES"]
-print gpu_index
+gpu_index = 0 # os.environ["CUDA_VISIBLE_DEVICES"]
+
 # check_point = None
 openmm_simulate_amber_fs_pep(pdb_file,
                              check_point = check_point,
