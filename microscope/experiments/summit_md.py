@@ -45,7 +45,7 @@ def generate_training_pipeline():
         t1.pre_exec += ['module load cuda/9.1.85']
         t1.pre_exec += ['source activate omm'] 
         t1.pre_exec += ['export PYTHONPATH=/gpfs/alpine/scratch/hm0/bip179/entk_test/hyperspace/microscope/experiments/MD_exps:$PYTHONPATH'] 
-        t1.pre_exec += ['export CUDA_VISIBLE_DEVICES=0'] 
+#         t1.pre_exec += ['export CUDA_VISIBLE_DEVICES=0'] 
         t1.pre_exec += ['cd /gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep'] 
         time_stampe = int(time.time())
         t1.pre_exec += ['mkdir -p omm_runs_%d && cd omm_runs_%d' % (time_stampe, time_stampe)]
@@ -57,7 +57,7 @@ def generate_training_pipeline():
                 '-f', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb']
 
         t1.cpu_reqs = {'processes': 1,
-                          'threads_per_process': 1,
+                          'threads_per_process': 4,
                           'thread_type': 'OpenMP'
                           }
         t1.gpu_reqs = {'processes': 1,
@@ -67,6 +67,7 @@ def generate_training_pipeline():
                           
         # Add the MD task to the simulating stage
         s1.add_tasks(t1)
+        time.sleep(1) 
 
     # Add simulating stage to the training pipeline
     p.add_stages(s1)
@@ -102,18 +103,26 @@ def generate_training_pipeline():
     # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/CVAE_exps/train_cvae.py
     t3.pre_exec = []
     t3.pre_exec += ['module load cuda/9.1.85']
-    t3.pre_exec += ['source activate omm']
-    t3.pre_exec += ['cd /gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/CVAE_exps']
-    t3.executable = ['/ccs/home/hm0/.conda/envs/omm/bin/python']  # train_cvae.py
+    t3.pre_exec += ['source activate hm0']
+    t3.pre_exec += ['cd /gpfs/alpine/scratch/hm0/bip179/entk_test/hyperspace/microscope/experiments/CVAE_exps']
+    t3.executable = ['/ccs/home/hm0/.conda/envs/hm0/bin/python']  # train_cvae.py
     t3.arguments = ['/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/CVAE_exps/train_cvae.py', 
-            '-f', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_to_CVAE/cvae_input.h5', 
-            '-d', '3'] 
-# 
-#     # Add the learn task to the learning stage
-#     s3.add_tasks(t3)
-# 
-#     # Add the learning stage to the pipeline
-#     p.add_stages(s3)
+            '-f', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_to_CVAE/cvae_input.h5'] 
+    
+    t3.cpu_reqs = {'processes': 1,
+            'threads_per_process': 4,
+            'thread_type': 'OpenMP'
+            }
+    t3.gpu_reqs = {'processes': 1,
+            'threads_per_process': 1,
+            'thread_type': 'CUDA'
+            }
+
+    # Add the learn task to the learning stage
+    s3.add_tasks(t3)
+
+    # Add the learning stage to the pipeline
+    p.add_stages(s3)
 
     return p
 
