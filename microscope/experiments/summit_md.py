@@ -45,13 +45,9 @@ def generate_training_pipeline():
         t1.pre_exec += ['module load cuda/9.1.85']
         t1.pre_exec += ['source activate omm'] 
         t1.pre_exec += ['export PYTHONPATH=/gpfs/alpine/scratch/hm0/bip179/entk_test/hyperspace/microscope/experiments/MD_exps:$PYTHONPATH'] 
-#         t1.pre_exec += ['export CUDA_VISIBLE_DEVICES=0'] 
         t1.pre_exec += ['cd /gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep'] 
-        time_stampe = int(time.time())
-        t1.pre_exec += ['mkdir -p omm_runs_%d && cd omm_runs_%d' % (time_stampe, time_stampe)]
-#         t1.pre_exec += ['which python']
-#         t1.executable = ['/ccs/home/hm0/Research/CUDA/device'] 
-#         t1.arguments = ['python'] 
+        time_stamp = int(time.time())
+        t1.pre_exec += ['mkdir -p omm_runs_%d && cd omm_runs_%d' % (time_stamp, time_stamp)]
         t1.executable = ['/ccs/home/hm0/.conda/envs/omm/bin/python']  # run_openmm.py
         t1.arguments = ['/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep/run_openmm.py', 
                 '-f', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb']
@@ -99,27 +95,34 @@ def generate_training_pipeline():
     s3.name = 'learning'
 
     # learn task
-    t3 = Task()
-    # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/CVAE_exps/train_cvae.py
-    t3.pre_exec = []
-    t3.pre_exec += ['module load cuda/9.1.85']
-    t3.pre_exec += ['source activate hm0']
-    t3.pre_exec += ['cd /gpfs/alpine/scratch/hm0/bip179/entk_test/hyperspace/microscope/experiments/CVAE_exps']
-    t3.executable = ['/ccs/home/hm0/.conda/envs/hm0/bin/python']  # train_cvae.py
-    t3.arguments = ['/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/CVAE_exps/train_cvae.py', 
-            '-f', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_to_CVAE/cvae_input.h5'] 
+    for i in range(1): 
+        t3 = Task()
+        # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/CVAE_exps/train_cvae.py
+        t3.pre_exec = []
+        t3.pre_exec += ['module load cuda/9.1.85']
+        t3.pre_exec += ['source activate hm0'] 
+        t3.pre_exec += ['export PYTHONPATH=/gpfs/alpine/scratch/hm0/bip179/entk_test/hyperspace/microscope/experiments/CVAE_exps:$PYTHONPATH']
+        t3.pre_exec += ['cd /gpfs/alpine/scratch/hm0/bip179/entk_test/hyperspace/microscope/experiments/CVAE_exps']
+        time_stamp = int(time.time())
+        dim = i + 3 
+        cvae_dir = 'cvae_runs_%.2d_%d' % (dim, time_stamp) 
+        t3.pre_exec += ['mkdir -p {0} && cd {0}'.format(cvae_dir)]
+        t3.executable = ['/ccs/home/hm0/.conda/envs/hm0/bin/python']  # train_cvae.py
+        t3.arguments = ['/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/CVAE_exps/train_cvae.py', 
+                '-f', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_to_CVAE/cvae_input.h5'] 
+        
+        t3.cpu_reqs = {'processes': 1,
+                'threads_per_process': 4,
+                'thread_type': 'OpenMP'
+                }
+        t3.gpu_reqs = {'processes': 1,
+                'threads_per_process': 1,
+                'thread_type': 'CUDA'
+                }
     
-    t3.cpu_reqs = {'processes': 1,
-            'threads_per_process': 4,
-            'thread_type': 'OpenMP'
-            }
-    t3.gpu_reqs = {'processes': 1,
-            'threads_per_process': 1,
-            'thread_type': 'CUDA'
-            }
-
-    # Add the learn task to the learning stage
-    s3.add_tasks(t3)
+        # Add the learn task to the learning stage
+        s3.add_tasks(t3)
+        time.sleep(1) 
 
     # Add the learning stage to the pipeline
     p.add_stages(s3)
