@@ -1,4 +1,4 @@
-import os 
+import os, json 
 import argparse 
 import numpy as np 
 from glob import glob
@@ -40,9 +40,18 @@ cvae_input = cm_to_cvae(cm_data_lists)
 train_data_length = [cm_data.shape[1] for cm_data in cm_data_lists]
 traj_dict = dict(zip(traj_file_list, train_data_length)) 
 
+
 # Outlier search 
 outlier_list = [] 
-eps_record = {} 
+
+## eps records for next iteration 
+eps_record_filepath = './eps_record.json' 
+if os.path.exists(eps_record_filepath): 
+    eps_file = open(eps_record_filepath, 'r')
+    eps_record = json.load(eps_file) 
+    eps_file.close() 
+else: 
+    eps_record = {} 
 
 for model_weight in model_weights: 
     # Identify the latent dimensions 
@@ -69,12 +78,17 @@ for model_weight in model_weights:
             outlier_list.append(outliers) 
             break 
 
-
+## Unique outliers 
 outlier_list_uni, outlier_count = np.unique(np.hstack(outlier_list), return_counts=True) 
+## Save the eps for next iteration 
+with open(eps_record_filepath, 'w') as eps_file: 
+        json.dump(eps_record, eps_file) 
 
 if DEBUG: 
     print outlier_list_uni
     
+
+# Write the outliers using MDAnalysis 
 outliers_pdb_path = os.path.abspath('./outlier_pdbs') 
 make_dir_p(outliers_pdb_path) 
 print 'Writing outliers in %s' % outliers_pdb_path  
@@ -83,10 +97,13 @@ new_outlier_list = []
 for outlier in outlier_list_uni: 
     traj_file, num_frame = find_frame(traj_dict, outlier)  
     outlier_pdb_file = os.path.join(outliers_pdb_path, '{}_{:06d}.pdb'.format(os.path.basename(os.path.dirname(traj_file)), num_frame)) 
+    # Only write new pdbs to reduce redundancy. 
     if not os.path.exists(outlier_pdb_file): 
         print 'Found a new outlier# {} at frame {} of {}'.format(outlier, num_frame, traj_file)
         outlier_pdb = write_pdb_frame(traj_file, pdb_file, num_frame, outlier_pdb_file)  
         print '     Written as {}'.format(outlier_pdb_file)
     new_outlier_list.append(outlier_pdb_file) 
 
+# Set up input configurations for next batch of MD simulations 
+## Checkpnt or pdb input 
 
