@@ -14,7 +14,7 @@ args = parser.parse_args()
 if args.f: 
     pdb_file = os.path.abspath(args.f) 
 else: 
-    raise IOError("No pdb file assigned") 
+    raise IOError("No pdb file assigned...") 
 
 if args.p: 
     top_file = os.path.abspath(args.p) 

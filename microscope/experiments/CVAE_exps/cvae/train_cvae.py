@@ -5,28 +5,21 @@ from CVAE import run_cvae
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-f", help="Input: contact map h5 file")
+parser.add_argument("-f", default='cvae_input.h5', help="Input: contact map h5 file")
 # parser.add_argument("-o", help="output: cvae weight file. (Keras cannot load model directly, will check again...)")
-parser.add_argument("-d", "--dim", help="Number of dimensions in latent space") 
-parser.add_argument("-gpu", help="gpu_id")
+parser.add_argument("-d", "--dim", default=3, help="Number of dimensions in latent space") 
+parser.add_argument("-gpu", default=0, help="gpu_id")
 
 args = parser.parse_args()
 
-if args.f: 
-    cvae_input = os.path.abspath(args.f) 
-else: 
-    raise IOError('No input file...') 
+print args.f, args.dim, args.gpu 
 
-if args.dim: 
-    hyper_dim = args.dim 
-else: 
-    hyper_dim = 3
+cvae_input = args.f
+hyper_dim = args.dim 
+gpu_id = args.gpu 
 
-if args.gpu: 
-    gpu_id = args.gpu 
-else: 
-    gpu_id = 0 
-
+if not os.path.exists(cvae_input):
+    raise IOError('Input file doesn\'t exist...') 
 
 if __name__ == '__main__': 
     cvae = run_cvae(gpu_id, cvae_input, hyper_dim=hyper_dim)
