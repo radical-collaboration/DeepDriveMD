@@ -45,7 +45,7 @@ def CVAE(input_shape, latent_dim=3):
     strides = strides[0:conv_layers];
     autoencoder = conv_variational_autoencoder(image_size,channels,conv_layers,feature_maps,
                filter_shapes,strides,dense_layers,dense_neurons,dense_dropouts,latent_dim); 
-#     autoencoder.model.summary()
+    autoencoder.model.summary()
     return autoencoder
 
 def run_cvae(gpu_id, cm_file, hyper_dim=3, epochs=100): 
