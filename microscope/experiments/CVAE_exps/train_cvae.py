@@ -13,7 +13,7 @@ parser.add_argument("-gpu", default=0, help="gpu_id")
 args = parser.parse_args()
 
 cvae_input = args.f
-hyper_dim = args.dim
+hyper_dim = int(args.dim) 
 gpu_id = args.gpu
 
 if not os.path.exists(cvae_input):
