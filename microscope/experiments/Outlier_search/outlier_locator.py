@@ -1,4 +1,4 @@
-import os, json 
+import os, random, json, shutil 
 import argparse 
 import numpy as np 
 from glob import glob
@@ -24,7 +24,7 @@ pdb_file = os.path.abspath(args.pdb)
 # Find the trajectories and contact maps 
 cm_files_list = sorted(glob(os.path.join(args.md, 'omm_runs_*/*_cm.h5')))
 traj_file_list = sorted(glob(os.path.join(args.md, 'omm_runs_*/*.dcd'))) 
-check_pnt_list = sorted(glob(os.path.join(args.md, 'omm_runs_*/checkpnt.chk'))) 
+checkpnt_list = sorted(glob(os.path.join(args.md, 'omm_runs_*/checkpnt.chk'))) 
 
 if cm_files_list == []: 
     raise IOError("No h5/traj file found, recheck your input filepath") 
@@ -93,7 +93,7 @@ outliers_pdb_path = os.path.abspath('./outlier_pdbs')
 make_dir_p(outliers_pdb_path) 
 print 'Writing outliers in %s' % outliers_pdb_path  
 
-new_outlier_list = [] 
+new_outliers_list = [] 
 for outlier in outlier_list_uni: 
     traj_file, num_frame = find_frame(traj_dict, outlier)  
     outlier_pdb_file = os.path.join(outliers_pdb_path, '{}_{:06d}.pdb'.format(os.path.basename(os.path.dirname(traj_file)), num_frame)) 
@@ -102,8 +102,48 @@ for outlier in outlier_list_uni:
         print 'Found a new outlier# {} at frame {} of {}'.format(outlier, num_frame, traj_file)
         outlier_pdb = write_pdb_frame(traj_file, pdb_file, num_frame, outlier_pdb_file)  
         print '     Written as {}'.format(outlier_pdb_file)
-    new_outlier_list.append(outlier_pdb_file) 
+    new_outliers_list.append(outlier_pdb_file) 
+
+# Clean up outdated outliers 
+outliers_list = glob(os.path.join(outliers_pdb_path, 'omm_runs*.pdb')) 
+for outlier in outliers_list: 
+    if outlier not in new_outliers_list: 
+        print 'Old outlier {} is now connected to a cluster and removing it from the outlier list '.format(os.path.basename(outlier))
+        os.rename(outlier, os.path.join(os.path.dirname(outlier), '_'+os.path.basename(outlier))) 
+
 
 # Set up input configurations for next batch of MD simulations 
-## Checkpnt or pdb input 
+## Restarts from pdb
+used_pdbs = glob(os.path.join(args.md, 'omm_runs_*/omm_runs_*.pdb'))
+used_pdbs_basenames = [os.path.basename(used_pdb) for used_pdb in used_pdbs ]
+outliers_list = glob(os.path.join(outliers_pdb_path, 'omm_runs*.pdb'))
+restart_pdbs = [outlier for outlier in outliers_list if os.path.basename(outlier) not in used_pdbs_basenames] 
+
+## Restarts from check point 
+used_checkpnts = glob(os.path.join(args.md, 'omm_runs_*/omm_runs_*.chk')) 
+restart_checkpnts = [] 
+for checkpnt in checkpnt_list: 
+    checkpnt_filepath = os.path.join(outliers_pdb_path, os.path.basename(os.path.dirname(checkpnt) + '.chk'))
+    if not os.path.exists(checkpnt_filepath): 
+        shutil.copy2(checkpnt, checkpnt_filepath) 
+        print [os.path.basename(os.path.dirname(checkpnt)) in outlier for outlier in outliers_list] 
+        if any(os.path.basename(os.path.dirname(checkpnt)) in outlier for outlier in outliers_list):  
+            restart_checkpnts.append(checkpnt_filepath) 
+
+if DEBUG: 
+    print restart_checkpnts
+
+
+if DEBUG: 
+    print restart_pdbs
+
+# Write record for next step 
+random.shuffle(restart_pdbs) 
+restart_points = restart_checkpnts + restart_pdbs
+print restart_points 
+
+restart_points_filepath = os.path.abspath('./restart_points.json') 
+with open(restart_points_filepath, 'w') as restart_file: 
+    json.dump(restart_points, restart_file) 
+
 
