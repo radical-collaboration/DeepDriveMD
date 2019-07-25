@@ -1,4 +1,4 @@
-import os, time 
+import os, json, time 
 from radical.entk import Pipeline, Stage, Task, AppManager
 
 # ------------------------------------------------------------------------------
@@ -42,6 +42,13 @@ def generate_training_pipeline():
         """
         s1 = Stage()
         s1.name = 'MD'
+        initial_MD = True 
+        outlier_filepath = './Outlier_search/restart_points.json'
+        if os.path.exists(outlier_filepath): 
+            initial_MD = False 
+            outlier_file = open(outlier_filepath, 'r') 
+            outlier_list = json.load(outlier_file) 
+            outlier_file.close() 
 
         # MD tasks
         for i in range(num_MD):
@@ -55,9 +62,29 @@ def generate_training_pipeline():
             time_stamp = int(time.time())
             t1.pre_exec += ['mkdir -p omm_runs_%d && cd omm_runs_%d' % (time_stamp, time_stamp)]
             t1.executable = ['/ccs/home/hm0/.conda/envs/omm/bin/python']  # run_openmm.py
-            t1.arguments = ['/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep/run_openmm.py', 
-                    '-f', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb']
+            t1.arguments = ['/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep/run_openmm.py']
 
+            # pick initial point of simulation 
+            if initial_MD or i >= len(outlier_list): 
+                t1.arguments += ['-f', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb']
+                print "Running from initial frame" 
+            elif outlier_list[i].endswith('pdb'): 
+                t1.arguments += ['-f', outlier_list[i]] 
+                t1.pre_exec += ['cp %s ./' % outlier_list[i]]  
+                print "Running from outlier", outlier_list[i] 
+            elif outlier_list[i].endswith('chk'): 
+                t1.arguments += ['-f', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb', 
+                        '-c', outlier_list[i]] 
+                t1.pre_exec += ['cp %s ./' % outlier_list[i]]
+                print "Running from checkpoint", outlier_list[i]
+
+            # how long to run the simulation 
+            if initial_MD: 
+                t1.arguments += ['-l', '1.0'] 
+            else: 
+                t1.arguments += ['-l', '1.0']
+
+            # assign hardware the task 
             t1.cpu_reqs = {'processes': 1,
                               'threads_per_process': 4,
                               'thread_type': 'OpenMP'
@@ -103,7 +130,7 @@ def generate_training_pipeline():
         s3.name = 'learning'
 
         # learn task
-        for i in range(4): 
+        for i in range(num_ML): 
             t3 = Task()
             # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/CVAE_exps/train_cvae.py
             t3.pre_exec = []
@@ -164,6 +191,7 @@ def generate_training_pipeline():
                 'thread_type': 'CUDA'
                 }
         s4.add_tasks(t4) 
+        s4.post_exec = func_condition 
         
         return s4
 
@@ -175,7 +203,31 @@ def generate_training_pipeline():
         func_on_false()
 
     def func_on_ture(): 
-        pass 
+        global CUR_STAGE, MAX_STAGE
+        print 'finishing stage %d of %d' % (CUR_STAGE, MAX_STAGE) 
+        CUR_STAGE += 1
+        # --------------------------
+        # MD stage
+        s1 = generate_MD_stage(num_MD=12)
+        # Add simulating stage to the training pipeline
+        p.add_stages(s1)
+
+        # --------------------------
+        # Aggregate stage
+        s2 = generate_aggregating_stage() 
+        # Add the aggregating stage to the training pipeline
+        p.add_stages(s2)
+
+        # --------------------------
+        # Learning stage
+        s3 = generate_ML_stage(num_ML=4) 
+        # Add the learning stage to the pipeline
+        p.add_stages(s3)
+
+        # --------------------------
+        # Outlier identification stage
+        s4 = generate_interfacing_stage() 
+        p.add_stages(s4) 
 
     def func_on_false(): 
         print 'Done' 
