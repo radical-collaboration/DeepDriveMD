@@ -8,6 +8,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-f", help="pdb file") 
 parser.add_argument("-p", help="topology file") 
 parser.add_argument("-c", help="check point file to restart simulation") 
+parser.add_argument("-l", "--length", default=10, help="how long (ns) the system will be simulated") 
 
 args = parser.parse_args() 
 
@@ -37,7 +38,7 @@ openmm_simulate_amber_fs_pep(pdb_file,
                              output_traj="output.dcd",
                              output_log="output.log",
                              output_cm='output_cm.h5',
-                             report_time=50*u.picoseconds,
-                             sim_time=100*u.nanoseconds)
+                             report_time=10*u.picoseconds,
+                             sim_time=float(args.length)*u.nanoseconds)
 
 
