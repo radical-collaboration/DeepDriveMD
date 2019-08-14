@@ -31,6 +31,9 @@ export RADICAL_PILOT_DBURL=mongodb://user:user@ds223760.mlab.com:23760/adaptivit
 CUR_STAGE=0
 MAX_STAGE=4
 
+LEN_initial = 100 
+LEN_iter = 20 
+
 def generate_training_pipeline():
     """
     Function to generate the CVAE_MD pipeline
@@ -67,22 +70,25 @@ def generate_training_pipeline():
             # pick initial point of simulation 
             if initial_MD or i >= len(outlier_list): 
                 t1.arguments += ['-f', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb']
-                print "Running from initial frame" 
+#                 t1.arguments += ['-l', LEN_initial] 
+                print "Running from initial frame for %d ns. " % LEN_initial
             elif outlier_list[i].endswith('pdb'): 
                 t1.arguments += ['-f', outlier_list[i]] 
+#                 t1.arguments += ['-l', LEN_iter] 
                 t1.pre_exec += ['cp %s ./' % outlier_list[i]]  
-                print "Running from outlier", outlier_list[i] 
+                print "Running from outlier %s for %d ns" % (outlier_list[i], LEN_iter) 
             elif outlier_list[i].endswith('chk'): 
                 t1.arguments += ['-f', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb', 
                         '-c', outlier_list[i]] 
+#                 t1.arguments += ['-l', LEN_iter]
                 t1.pre_exec += ['cp %s ./' % outlier_list[i]]
-                print "Running from checkpoint", outlier_list[i]
+                print "Running from checkpoint %s for %d ns" % (outlier_list[i], LEN_iter) 
 
             # how long to run the simulation 
             if initial_MD: 
-                t1.arguments += ['-l', '1.0'] 
+                t1.arguments += ['-l', LEN_initial] 
             else: 
-                t1.arguments += ['-l', '1.0']
+                t1.arguments += ['-l', LEN_iter]
 
             # assign hardware the task 
             t1.cpu_reqs = {'processes': 1,
