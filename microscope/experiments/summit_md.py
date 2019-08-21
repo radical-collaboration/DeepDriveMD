@@ -23,7 +23,9 @@ if os.environ.get('RADICAL_ENTK_VERBOSE') is None:
 '''
 export RMQ_HOSTNAME=two.radical-project.org 
 export RMQ_PORT=33235 
-export RADICAL_PILOT_DBURL=mongodb://user:user@ds223760.mlab.com:23760/adaptivity 
+export RADICAL_PILOT_DBURL=mongodb://hyperrct:h1p3rrc7@two.radical-project.org:27017/hyperrct 
+
+mongodb://user:user@ds223760.mlab.com:23760/adaptivity 
 '''
 #
 
@@ -31,8 +33,8 @@ export RADICAL_PILOT_DBURL=mongodb://user:user@ds223760.mlab.com:23760/adaptivit
 CUR_STAGE=0
 MAX_STAGE=4
 
-LEN_initial = 100 
-LEN_iter = 20 
+LEN_initial = 10 
+LEN_iter = 1 
 
 def generate_training_pipeline():
     """
@@ -205,30 +207,31 @@ def generate_training_pipeline():
     def func_condition(): 
         global CUR_STAGE, MAX_STAGE 
         if CUR_STAGE <= MAX_STAGE: 
-            func_on_ture()
-        func_on_false()
+            func_on_true()
+        else: 
+            func_on_false()
 
-    def func_on_ture(): 
+    def func_on_true(): 
         global CUR_STAGE, MAX_STAGE
         print 'finishing stage %d of %d' % (CUR_STAGE, MAX_STAGE) 
         CUR_STAGE += 1
         # --------------------------
         # MD stage
-        s1 = generate_MD_stage(num_MD=12)
+        s1 = generate_MD_stage(num_MD=60)
         # Add simulating stage to the training pipeline
         p.add_stages(s1)
 
         # --------------------------
         # Aggregate stage
-        s2 = generate_aggregating_stage() 
+#         s2 = generate_aggregating_stage() 
         # Add the aggregating stage to the training pipeline
-        p.add_stages(s2)
+#         p.add_stages(s2)
 
         # --------------------------
         # Learning stage
-        s3 = generate_ML_stage(num_ML=4) 
+#         s3 = generate_ML_stage(num_ML=10) 
         # Add the learning stage to the pipeline
-        p.add_stages(s3)
+#         p.add_stages(s3)
 
         # --------------------------
         # Outlier identification stage
@@ -245,7 +248,7 @@ def generate_training_pipeline():
 
     # --------------------------
     # MD stage
-    s1 = generate_MD_stage(num_MD=12)
+    s1 = generate_MD_stage(num_MD=60)
     # Add simulating stage to the training pipeline
     p.add_stages(s1)
 
@@ -257,7 +260,7 @@ def generate_training_pipeline():
 
     # --------------------------
     # Learning stage
-    s3 = generate_ML_stage(num_ML=4) 
+    s3 = generate_ML_stage(num_ML=10) 
     # Add the learning stage to the pipeline
     p.add_stages(s3)
 
@@ -282,8 +285,8 @@ if __name__ == '__main__':
             'queue'   : 'batch',
             'schema'  : 'local',
             'walltime': 120,
-            'cpus'    : 84,
-            'gpus'    : 12 ,
+            'cpus'    : 420,
+            'gpus'    : 60,
             'project' : 'BIP179'
     }
 
