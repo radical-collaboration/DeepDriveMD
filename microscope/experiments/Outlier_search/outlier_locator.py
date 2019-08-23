@@ -2,6 +2,7 @@ import os, random, json, shutil
 import argparse 
 import numpy as np 
 from glob import glob
+import MDAnalysis as mda
 from utils import read_h5py_file, outliers_from_cvae, cm_to_cvae  
 from utils import predict_from_cvae, outliers_from_latent
 from utils import find_frame, write_pdb_frame, make_dir_p 
@@ -15,11 +16,13 @@ parser.add_argument("-m", "--md", help="Input: MD simulation directory")
 # parser.add_argument("-o", help="output: cvae weight file. (Keras cannot load model directly, will check again...)")
 parser.add_argument("-c", "--cvae", help="Input: CVAE model directory")
 parser.add_argument("-p", "--pdb", help="Input: pdb file") 
+parser.add_argument("-r", "--ref", default=None, help="Input: Reference pdb for RMSD") 
 
 args = parser.parse_args()
 
 # Pdb file for MDAnalysis 
 pdb_file = os.path.abspath(args.pdb) 
+ref_pdb_file = os.path.abspath(args.ref) 
 
 # Find the trajectories and contact maps 
 cm_files_list = sorted(glob(os.path.join(args.md, 'omm_runs_*/*_cm.h5')))
@@ -89,7 +92,7 @@ while True:
     n_outlier = len(outliers) 
     print('dimension = {0}, eps = {1:.2f}, number of outlier found: {2}'.format(
         model_dim, eps, n_outlier))
-    if n_outlier > 200: 
+    if n_outlier > 150: 
         eps = eps + 0.05 
     else: 
         eps_record[model_best] = eps 
@@ -155,8 +158,20 @@ if DEBUG:
 if DEBUG: 
     print restart_pdbs
 
+# rank the restart_pdbs according to their RMSD to local state 
+if ref_pdb_file: 
+    outlier_traj = mda.Universe(restart_pdbs[0], restart_pdbs) 
+    ref_traj = mda.Universe(ref_pdb_file) 
+    R = RMSD(outlier_traj, ref_traj, select='protein and name CA') 
+    R.run()    
+    # Make a dict contains outliers and their RMSD
+    # outlier_pdb_RMSD = dict(zip(restart_pdbs, R.rmsd[:,2]))
+    restart_pdbs = [pdb for pdb in sorted(zip(R.rmsd[:,2], restart_pdbs))] 
+else: 
+    random.shuffle(restart_pdbs) 
+
+
 # Write record for next step 
-random.shuffle(restart_pdbs) 
 restart_points = restart_checkpnts + restart_pdbs
 print restart_points 
 

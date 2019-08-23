@@ -183,7 +183,8 @@ def generate_training_pipeline():
         t4.pre_exec += ['cd /gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/Outlier_search'] 
         # python outlier_locator.py -m ../MD_exps/fs-pep -c ../CVAE_exps -p ../MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb 
         t4.executable = ['/ccs/home/hm0/.conda/envs/omm/bin/python'] 
-        t4.arguments = ['outlier_locator.py', '-m', '../MD_exps/fs-pep', '-c', '../CVAE_exps -p', '../MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb']
+        t4.arguments = ['outlier_locator.py', '-m', '../MD_exps/fs-pep', '-c', '../CVAE_exps -p', '../MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb', 
+                '-r', '../MD_exps/fs-pep/pdb/fs-peptide.pdb']
     #     t4.arguments = ['/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/Outlier_search/outlier_locator.py', 
     #             '-m', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep', 
     #             '-c', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/CVAE_exps', 
