@@ -6,6 +6,7 @@ import MDAnalysis as mda
 from utils import read_h5py_file, outliers_from_cvae, cm_to_cvae  
 from utils import predict_from_cvae, outliers_from_latent
 from utils import find_frame, write_pdb_frame, make_dir_p 
+from  MDAnalysis.analysis.rms import RMSD
 
 # os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 DEBUG = 1 
