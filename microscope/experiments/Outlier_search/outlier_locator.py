@@ -167,7 +167,7 @@ if ref_pdb_file:
     R.run()    
     # Make a dict contains outliers and their RMSD
     # outlier_pdb_RMSD = dict(zip(restart_pdbs, R.rmsd[:,2]))
-    restart_pdbs = [pdb for pdb in sorted(zip(R.rmsd[:,2], restart_pdbs))] 
+    restart_pdbs = [pdb for _, pdb in sorted(zip(R.rmsd[:,2], restart_pdbs))] 
 else: 
     random.shuffle(restart_pdbs) 
 
