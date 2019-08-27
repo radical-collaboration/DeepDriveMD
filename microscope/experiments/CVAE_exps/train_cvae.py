@@ -1,7 +1,7 @@
 import os, sys, errno
 import argparse 
 from cvae.CVAE import run_cvae  
-
+import numpy as np 
 
 
 parser = argparse.ArgumentParser()
@@ -25,6 +25,8 @@ if __name__ == '__main__':
 
     model_weight = 'cvae_weight.h5' 
     model_file = 'cvae_model.h5' 
+    loss_file = 'loss.npy' 
 
     cvae.model.save_weights(model_weight)
     cvae.save(model_file)
+    np.save(loss_file, cvae.history.losses) 
