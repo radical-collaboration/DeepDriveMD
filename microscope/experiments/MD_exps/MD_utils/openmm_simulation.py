@@ -386,6 +386,7 @@ def openmm_simulate_amber_npt(top_file, pdb_file, check_point, GPU_index=0,
     simulation.reporters.append(app.StateDataReporter(output_log,
             report_freq, step=True, time=True, speed=True,
             potentialEnergy=True, temperature=True, totalEnergy=True))
+    simulation.reporters.append(app.CheckpointReporter('checkpnt.chk', report_freq))
 
     if check_point:
         simulation.loadCheckpoint(check_point)
