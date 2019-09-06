@@ -5,7 +5,7 @@ from glob import glob
 from utils import cm_to_cvae, read_h5py_file
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-f", help="Input: OpenMM simulation path") 
+parser.add_argument("-f", "--sim_path", dest='f', help="Input: OpenMM simulation path") 
 parser.add_argument("-o", help="Output: CVAE 2D contact map h5 input file")
 
 # Let's say I have a list of h5 file names 

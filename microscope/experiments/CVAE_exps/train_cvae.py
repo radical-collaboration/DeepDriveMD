@@ -5,7 +5,7 @@ import numpy as np
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-f", default='cvae_input.h5', help="Input: contact map h5 file")
+parser.add_argument("-f", "--h5_file", dest="f", default='cvae_input.h5', help="Input: contact map h5 file")
 # parser.add_argument("-o", help="output: cvae weight file. (Keras cannot load model directly, will check again...)")
 parser.add_argument("-d", "--dim", default=3, help="Number of dimensions in latent space")
 parser.add_argument("-gpu", default=0, help="gpu_id")
