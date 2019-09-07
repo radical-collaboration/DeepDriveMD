@@ -38,7 +38,7 @@ openmm_simulate_amber_fs_pep(pdb_file,
                              output_traj="output.dcd",
                              output_log="output.log",
                              output_cm='output_cm.h5',
-                             report_time=10*u.picoseconds,
+                             report_time=50*u.picoseconds,
                              sim_time=float(args.length)*u.nanoseconds)
 
 

@@ -31,10 +31,13 @@ mongodb://user:user@ds223760.mlab.com:23760/adaptivity
 
 
 CUR_STAGE=0
-MAX_STAGE=4
+MAX_STAGE=0
 
-LEN_initial = 10 
+LEN_initial = 50 
 LEN_iter = 1 
+
+BASE_PATH = os.path.abspath('.') 
+CONDA_PATH = '/ccs/home/hm0/.conda/envs/omm/'  
 
 def generate_training_pipeline():
     """
@@ -54,24 +57,24 @@ def generate_training_pipeline():
             outlier_file = open(outlier_filepath, 'r') 
             outlier_list = json.load(outlier_file) 
             outlier_file.close() 
-
+        
+	time_stamp = int(time.time())
         # MD tasks
         for i in range(num_MD):
             t1 = Task()
             # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/MD_exps/fs-pep/run_openmm.py
             t1.pre_exec = [] 
             t1.pre_exec += ['module load cuda/9.1.85']
-            t1.pre_exec += ['source activate omm'] 
-            t1.pre_exec += ['export PYTHONPATH=/gpfs/alpine/scratch/hm0/bip179/entk_test/hyperspace/microscope/experiments/MD_exps:$PYTHONPATH'] 
-            t1.pre_exec += ['cd /gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep'] 
-            time_stamp = int(time.time())
-            t1.pre_exec += ['mkdir -p omm_runs_%d && cd omm_runs_%d' % (time_stamp, time_stamp)]
-            t1.executable = ['/ccs/home/hm0/.conda/envs/omm/bin/python']  # run_openmm.py
-            t1.arguments = ['/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep/run_openmm.py']
+            t1.pre_exec += ['source activate %s' % CONDA_PATH] 
+            t1.pre_exec += ['export PYTHONPATH=%s/MD_exps:$PYTHONPATH' % BASE_PATH] 
+            t1.pre_exec += ['cd %s/MD_exps/fs-pep' % BASE_PATH] 
+            t1.pre_exec += ['mkdir -p omm_runs_%d && cd omm_runs_%d' % (time_stamp+i, time_stamp+i)]
+            t1.executable = ['%s/bin/python' % CONDA_PATH]  # run_openmm.py
+            t1.arguments = ['%s/MD_exps/fs-pep/run_openmm.py' % BASE_PATH]
 
             # pick initial point of simulation 
             if initial_MD or i >= len(outlier_list): 
-                t1.arguments += ['-f', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb']
+                t1.arguments += ['-f', '%s/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb' % BASE_PATH]
 #                 t1.arguments += ['-l', LEN_initial] 
                 print "Running from initial frame for %d ns. " % LEN_initial
             elif outlier_list[i].endswith('pdb'): 
@@ -80,7 +83,7 @@ def generate_training_pipeline():
                 t1.pre_exec += ['cp %s ./' % outlier_list[i]]  
                 print "Running from outlier %s for %d ns" % (outlier_list[i], LEN_iter) 
             elif outlier_list[i].endswith('chk'): 
-                t1.arguments += ['-f', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb', 
+                t1.arguments += ['-f', '%s/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb' % BASE_PATH, 
                         '-c', outlier_list[i]] 
 #                 t1.arguments += ['-l', LEN_iter]
                 t1.pre_exec += ['cp %s ./' % outlier_list[i]]
@@ -104,7 +107,6 @@ def generate_training_pipeline():
                               
             # Add the MD task to the simulating stage
             s1.add_tasks(t1)
-            time.sleep(1) 
         return s1 
 
 
@@ -119,11 +121,11 @@ def generate_training_pipeline():
         t2 = Task()
         # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/MD_to_CVAE/MD_to_CVAE.py
         t2.pre_exec = [] 
-        t2.pre_exec += ['source activate omm'] 
-        t2.pre_exec += ['cd /gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_to_CVAE']
-        t2.executable = ['/ccs/home/hm0/.conda/envs/omm/bin/python']  # MD_to_CVAE.py
-        t2.arguments = ['/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_to_CVAE/MD_to_CVAE.py', 
-                '-f', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep']
+        t2.pre_exec += ['source activate %s' % CONDA_PATH] 
+        t2.pre_exec += ['cd %s/MD_to_CVAE' % BASE_PATH]
+        t2.executable = ['%s/bin/python' % CONDA_PATH]  # MD_to_CVAE.py
+        t2.arguments = ['%s/MD_to_CVAE/MD_to_CVAE.py' % BASE_PATH, 
+                '-f', '%s/MD_exps/fs-pep' % BASE_PATH]
 
         # Add the aggregation task to the aggreagating stage
         s2.add_tasks(t2)
@@ -138,21 +140,21 @@ def generate_training_pipeline():
         s3.name = 'learning'
 
         # learn task
+        time_stamp = int(time.time())
         for i in range(num_ML): 
             t3 = Task()
             # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/CVAE_exps/train_cvae.py
             t3.pre_exec = []
             t3.pre_exec += ['module load cuda/9.1.85']
-            t3.pre_exec += ['source activate omm'] 
-            t3.pre_exec += ['export PYTHONPATH=/gpfs/alpine/scratch/hm0/bip179/entk_test/hyperspace/microscope/experiments/CVAE_exps:$PYTHONPATH']
-            t3.pre_exec += ['cd /gpfs/alpine/scratch/hm0/bip179/entk_test/hyperspace/microscope/experiments/CVAE_exps']
-            time_stamp = int(time.time())
+            t3.pre_exec += ['source activate %s' % CONDA_PATH] 
+            t3.pre_exec += ['export PYTHONPATH=%s/CVAE_exps:$PYTHONPATH' % BASE_PATH]
+            t3.pre_exec += ['cd %s/CVAE_exps' % BASE_PATH]
             dim = i + 3 
-            cvae_dir = 'cvae_runs_%.2d_%d' % (dim, time_stamp) 
+            cvae_dir = 'cvae_runs_%.2d_%d' % (dim, time_stamp+i) 
             t3.pre_exec += ['mkdir -p {0} && cd {0}'.format(cvae_dir)]
             t3.executable = ['/ccs/home/hm0/.conda/envs/omm/bin/python']  # train_cvae.py
-            t3.arguments = ['/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/CVAE_exps/train_cvae.py', 
-                    '-f', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_to_CVAE/cvae_input.h5', 
+            t3.arguments = ['%s/CVAE_exps/train_cvae.py' % BASE_PATH, 
+                    '-f', '%s/MD_to_CVAE/cvae_input.h5' % BASE_PATH, 
                     '-d', dim] 
             
             t3.cpu_reqs = {'processes': 1,
@@ -166,7 +168,6 @@ def generate_training_pipeline():
         
             # Add the learn task to the learning stage
             s3.add_tasks(t3)
-            time.sleep(1) 
         return s3 
 
 
@@ -178,17 +179,17 @@ def generate_training_pipeline():
         t4 = Task() 
         t4.pre_exec = [] 
         t4.pre_exec += ['module load cuda/9.1.85'] 
-        t4.pre_exec += ['source activate omm'] 
-        t4.pre_exec += ['export PYTHONPATH=/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/CVAE_exps:$PYTHONPATH'] 
-        t4.pre_exec += ['cd /gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/Outlier_search'] 
+        t4.pre_exec += ['source activate %s' % CONDA_PATH] 
+        t4.pre_exec += ['export PYTHONPATH=%s/CVAE_exps:$PYTHONPATH' % BASE_PATH] 
+        t4.pre_exec += ['cd %s/Outlier_search' % BASE_PATH] 
         # python outlier_locator.py -m ../MD_exps/fs-pep -c ../CVAE_exps -p ../MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb 
-        t4.executable = ['/ccs/home/hm0/.conda/envs/omm/bin/python'] 
+        t4.executable = ['%s/bin/python' % CONDA_PATH] 
         t4.arguments = ['outlier_locator.py', '-m', '../MD_exps/fs-pep', '-c', '../CVAE_exps -p', '../MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb', 
                 '-r', '../MD_exps/fs-pep/pdb/fs-peptide.pdb']
-    #     t4.arguments = ['/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/Outlier_search/outlier_locator.py', 
-    #             '-m', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep', 
-    #             '-c', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/CVAE_exps', 
-    #             '-p', '/gpfs/alpine/bip179/scratch/hm0/entk_test/hyperspace/microscope/experiments/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb'
+    #     t4.arguments = ['%s/Outlier_search/outlier_locator.py', 
+    #             '-m', '%s/MD_exps/fs-pep', 
+    #             '-c', '%s/CVAE_exps', 
+    #             '-p', '%s/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb'
     #             ]
 
         t4.cpu_reqs = {'processes': 1,
@@ -207,7 +208,7 @@ def generate_training_pipeline():
 
     def func_condition(): 
         global CUR_STAGE, MAX_STAGE 
-        if CUR_STAGE <= MAX_STAGE: 
+        if CUR_STAGE < MAX_STAGE: 
             func_on_true()
         else: 
             func_on_false()
@@ -218,7 +219,7 @@ def generate_training_pipeline():
         CUR_STAGE += 1
         # --------------------------
         # MD stage
-        s1 = generate_MD_stage(num_MD=60)
+        s1 = generate_MD_stage(num_MD=600)
         # Add simulating stage to the training pipeline
         p.add_stages(s1)
 
@@ -249,7 +250,7 @@ def generate_training_pipeline():
 
     # --------------------------
     # MD stage
-    s1 = generate_MD_stage(num_MD=60)
+    s1 = generate_MD_stage(num_MD=600)
     # Add simulating stage to the training pipeline
     p.add_stages(s1)
 
@@ -286,8 +287,8 @@ if __name__ == '__main__':
             'queue'   : 'batch',
             'schema'  : 'local',
             'walltime': 120,
-            'cpus'    : 420,
-            'gpus'    : 60,
+            'cpus'    : 4200,
+            'gpus'    : 600,
             'project' : 'BIP179'
     }
 
