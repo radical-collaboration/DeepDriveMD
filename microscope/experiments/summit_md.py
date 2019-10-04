@@ -74,16 +74,16 @@ def generate_training_pipeline():
 
             # pick initial point of simulation 
             if initial_MD or i >= len(outlier_list): 
-                t1.arguments += ['-f', '%s/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb' % BASE_PATH]
+                t1.arguments += ['--pdb_file', '%s/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb' % BASE_PATH]
 #                 t1.arguments += ['-l', LEN_initial] 
                 print "Running from initial frame for %d ns. " % LEN_initial
             elif outlier_list[i].endswith('pdb'): 
-                t1.arguments += ['-f', outlier_list[i]] 
+                t1.arguments += ['--pdb_file', outlier_list[i]] 
 #                 t1.arguments += ['-l', LEN_iter] 
                 t1.pre_exec += ['cp %s ./' % outlier_list[i]]  
                 print "Running from outlier %s for %d ns" % (outlier_list[i], LEN_iter) 
             elif outlier_list[i].endswith('chk'): 
-                t1.arguments += ['-f', '%s/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb' % BASE_PATH, 
+                t1.arguments += ['--pdb_file', '%s/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb' % BASE_PATH, 
                         '-c', outlier_list[i]] 
 #                 t1.arguments += ['-l', LEN_iter]
                 t1.pre_exec += ['cp %s ./' % outlier_list[i]]
@@ -91,9 +91,9 @@ def generate_training_pipeline():
 
             # how long to run the simulation 
             if initial_MD: 
-                t1.arguments += ['-l', LEN_initial] 
+                t1.arguments += ['--length', LEN_initial] 
             else: 
-                t1.arguments += ['-l', LEN_iter]
+                t1.arguments += ['--length', LEN_iter]
 
             # assign hardware the task 
             t1.cpu_reqs = {'processes': 1,
@@ -125,7 +125,7 @@ def generate_training_pipeline():
         t2.pre_exec += ['cd %s/MD_to_CVAE' % BASE_PATH]
         t2.executable = ['%s/bin/python' % CONDA_PATH]  # MD_to_CVAE.py
         t2.arguments = ['%s/MD_to_CVAE/MD_to_CVAE.py' % BASE_PATH, 
-                '-f', '%s/MD_exps/fs-pep' % BASE_PATH]
+                '--sim_path', '%s/MD_exps/fs-pep' % BASE_PATH]
 
         # Add the aggregation task to the aggreagating stage
         s2.add_tasks(t2)
@@ -154,8 +154,8 @@ def generate_training_pipeline():
             t3.pre_exec += ['mkdir -p {0} && cd {0}'.format(cvae_dir)]
             t3.executable = ['/ccs/home/hm0/.conda/envs/omm/bin/python']  # train_cvae.py
             t3.arguments = ['%s/CVAE_exps/train_cvae.py' % BASE_PATH, 
-                    '-f', '%s/MD_to_CVAE/cvae_input.h5' % BASE_PATH, 
-                    '-d', dim] 
+                    '--h5_file', '%s/MD_to_CVAE/cvae_input.h5' % BASE_PATH, 
+                    '--dim', dim] 
             
             t3.cpu_reqs = {'processes': 1,
                     'threads_per_process': 4,
@@ -182,10 +182,11 @@ def generate_training_pipeline():
         t4.pre_exec += ['source activate %s' % CONDA_PATH] 
         t4.pre_exec += ['export PYTHONPATH=%s/CVAE_exps:$PYTHONPATH' % BASE_PATH] 
         t4.pre_exec += ['cd %s/Outlier_search' % BASE_PATH] 
-        # python outlier_locator.py -m ../MD_exps/fs-pep -c ../CVAE_exps -p ../MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb 
+        # python outlier_locator.py -m ../MD_exps/fs-pep -c ../CVAE_exps -p ../MD_exps/fs-pep/pdb/98-fs-peptide-400K.pdb 
         t4.executable = ['%s/bin/python' % CONDA_PATH] 
-        t4.arguments = ['outlier_locator.py', '-m', '../MD_exps/fs-pep', '-c', '../CVAE_exps -p', '../MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb', 
-                '-r', '../MD_exps/fs-pep/pdb/fs-peptide.pdb']
+        t4.arguments = ['outlier_locator.py', '--md', '../MD_exps/fs-pep',
+                '--cvae', '../CVAE_exps --pdb', '../MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb', 
+                '--ref', '../MD_exps/fs-pep/pdb/fs-peptide.pdb']
     #     t4.arguments = ['%s/Outlier_search/outlier_locator.py', 
     #             '-m', '%s/MD_exps/fs-pep', 
     #             '-c', '%s/CVAE_exps', 
@@ -219,7 +220,7 @@ def generate_training_pipeline():
         CUR_STAGE += 1
         # --------------------------
         # MD stage
-        s1 = generate_MD_stage(num_MD=600)
+        s1 = generate_MD_stage(num_MD=6 * 20)
         # Add simulating stage to the training pipeline
         p.add_stages(s1)
 
@@ -250,7 +251,7 @@ def generate_training_pipeline():
 
     # --------------------------
     # MD stage
-    s1 = generate_MD_stage(num_MD=600)
+    s1 = generate_MD_stage(num_MD=6 * 20)
     # Add simulating stage to the training pipeline
     p.add_stages(s1)
 
@@ -284,11 +285,11 @@ if __name__ == '__main__':
     # resource is 'local.localhost' to execute locally
     res_dict = {
             'resource': 'ornl.summit',
-            'queue'   : 'batch',
+            'queue'   : 'killable',
             'schema'  : 'local',
-            'walltime': 120,
-            'cpus'    : 4200,
-            'gpus'    : 600,
+            'walltime': 720,
+            'cpus'    : 42 * 20,
+            'gpus'    : 6 * 20,
             'project' : 'BIP179'
     }
 
