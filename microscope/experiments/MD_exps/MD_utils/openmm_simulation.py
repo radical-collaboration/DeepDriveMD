@@ -220,7 +220,8 @@ def openmm_simulate_amber_fs_pep(pdb_file, top_file=None, check_point=None, GPU_
 
     simulation.context.setPositions(random.choice(pdb.get_coordinates()))
 
-    simulation.minimizeEnergy()
+    # equilibrate
+    simulation.step(int(100*u.picoseconds / (2*u.femtoseconds)))
 
     report_freq = int(report_time/dt)
     simulation.context.setVelocitiesToTemperature(10*u.kelvin, random.randint(1, 10000))
