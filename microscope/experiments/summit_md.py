@@ -23,7 +23,9 @@ if os.environ.get('RADICAL_ENTK_VERBOSE') is None:
 '''
 export RMQ_HOSTNAME=two.radical-project.org 
 export RMQ_PORT=33235 
-export RADICAL_PILOT_DBURL=mongodb://user:user@ds223760.mlab.com:23760/adaptivity 
+export RADICAL_PILOT_DBURL=mongodb://hyperrct:h1p3rrc7@two.radical-project.org:27017/hyperrct 
+export RADICAL_PILOT_PROFILE=True
+export RADICAL_ENTK_PROFILE=True
 '''
 #
 
@@ -57,6 +59,7 @@ def generate_training_pipeline():
             outlier_file.close() 
 
         # MD tasks
+        time_stamp = int(time.time())
         for i in range(num_MD):
             t1 = Task()
             # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/MD_exps/fs-pep/run_openmm.py
@@ -65,8 +68,7 @@ def generate_training_pipeline():
             t1.pre_exec += ['conda activate %s' % conda_path] 
             t1.pre_exec += ['export PYTHONPATH=%s/MD_exps:$PYTHONPATH' % base_path] 
             t1.pre_exec += ['cd %s/MD_exps/fs-pep' % base_path] 
-            time_stamp = int(time.time())
-            t1.pre_exec += ['mkdir -p omm_runs_%d && cd omm_runs_%d' % (time_stamp, time_stamp)]
+            t1.pre_exec += ['mkdir -p omm_runs_%d && cd omm_runs_%d' % (time_stamp+i, time_stamp+i)]
             t1.executable = ['%s/bin/python' % conda_path]  # run_openmm.py
             t1.arguments = ['%s/MD_exps/fs-pep/run_openmm.py' % base_path]
           #   t1.arguments += ['--topol', '%s/MD_exps/fs-pep/pdb/topol.top' % base_path]
@@ -111,7 +113,6 @@ def generate_training_pipeline():
                               
             # Add the MD task to the simulating stage
             s1.add_tasks(t1)
-            time.sleep(1) 
         return s1 
 
 
@@ -146,6 +147,7 @@ def generate_training_pipeline():
         s3.name = 'learning'
 
         # learn task
+        time_stamp = int(time.time())
         for i in range(num_ML): 
             t3 = Task()
             # https://github.com/radical-collaboration/hyperspace/blob/MD/microscope/experiments/CVAE_exps/train_cvae.py
@@ -156,9 +158,8 @@ def generate_training_pipeline():
 
             t3.pre_exec += ['export PYTHONPATH=%s/CVAE_exps:$PYTHONPATH' % base_path]
             t3.pre_exec += ['cd %s/CVAE_exps' % base_path]
-            time_stamp = int(time.time())
             dim = i + 3 
-            cvae_dir = 'cvae_runs_%.2d_%d' % (dim, time_stamp) 
+            cvae_dir = 'cvae_runs_%.2d_%d' % (dim, time_stamp+i) 
             t3.pre_exec += ['mkdir -p {0} && cd {0}'.format(cvae_dir)]
             t3.executable = ['%s/bin/python' % conda_path]  # train_cvae.py
             t3.arguments = ['%s/CVAE_exps/train_cvae.py' % base_path, 
@@ -178,7 +179,6 @@ def generate_training_pipeline():
         
             # Add the learn task to the learning stage
             s3.add_tasks(t3)
-            time.sleep(1) 
         return s3 
 
 
