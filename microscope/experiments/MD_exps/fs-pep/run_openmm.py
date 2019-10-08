@@ -4,12 +4,12 @@ import argparse
 
 from MD_utils.openmm_simulation import openmm_simulate_amber_fs_pep 
 
-parser = argparse.ArgumentParser() 
-parser.add_argument("-f", help="pdb file") 
-parser.add_argument("-p", help="topology file") 
-parser.add_argument("-c", help="check point file to restart simulation") 
-parser.add_argument("-l", "--length", default=10, help="how long (ns) the system will be simulated") 
-
+parser = argparse.ArgumentParser()
+parser.add_argument("-f", "--pdb_file", dest="f", help="pdb file")
+parser.add_argument("-p", "--topol", dest='p', help="topology file")
+parser.add_argument("-c", help="check point file to restart simulation")
+parser.add_argument("-l", "--length", default=10, help="how long (ns) the system will be simulated")
+parser.add_argument("-g", "--gpu", default=0, help="id of gpu to use for the simulation")
 args = parser.parse_args() 
 
 if args.f: 
