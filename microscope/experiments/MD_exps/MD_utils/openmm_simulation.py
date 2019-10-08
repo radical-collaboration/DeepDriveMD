@@ -218,7 +218,7 @@ def openmm_simulate_amber_fs_pep(pdb_file, top_file=None, check_point=None, GPU_
 
     simulation = app.Simulation(pdb.topology, system, integrator, platform, properties)
 
-    simulation.context.setPositions(random.choice(pdb.get_coordinates()))
+    simulation.context.setPositions(random.choice(pdb.get_coordinates())/10) #parmed \AA to OpenMM nm
 
     # equilibrate
     simulation.step(int(100*u.picoseconds / (2*u.femtoseconds)))
