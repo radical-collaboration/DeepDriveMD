@@ -29,14 +29,15 @@ export RADICAL_ENTK_PROFILE=True
 '''
 #
 
-base_path='/gpfs/alpine/proj-shared/bip179/entk/hyperspace/microscope/experiments/'
-conda_path='/ccs/home/hm0/.conda/envs/omm'
+base_path = os.path.abspath('.') # '/gpfs/alpine/proj-shared/bip179/entk/hyperspace/microscope/experiments/'
+conda_path = '/ccs/home/hm0/.conda/envs/omm'
 
 CUR_STAGE=0
-MAX_STAGE=0
+MAX_STAGE=10
+RETRAIN_FREQ = 5
 
-LEN_initial = 50
-LEN_iter = 1 
+LEN_initial = 100
+LEN_iter = 10 
 
 def generate_training_pipeline():
     """
@@ -79,19 +80,19 @@ def generate_training_pipeline():
                 t1.arguments += ['--pdb_file',
                         '%s/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb' % base_path]
 #                 t1.arguments += ['--length', LEN_initial] 
-                print "Running from initial frame for %d ns. " % LEN_initial
+#                print "Running from initial frame for %d ns. " % LEN_initial
             elif outlier_list[i].endswith('pdb'): 
                 t1.arguments += ['--pdb_file', outlier_list[i]] 
 #                 t1.arguments += ['--length', LEN_iter] 
                 t1.pre_exec += ['cp %s ./' % outlier_list[i]]  
-                print "Running from outlier %s for %d ns" % (outlier_list[i], LEN_iter) 
+#                print "Running from outlier %s for %d ns" % (outlier_list[i], LEN_iter) 
             elif outlier_list[i].endswith('chk'): 
                 t1.arguments += ['--pdb_file',
                         '%s/MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb' % base_path,
                         '-c', outlier_list[i]] 
 #                 t1.arguments += ['--length', LEN_iter]
                 t1.pre_exec += ['cp %s ./' % outlier_list[i]]
-                print "Running from checkpoint %s for %d ns" % (outlier_list[i], LEN_iter) 
+#                print "Running from checkpoint %s for %d ns" % (outlier_list[i], LEN_iter) 
 
             # how long to run the simulation 
             if initial_MD: 
@@ -196,7 +197,9 @@ def generate_training_pipeline():
         t4.pre_exec += ['export PYTHONPATH=%s/CVAE_exps:$PYTHONPATH' % base_path] 
         t4.pre_exec += ['cd %s/Outlier_search' % base_path] 
         t4.executable = ['%s/bin/python' % conda_path] 
-        t4.arguments = ['outlier_locator.py', '--md', '../MD_exps/fs-pep', '--cvae', '../CVAE_exps --pdb', '../MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb', '--ref', '../MD_exps/fs-pep/pdb/fs-peptide.pdb']
+        t4.arguments = ['outlier_locator.py', '--md', '../MD_exps/fs-pep', '--cvae', '../CVAE_exps', '
+                --pdb', '../MD_exps/fs-pep/pdb/100-fs-peptide-400K.pdb', 
+                '--ref', '../MD_exps/fs-pep/pdb/fs-peptide.pdb']
 
         t4.cpu_reqs = {'processes': 1,
                            'process_type': None,
@@ -224,29 +227,32 @@ def generate_training_pipeline():
     def func_on_true(): 
         global CUR_STAGE, MAX_STAGE
         print 'finishing stage %d of %d' % (CUR_STAGE, MAX_STAGE) 
-        CUR_STAGE += 1
+        
         # --------------------------
         # MD stage
-        s1 = generate_MD_stage(num_MD=60)
+        s1 = generate_MD_stage(num_MD=6 * 20)
         # Add simulating stage to the training pipeline
         p.add_stages(s1)
 
-        # --------------------------
-        # Aggregate stage
-        #s2 = generate_aggregating_stage() 
-        # Add the aggregating stage to the training pipeline
-        #p.add_stages(s2)
+        if CUR_STAGE % RETRAIN_FREQ == 0: 
+            # --------------------------
+            # Aggregate stage
+            s2 = generate_aggregating_stage() 
+            # Add the aggregating stage to the training pipeline
+            p.add_stages(s2)
 
-        # --------------------------
-        # Learning stage
-        #s3 = generate_ML_stage(num_ML=10) 
-        # Add the learning stage to the pipeline
-        #p.add_stages(s3)
+            # --------------------------
+            # Learning stage
+            s3 = generate_ML_stage(num_ML=10) 
+            # Add the learning stage to the pipeline
+            p.add_stages(s3)
 
         # --------------------------
         # Outlier identification stage
         s4 = generate_interfacing_stage() 
         p.add_stages(s4) 
+        
+        CUR_STAGE += 1
 
     def func_on_false(): 
         print 'Done' 
@@ -258,7 +264,7 @@ def generate_training_pipeline():
 
     # --------------------------
     # MD stage
-    s1 = generate_MD_stage(num_MD=60)
+    s1 = generate_MD_stage(num_MD=6 * 20)
     # Add simulating stage to the training pipeline
     p.add_stages(s1)
 
@@ -279,6 +285,7 @@ def generate_training_pipeline():
     s4 = generate_interfacing_stage() 
     p.add_stages(s4) 
 
+    CUR_STAGE += 1
 
     return p
 
@@ -292,11 +299,11 @@ if __name__ == '__main__':
     # resource is 'local.localhost' to execute locally
     res_dict = {
             'resource': 'ornl.summit',
-            'queue'   : 'batch',
+            'queue'   : 'killable',
             'schema'  : 'local',
-            'walltime': 120 ,
-            'cpus'    : 42 * 10,
-            'gpus'    : 6 * 10,#6*2 ,
+            'walltime': 60 * 12,
+            'cpus'    : 42 * 20,
+            'gpus'    : 6 * 20,#6*2 ,
             'project' : 'BIP179'
     }
 
