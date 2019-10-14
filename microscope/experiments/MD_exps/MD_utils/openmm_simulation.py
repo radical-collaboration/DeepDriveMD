@@ -221,10 +221,11 @@ def openmm_simulate_amber_fs_pep(pdb_file, top_file=None, check_point=None, GPU_
     simulation.context.setPositions(random.choice(pdb.get_coordinates())/10) #parmed \AA to OpenMM nm
 
     # equilibrate
+    simulation.minimizeEnergy() 
+    simulation.context.setVelocitiesToTemperature(300*u.kelvin, random.randint(1, 10000))
     simulation.step(int(100*u.picoseconds / (2*u.femtoseconds)))
 
     report_freq = int(report_time/dt)
-    simulation.context.setVelocitiesToTemperature(10*u.kelvin, random.randint(1, 10000))
     simulation.reporters.append(app.DCDReporter(output_traj, report_freq))
     if output_cm:
         simulation.reporters.append(ContactMapReporter(output_cm, report_freq))
