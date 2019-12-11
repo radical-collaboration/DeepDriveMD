@@ -3,7 +3,7 @@
 The 100-ns MD simulation of GPCR can be run with the follow code. 
 Check `python run_openmm.py --help` for more information.  
 
-```python 
+```bash 
 python run_openmm.py --pdb_file pdb/3pbl.pdb --topol pdb/topol.top --length 100
 ```
 
