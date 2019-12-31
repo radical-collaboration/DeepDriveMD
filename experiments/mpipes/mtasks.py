@@ -1,7 +1,7 @@
 from radical import pilot as rp, utils as ru
 
-def prepare_pilot(rd):
-    session = rp.Session()
+def prepare_pilot(rd, uid=None):
+    session = rp.Session(uid=uid)
     pmgr = rp.PilotManager(session=session)
     umgr = rp.UnitManager(session=session) 
 
@@ -40,21 +40,38 @@ if __name__ == '__main__':
 
     rp_resource_description = {
             'resource'      : "ornl.summit",
-            'runtime'       : 20,  # pilot runtime (min)
+            'runtime'       : 30,  # pilot runtime (min)
             'exit_on_error' : True,
             'project'       : "LRN005",
             'queue'         : "batch",
             'access_schema' : "local",
-            'cores'         : 168*3,
+            'cores'         : 168*1.5,
             }
 
-    session, _, umgr = prepare_pilot(rp_resource_description)
+    session, _, umgr = prepare_pilot(rp_resource_description,
+            uid="40cpus_40_40_40tasks_1_4_4gens")
     #cuds = set_ratio({"40:40:40": "10,100,1000"})
     #cuds = set_ratio({"58:31:31": "10,100,1000"})
     #cuds = set_ratio({"76:22:22": "10,100,1000"})
     #cuds = set_ratio({"94:13:13": "10,100,1000"})
     #cuds = set_ratio({"112:4:4": "10,100,1000"})
-    cuds = set_ratio({"4:4:112": "10,100,1000"})
+    # 2nd try
+    #cuds = set_ratio({"60:30:30": "10,100,1000"})
+    #cuds = set_ratio({"80:20:20": "10,100,1000"})
+    #cuds = set_ratio({"100:10:10": "10,100,1000"})
+    #cuds = set_ratio({"118:1:1": "10,100,1000"})
+    #cuds = set_ratio({"30:60:30": "10,100,1000"})
+    #cuds = set_ratio({"20:80:20": "10,100,1000"})
+    #cuds = set_ratio({"10:100:10": "10,100,1000"})
+    #cuds = set_ratio({"1:118:1": "10,100,1000"})
+    #cuds = set_ratio({"30:30:60": "10,100,1000"})
+    #cuds = set_ratio({"20:20:80": "10,100,1000"})
+    #cuds = set_ratio({"10:10:100": "10,100,1000"})
+    #cuds = set_ratio({"1:1:118": "10,100,1000"})
+    #cuds = set_ratio({"40:20:20:20:20": "1000,100,10,100,10"})
+    cuds = set_ratio({"40:10:10:10:10:10:10:10:10":
+        "1000,100,10,100,10,100,10,100,10"})
+
     umgr.submit_units(cuds)
     umgr.wait_units()
     session.close(download=True)
