@@ -1,0 +1,12 @@
+#!/bin/bash
+# Summitdev OpenMM testing
+#BSUB -P MED106 
+#BSUB -J test_omm_ppc
+#BSUB -o tst.o%J
+#BSUB -W 1:00
+#BSUB -nnodes 1
+# End LSF directives and begin shell commands
+date
+source activate hm0 
+module load cuda/9.1.85
+jsrun -n 1 -a 1 -g 1 python train_cvae.py  -f cvae_input.h5  

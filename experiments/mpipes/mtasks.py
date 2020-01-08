@@ -45,11 +45,11 @@ if __name__ == '__main__':
             'project'       : "LRN005",
             'queue'         : "batch",
             'access_schema' : "local",
-            'cores'         : 168*1.5,
+            'cores'         : 168*5,
             }
 
     session, _, umgr = prepare_pilot(rp_resource_description,
-            uid="40cpus_40_40_40tasks_1_4_4gens")
+            uid="200cpus_100_100_100tasks_1_1_10gens")
     #cuds = set_ratio({"40:40:40": "10,100,1000"})
     #cuds = set_ratio({"58:31:31": "10,100,1000"})
     #cuds = set_ratio({"76:22:22": "10,100,1000"})
@@ -69,8 +69,11 @@ if __name__ == '__main__':
     #cuds = set_ratio({"10:10:100": "10,100,1000"})
     #cuds = set_ratio({"1:1:118": "10,100,1000"})
     #cuds = set_ratio({"40:20:20:20:20": "1000,100,10,100,10"})
-    cuds = set_ratio({"40:10:10:10:10:10:10:10:10":
-        "1000,100,10,100,10,100,10,100,10"})
+    #cuds = set_ratio({"40:10:10:10:10:10:10:10:10"
+    #    "1000,100,10,100,10,100,10,100,10"})
+    cuds = set_ratio({"100:100:100":"1000,100,10"})
+   # cuds = set_ratio({"100:25:1:25:1:25:1:25:97":
+    #    "1000,100,10,100,10,100,10,100,10"})
 
     umgr.submit_units(cuds)
     umgr.wait_units()

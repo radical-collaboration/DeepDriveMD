@@ -46,20 +46,36 @@ if __name__ == '__main__':
             'walltime'       : 30,
             'project'       : "LRN005",
             'queue'         : "batch",
-            'cpus'         : 168*1.5
+            'cpus'         : 168*3
             }
 
-    appman = prepare_entk(res_dict)
-    ps = []
-    p1 = entk.Pipeline()
-    s1 = set_ratio({"40:10:10": "1000,100,10"})
-    p1.add_stages(s1)
-    for i in range(3):
-        pn = entk.Pipeline()
-        sn = set_ratio({"10:10": "100,10"})
-        pn.add_stages(sn)
-        ps.append(pn)
 
-    appman.workflow = [p1] + ps
+    res_set = {"100:100:52":"1000,100,10"}
+    res_set = {"100:100:10":"1000,100,10"}
+    res_set = {"100:66:2":"1000,100,10"}
+    res_set = {"100:25:1":"1000,100,10"}
+    tcpus = 0
+    ntasks = 100
+    pipes = []
+    for k, v in res_set.items():
+        for cpus, exec_second in zip(k.split(":"), v.split(",")):
+            cpus = int(cpus)
+            p = entk.Pipeline()
+            for i in range(0, ntasks, cpus):
+                if ntasks - i < cpus:
+                    ptask = ntasks - i
+                else:
+                    ptask = cpus
+                s = set_ratio({str(ptask):str(exec_second)})
+                #print(ptask,exec_second)
+                p.add_stages(s)
+            tcpus += cpus
+            pipes.append(p)
+    #print(tcpus)
+    #import sys
+    #sys.exit()
+    res_dict['cpus'] = tcpus * 4
+    appman = prepare_entk(res_dict)
+    appman.workflow = pipes
     appman.run()
 
