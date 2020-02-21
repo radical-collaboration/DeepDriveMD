@@ -45,11 +45,11 @@ if __name__ == '__main__':
             'project'       : "LRN005",
             'queue'         : "batch",
             'access_schema' : "local",
-            'cores'         : 168*5,
+            'cores'         : 168*32,
             }
 
     session, _, umgr = prepare_pilot(rp_resource_description,
-            uid="200cpus_100_100_100tasks_1_1_10gens")
+            uid="32nodes_12_10_10_10_1tasks_1_1_10_10_1gens")
     #cuds = set_ratio({"40:40:40": "10,100,1000"})
     #cuds = set_ratio({"58:31:31": "10,100,1000"})
     #cuds = set_ratio({"76:22:22": "10,100,1000"})
@@ -71,9 +71,16 @@ if __name__ == '__main__':
     #cuds = set_ratio({"40:20:20:20:20": "1000,100,10,100,10"})
     #cuds = set_ratio({"40:10:10:10:10:10:10:10:10"
     #    "1000,100,10,100,10,100,10,100,10"})
-    cuds = set_ratio({"100:100:100":"1000,100,10"})
+    #exp3, 3nodes, cuds = set_ratio({"84:35:7:35:7:56:70:1":"720,390,84,390,84,84,60,6"})
+    #exp3, 4nodes, cuds = set_ratio({"84:70:14:56:70:1":"720,390,84,84,60,6"})
+    #exp3, 5nodes, cuds = set_ratio({"84:70:56:14:70:1":"720,390,84,84,60,6"})
+    #exp3, 6nodes, 
+    cuds = set_ratio({"84:70:70:70:1":"720,390,84,60,6"})
+    cuds = set_ratio({"672:560:560:560:1":"720,390,84,60,6"})
    # cuds = set_ratio({"100:25:1:25:1:25:1:25:97":
     #    "1000,100,10,100,10,100,10,100,10"})
+
+    # 64,
 
     umgr.submit_units(cuds)
     umgr.wait_units()
