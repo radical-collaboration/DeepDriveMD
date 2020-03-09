@@ -1,3 +1,21 @@
+# DeepDriveMD
+
+## Dependency
+
+- OpenMM
+  - swig 3+ 
+  - numpy 
+  - cython
+- MDAnalysis
+  - scipy
+  - numpy 1.16+
+- Parmed
+
+## Systems
+
+ - fs-peptide/vhp: https://github.com/radical-collaboration/DeepDriveMD/tree/master/microscope/experiments
+ - ntl9: https://github.com/radical-collaboration/DeepDriveMD/tree/master/src/mdrun/ntl9
+
 ## MicroScope Workflow 
 
 * Summit Experiments and RADICAL-Analytics [Workflow](https://github.com/radical-experiments/hyperspace_experiments/tree/master/summit) 
