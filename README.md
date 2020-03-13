@@ -6,6 +6,8 @@
   - swig 3+ 
   - numpy 
   - cython
+- tensorflow-gpu 
+  - keras
 - MDAnalysis
   - scipy
   - numpy 1.16+
