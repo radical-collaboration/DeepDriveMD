@@ -10,6 +10,8 @@
   - scipy
   - numpy 1.16+
 - Parmed
+- pytables
+- h5py
 
 ## Systems
 
