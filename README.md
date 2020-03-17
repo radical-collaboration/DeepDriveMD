@@ -11,6 +11,7 @@
 - MDAnalysis
   - scipy
   - numpy 1.16+
+- scikit-learn
 - Parmed
 - pytables
 - h5py
