@@ -1,6 +1,7 @@
 # DeepDriveMD
 
-Lee, Hyungro, et al. "DeepDriveMD: Deep-Learning Driven Adaptive Molecular Simulations for Protein Folding." 2019 IEEE/ACM Third Workshop on Deep Learning on Supercomputers (DLS). IEEE, 2019. https://ieeexplore.ieee.org/abstract/document/8945122
+H. Lee, M. Turilli, S. Jha, D. Bhowmik, H. Ma and A. Ramanathan, "DeepDriveMD: Deep-Learning Driven Adaptive Molecular Simulations for Protein Folding," 2019 IEEE/ACM Third Workshop on Deep Learning on Supercomputers (DLS), Denver, CO, USA, 2019, pp. 12-19, doi: 10.1109/DLS49591.2019.00007.
+https://ieeexplore.ieee.org/abstract/document/8945122
 
 ## COVID-19 Development
 
