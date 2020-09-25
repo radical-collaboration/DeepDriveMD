@@ -1,6 +1,6 @@
 # DeepDriveMD
 
-DeepDriveMD, Deep learning-driven Adaptive Molecular Simulations for Protein Folding, is a toolkit jointly developed by Ramanathan's team at the Argonne National laboratory and Shantenu Jha's team at Rutgers University/ Brookhaven National Laboratory (BNL).
+DeepDriveMD, Deep learning-driven Adaptive Molecular Simulations for Protein Folding, is a toolkit developed by Brookhaven National Laboratobry (BNL)/RADICAL Laboratory at Rutgers, in collaboration with Argonne National Laboratory.
 
 This is a main repository of DeepDriveMD used in production runs. You can find the latest publication here:
 
