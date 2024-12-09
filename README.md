@@ -1,8 +1,3 @@
-# This Branch holds code for Adaptive and Asynchronous execution paterns
-
-Note: For  JSSPP paper please check the JSSPP folder 
-
-
 # DeepDriveMD
 
 DeepDriveMD, Deep learning-driven Adaptive Molecular Simulations for Protein Folding, is a toolkit developed by Brookhaven National Laboratobry (BNL)/RADICAL Laboratory at Rutgers, in collaboration with Argonne National Laboratory.
@@ -12,9 +7,17 @@ This is a main repository of DeepDriveMD used in production runs. You can find t
 H. Lee, M. Turilli, S. Jha, D. Bhowmik, H. Ma and A. Ramanathan, "DeepDriveMD: Deep-Learning Driven Adaptive Molecular Simulations for Protein Folding," 2019 IEEE/ACM Third Workshop on Deep Learning on Supercomputers (DLS), Denver, CO, USA, 2019, pp. 12-19, doi: 10.1109/DLS49591.2019.00007.
 https://ieeexplore.ieee.org/abstract/document/8945122
 
+# Adaptive Execution Development
+
+This is an on going develeopment branch  you can find the source code under [src](https://github.com/radical-collaboration/DeepDriveMD/tree/master/src/) and [data](https://github.com/radical-collaboration/DeepDriveMD/tree/master/data/) 
 
 
-## COVID-19 Development
+# Asyncronous Execution Development published at JSSPP 
+
+JSSPP folder holds source code and figures used in the paper
+
+
+## COVID-19 Development (Relocated under [archive](https://github.com/radical-collaboration/DeepDriveMD/tree/master/archive)
 
 There is ongoing activity in associcated with the Covid-19 project.
 https://github.com/2019-ncovgroup/DrugWorkflows/tree/devel/workflow-2
