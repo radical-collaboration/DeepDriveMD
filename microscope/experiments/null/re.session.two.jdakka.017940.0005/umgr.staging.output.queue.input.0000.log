@@ -1,7 +1,0 @@
-2019-02-14 06:47:04,530: umgr.staging.output.queue.input.0000: task-manager                    : Thread-1       : INFO    : python.interpreter   version: 2.7.12 (default, Nov 12 2018, 14:36:49) [GCC 5.4.0 20160609]
-2019-02-14 06:47:04,530: umgr.staging.output.queue.input.0000: task-manager                    : Thread-1       : INFO    :                      pid/tid: 23824/Thread-1
-2019-02-14 06:47:04,530: umgr.staging.output.queue.input.0000: task-manager                    : Thread-1       : INFO    : create umgr_staging_output_queue - input - tcp://138.201.86.166:42056
-2019-02-14 06:47:04,531: umgr.staging.output.queue.input.0000: task-manager                    : Thread-1       : DEBUG   : start process
-2019-02-14 06:47:04,531: umgr.staging.output.queue.input.0000: task-manager                    : Thread-1       : DEBUG   : ru_initialize_common (NOOP)
-2019-02-14 06:47:04,531: umgr.staging.output.queue.input.0000: task-manager                    : Thread-1       : DEBUG   : ru_initialize_parent (NOOP)
-2019-02-14 06:47:04,531: umgr.staging.output.queue.input.0000: task-manager                    : Thread-1       : DEBUG   : process class started (no child)

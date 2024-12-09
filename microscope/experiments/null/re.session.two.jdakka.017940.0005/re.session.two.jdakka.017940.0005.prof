@@ -1,7 +1,0 @@
-#time,event,comp,thread,uid,state,msg
-1550094716.0767,sync_abs,re.session.two.jdakka.017940.0005,MainThread,,,localhost.localdomain:138.201.86.166:1550094716.07:1550094716.07:ntp
-1550094716.1365,config_parser_start,re.session.two.jdakka.017940.0005,MainThread,re.session.two.jdakka.017940.0005,,
-1550094716.2078,config_parser_stop,re.session.two.jdakka.017940.0005,MainThread,re.session.two.jdakka.017940.0005,,
-1550130505.5567,session_close,re.session.two.jdakka.017940.0005,MainThread,re.session.two.jdakka.017940.0005,,
-1550130512.1382,session_stop,re.session.two.jdakka.017940.0005,MainThread,re.session.two.jdakka.017940.0005,,
-1550130512.1383,END,re.session.two.jdakka.017940.0005,MainThread,,,

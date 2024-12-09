@@ -1,3 +1,8 @@
+# This Branch holds code for Adaptive and Asynchronous execution paterns
+
+Note: For  JSSPP paper please check the JSSPP folder 
+
+
 # DeepDriveMD
 
 DeepDriveMD, Deep learning-driven Adaptive Molecular Simulations for Protein Folding, is a toolkit developed by Brookhaven National Laboratobry (BNL)/RADICAL Laboratory at Rutgers, in collaboration with Argonne National Laboratory.

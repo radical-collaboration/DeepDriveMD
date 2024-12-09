@@ -1,9 +1,0 @@
-As part of the final paper, we plan to demonstrate two aspects of our AI-driven workflow: 
-\begin{itemize}
-\item \emph{Scaling characteristics}: We will show how larger proteins can be folded by  training across multiple GPUs (using a data parallel implementation of the CVAE). Additionally, we will demonstrate how hyperparameter optimization using our HyperSpace~\cite{Young_2018} can improve the robustness of the CVAE while achieving scalability on the Summit supercomputer. We will also demonstrate how increasing the data load (through the number of concurrently instantiated trajectories, as well as building larger CVAE models distributed across nodes) can affect the performance of our workflow. 
-\item \emph{Providing near real-time inference for CVAE}: A critical component of our workflow is to instantiate newer simulations of novel conformations (inferred from our CVAE model) as simulations are still running. This will involve enabling building near real time inference of the best trained / optimized CVAE such that novel conformations can be identified across all simulations currently running. 
-\end{itemize}
-We believe that the performance characteristics of our workflow within the
-RADICAL-Cybertools will provide quantitative underpinnings for challenges
-involved in implementing AI-driven multiscale molecular simulations at scale
-on emerging HPC platforms.

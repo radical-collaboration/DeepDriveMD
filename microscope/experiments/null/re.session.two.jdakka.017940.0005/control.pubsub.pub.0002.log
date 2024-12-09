@@ -1,9 +1,0 @@
-2019-02-13 22:51:59,096: control.pubsub.pub.0002: MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.12 (default, Nov 12 2018, 14:36:49) [GCC 5.4.0 20160609]
-2019-02-13 22:51:59,096: control.pubsub.pub.0002: MainProcess                     : MainThread     : INFO    :                      pid/tid: 20716/MainThread
-2019-02-13 22:51:59,096: control.pubsub.pub.0002: MainProcess                     : MainThread     : INFO    : create control_pubsub - pub - tcp://138.201.86.166:41339
-2019-02-13 22:51:59,096: control.pubsub.pub.0002: MainProcess                     : MainThread     : DEBUG   : start process
-2019-02-13 22:51:59,096: control.pubsub.pub.0002: MainProcess                     : MainThread     : DEBUG   : ru_initialize_common (NOOP)
-2019-02-13 22:51:59,096: control.pubsub.pub.0002: MainProcess                     : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
-2019-02-13 22:51:59,096: control.pubsub.pub.0002: MainProcess                     : MainThread     : DEBUG   : process class started (no child)
-2019-02-14 08:48:28,553: control.pubsub.pub.0002: MainProcess                     : MainThread     : INFO    : parent stops child  20716 -> None [control.pubsub.pub.0002]
-2019-02-14 08:48:28,553: control.pubsub.pub.0002: MainProcess                     : MainThread     : DEBUG   : ru_finalize_parent (NOOP)
