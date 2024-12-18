@@ -9,15 +9,15 @@ https://ieeexplore.ieee.org/abstract/document/8945122
 
 # Adaptive Execution Development
 
-This is an on going develeopment branch  you can find the source code under [src](https://github.com/radical-collaboration/DeepDriveMD/tree/master/src/) and [data](https://github.com/radical-collaboration/DeepDriveMD/tree/master/data/) 
+This is an ongoing develeopment branch  you can find the source code under [src](https://github.com/radical-collaboration/DeepDriveMD/tree/master/src/) and [data](https://github.com/radical-collaboration/DeepDriveMD/tree/master/data/) 
 
 
-# Asyncronous Execution Development published at JSSPP 
+# Asynchronous Execution Development published at JSSPP 
 
 JSSPP folder holds source code and figures used in the paper
 
 
-## COVID-19 Development (Relocated under [archive](https://github.com/radical-collaboration/DeepDriveMD/tree/master/archive)
+## COVID-19 Development (Relocated under [archive](https://github.com/radical-collaboration/DeepDriveMD/tree/master/archive))
 
 There is ongoing activity in associcated with the Covid-19 project.
 https://github.com/2019-ncovgroup/DrugWorkflows/tree/devel/workflow-2
