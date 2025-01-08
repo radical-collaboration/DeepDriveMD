@@ -1,7 +1,0 @@
-2019-02-14 00:46:59,788: log.pubsub.pub.0005 : MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.11 (default, Feb 23 2016, 17:47:07) [GCC 4.8.5 20150623 (Red Hat 4.8.5-4)]
-2019-02-14 00:46:59,790: log.pubsub.pub.0005 : MainProcess                     : MainThread     : INFO    :                      pid/tid: 29469/MainThread
-2019-02-14 00:46:59,791: log.pubsub.pub.0005 : MainProcess                     : MainThread     : INFO    : create log_pubsub - pub - tcp://10.4.116.12:34166
-2019-02-14 00:46:59,792: log.pubsub.pub.0005 : MainProcess                     : MainThread     : DEBUG   : start process
-2019-02-14 00:46:59,792: log.pubsub.pub.0005 : MainProcess                     : MainThread     : DEBUG   : ru_initialize_common (NOOP)
-2019-02-14 00:46:59,792: log.pubsub.pub.0005 : MainProcess                     : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
-2019-02-14 00:46:59,792: log.pubsub.pub.0005 : MainProcess                     : MainThread     : DEBUG   : process class started (no child)

@@ -1,9 +1,0 @@
-2019-02-14 06:47:04,497: umgr.scheduling.queue.output.0000: umgr.0000.scheduling.0          : Thread-1       : INFO    : python.interpreter   version: 2.7.12 (default, Nov 12 2018, 14:36:49) [GCC 5.4.0 20160609]
-2019-02-14 06:47:04,498: umgr.scheduling.queue.output.0000: umgr.0000.scheduling.0          : Thread-1       : INFO    :                      pid/tid: 23916/Thread-1
-2019-02-14 06:47:04,498: umgr.scheduling.queue.output.0000: umgr.0000.scheduling.0          : Thread-1       : INFO    : create umgr_scheduling_queue - output - tcp://138.201.86.166:46784
-2019-02-14 06:47:04,498: umgr.scheduling.queue.output.0000: umgr.0000.scheduling.0          : Thread-1       : DEBUG   : start process
-2019-02-14 06:47:04,498: umgr.scheduling.queue.output.0000: umgr.0000.scheduling.0          : Thread-1       : DEBUG   : ru_initialize_common (NOOP)
-2019-02-14 06:47:04,498: umgr.scheduling.queue.output.0000: umgr.0000.scheduling.0          : Thread-1       : DEBUG   : ru_initialize_parent (NOOP)
-2019-02-14 06:47:04,498: umgr.scheduling.queue.output.0000: umgr.0000.scheduling.0          : Thread-1       : DEBUG   : process class started (no child)
-2019-02-14 08:47:42,537: umgr.scheduling.queue.output.0000: umgr.0000.scheduling.0          : Thread-1       : INFO    : parent stops child  23916 -> None [umgr.scheduling.queue.output.0000]
-2019-02-14 08:47:42,537: umgr.scheduling.queue.output.0000: umgr.0000.scheduling.0          : Thread-1       : DEBUG   : ru_finalize_parent (NOOP)

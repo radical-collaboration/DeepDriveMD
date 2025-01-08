@@ -1,0 +1,4233 @@
+cscope 15 /Users/ozgurkilic/Projects/CANDLE/DeepDriveMD-pipeline/deepdrivemd -c 0000026725
+	@./config.py
+
+
+	@./deepdrivemd_stream.py
+
+1 import 
+	~math
+
+2 import 
+	~os
+
+3 import 
+	~shutil
+
+4 from 
+	~pathlib
+ import 
+Path
+
+5 from 
+	~typing
+ import 
+List
+
+7 import 
+	~radical.utils
+ as 
+ru
+
+8 from 
+	~radical.entk
+ import 
+AppManager
+ , 
+Pipeline
+ , 
+Stage
+ , 
+Task
+
+10 from 
+	~deepdrivemd.config
+ import 
+BaseStageConfig
+ , 
+StreamingExperimentConfig
+
+11 from 
+	~deepdrivemd.data.api
+ import 
+DeepDriveMD_API
+
+12 from 
+	~deepdrivemd.utils
+ import 
+parse_args
+
+15 def 
+	$generate_task
+ ( 
+cfg
+ : 
+BaseStageConfig
+ ) -> 
+Task
+ :
+
+16 
+task
+ = 
+Task
+ ( )
+
+17 
+task
+ . 
+cpu_reqs
+ = 
+cfg
+ . 
+cpu_reqs
+ . 
+dict
+ ( ) . 
+copy
+ ( )
+
+18 
+task
+ . 
+gpu_reqs
+ = 
+cfg
+ . 
+gpu_reqs
+ . 
+dict
+ ( ) . 
+copy
+ ( )
+
+19 
+task
+ . 
+pre_exec
+ = 
+cfg
+ . 
+pre_exec
+ . 
+copy
+ ( )
+
+20 
+task
+ . 
+executable
+ = 
+cfg
+ . 
+executable
+
+21 
+task
+ . 
+arguments
+ = 
+cfg
+ . 
+arguments
+ . 
+copy
+ ( )
+
+22 return 
+task
+ 
+	}
+
+25 class 
+	cPipelineManager
+ :
+
+26 
+MOLECULAR_DYNAMICS_STAGE_NAME
+ = "MolecularDynamics"
+
+27 
+AGGREGATION_STAGE_NAME
+ = "Aggregating"
+
+28 
+MACHINE_LEARNING_STAGE_NAME
+ = "MachineLearning"
+
+29 
+AGENT_STAGE_NAME
+ = "Agent"
+
+31 
+MOLECULAR_DYNAMICS_PIPELINE_NAME
+ = "MolecularDynamicsPipeline"
+
+32 
+AGGREGATION_PIPELINE_NAME
+ = "AggregatingPipeline"
+
+33 
+MACHINE_LEARNING_PIPELINE_NAME
+ = "MachineLearningPipeline"
+
+34 
+AGENT_PIPELINE_NAME
+ = "AgentPipeline"
+
+36 def 
+	$__init__
+ ( 
+self
+ , 
+cfg
+ : 
+StreamingExperimentConfig
+ ) :
+
+37 
+self
+ . 
+cfg
+ = 
+cfg
+
+38 
+self
+ . 
+stage_idx
+ = 0
+
+39 
+self
+ . 
+api
+ = 
+DeepDriveMD_API
+ ( 
+cfg
+ . 
+experiment_directory
+ )
+
+41 
+self
+ . 
+pipelines
+ = { }
+
+43 
+p_md
+ = 
+Pipeline
+ ( )
+
+44 
+p_md
+ . 
+name
+ = 
+self
+ . 
+MOLECULAR_DYNAMICS_PIPELINE_NAME
+
+46 
+self
+ . 
+pipelines
+ [ 
+p_md
+ . 
+name
+ ] = 
+p_md
+
+48 
+p_aggregate
+ = 
+Pipeline
+ ( )
+
+49 
+p_aggregate
+ . 
+name
+ = 
+self
+ . 
+AGGREGATION_PIPELINE_NAME
+
+51 
+self
+ . 
+pipelines
+ [ 
+p_aggregate
+ . 
+name
+ ] = 
+p_aggregate
+
+53 
+p_ml
+ = 
+Pipeline
+ ( )
+
+54 
+p_ml
+ . 
+name
+ = 
+self
+ . 
+MACHINE_LEARNING_PIPELINE_NAME
+
+55 
+self
+ . 
+pipelines
+ [ 
+p_ml
+ . 
+name
+ ] = 
+p_ml
+
+57 
+p_outliers
+ = 
+Pipeline
+ ( )
+
+58 
+p_outliers
+ . 
+name
+ = 
+self
+ . 
+AGENT_PIPELINE_NAME
+
+59 
+self
+ . 
+pipelines
+ [ 
+p_outliers
+ . 
+name
+ ] = 
+p_outliers
+
+61 
+self
+ . 
+_init_experiment_dir
+ ( ) 
+	}
+
+63 def 
+	$_init_experiment_dir
+ ( 
+self
+ ) :
+
+65 
+self
+ . 
+cfg
+ . 
+experiment_directory
+ . 
+mkdir
+ ( )
+
+66 
+self
+ . 
+api
+ . 
+molecular_dynamics_stage
+ . 
+runs_dir
+ . 
+mkdir
+ ( )
+
+67 
+self
+ . 
+api
+ . 
+aggregation_stage
+ . 
+runs_dir
+ . 
+mkdir
+ ( )
+
+68 
+self
+ . 
+api
+ . 
+machine_learning_stage
+ . 
+runs_dir
+ . 
+mkdir
+ ( )
+
+69 
+self
+ . 
+api
+ . 
+agent_stage
+ . 
+runs_dir
+ . 
+mkdir
+ ( ) 
+	}
+
+71 def 
+	$_generate_pipeline_iteration
+ ( 
+self
+ ) :
+
+73 
+self
+ . 
+pipelines
+ [ 
+self
+ . 
+MOLECULAR_DYNAMICS_PIPELINE_NAME
+ ] . 
+add_stages
+ (
+
+74 
+self
+ . 
+generate_molecular_dynamics_stage
+ ( )
+
+76 
+self
+ . 
+pipelines
+ [ 
+self
+ . 
+AGGREGATION_PIPELINE_NAME
+ ] . 
+add_stages
+ (
+
+77 
+self
+ . 
+generate_aggregating_stage
+ ( )
+
+79 
+self
+ . 
+pipelines
+ [ 
+self
+ . 
+MACHINE_LEARNING_PIPELINE_NAME
+ ] . 
+add_stages
+ (
+
+80 
+self
+ . 
+generate_machine_learning_stage
+ ( )
+
+82 
+self
+ . 
+pipelines
+ [ 
+self
+ . 
+AGENT_PIPELINE_NAME
+ ] . 
+add_stages
+ ( 
+self
+ . 
+generate_agent_stage
+ ( ) )
+
+84 
+self
+ . 
+stage_idx
+ += 1 
+	}
+
+86 def 
+	$generate_pipelines
+ ( 
+self
+ ) -> 
+List
+ [ 
+Pipeline
+ ] :
+
+87 
+self
+ . 
+_generate_pipeline_iteration
+ ( )
+
+88 return 
+list
+ ( 
+self
+ . 
+pipelines
+ . 
+values
+ ( ) ) 
+	}
+
+90 def 
+	$generate_molecular_dynamics_stage
+ ( 
+self
+ ) -> 
+Stage
+ :
+
+91 
+stage
+ = 
+Stage
+ ( )
+
+92 
+stage
+ . 
+name
+ = 
+self
+ . 
+MOLECULAR_DYNAMICS_STAGE_NAME
+
+93 
+cfg
+ = 
+self
+ . 
+cfg
+ . 
+molecular_dynamics_stage
+
+94 
+stage_api
+ = 
+self
+ . 
+api
+ . 
+molecular_dynamics_stage
+
+96 for 
+task_idx
+ in 
+range
+ ( 
+cfg
+ . 
+num_tasks
+ ) :
+
+98 
+output_path
+ = 
+stage_api
+ . 
+task_dir
+ ( 
+self
+ . 
+stage_idx
+ , 
+task_idx
+ , 
+mkdir
+ = True )
+
+99 assert 
+output_path
+ is not None
+
+102 
+cfg
+ . 
+task_config
+ . 
+experiment_directory
+ = 
+self
+ . 
+cfg
+ . 
+experiment_directory
+
+103 
+cfg
+ . 
+task_config
+ . 
+stage_idx
+ = 
+self
+ . 
+stage_idx
+
+104 
+cfg
+ . 
+task_config
+ . 
+task_idx
+ = 
+task_idx
+
+105 
+cfg
+ . 
+task_config
+ . 
+node_local_path
+ = 
+self
+ . 
+cfg
+ . 
+node_local_path
+
+106 
+cfg
+ . 
+task_config
+ . 
+output_path
+ = 
+output_path
+
+108 
+cfg_path
+ = 
+stage_api
+ . 
+config_path
+ ( 
+self
+ . 
+stage_idx
+ , 
+task_idx
+ )
+
+109 
+cfg
+ . 
+task_config
+ . 
+dump_yaml
+ ( 
+cfg_path
+ )
+
+110 
+task
+ = 
+generate_task
+ ( 
+cfg
+ )
+
+111 
+task
+ . 
+arguments
+ += [ "-c" , 
+cfg_path
+ . 
+as_posix
+ ( ) ]
+
+112 
+stage
+ . 
+add_tasks
+ ( 
+task
+ )
+
+114 return 
+stage
+ 
+	}
+
+116 def 
+	$generate_aggregating_stage
+ ( 
+self
+ ) -> 
+Stage
+ :
+
+117 
+stage
+ = 
+Stage
+ ( )
+
+118 
+stage
+ . 
+name
+ = 
+self
+ . 
+AGGREGATION_STAGE_NAME
+
+119 
+cfg
+ = 
+self
+ . 
+cfg
+ . 
+aggregation_stage
+
+120 
+stage_api
+ = 
+self
+ . 
+api
+ . 
+aggregation_stage
+
+122 for 
+task_idx
+ in 
+range
+ ( 
+cfg
+ . 
+num_tasks
+ ) :
+
+123 
+output_path
+ = 
+stage_api
+ . 
+task_dir
+ ( 
+self
+ . 
+stage_idx
+ , 
+task_idx
+ , 
+mkdir
+ = True )
+
+124 assert 
+output_path
+ is not None
+
+127 
+cfg
+ . 
+task_config
+ . 
+experiment_directory
+ = 
+self
+ . 
+cfg
+ . 
+experiment_directory
+
+128 
+cfg
+ . 
+task_config
+ . 
+stage_idx
+ = 
+self
+ . 
+stage_idx
+
+129 
+cfg
+ . 
+task_config
+ . 
+task_idx
+ = 
+task_idx
+
+130 
+cfg
+ . 
+task_config
+ . 
+node_local_path
+ = 
+self
+ . 
+cfg
+ . 
+node_local_path
+
+131 
+cfg
+ . 
+task_config
+ . 
+output_path
+ = 
+output_path
+
+134 
+cfg_path
+ = 
+stage_api
+ . 
+config_path
+ ( 
+self
+ . 
+stage_idx
+ , 
+task_idx
+ )
+
+135 
+cfg
+ . 
+task_config
+ . 
+dump_yaml
+ ( 
+cfg_path
+ )
+
+136 
+task
+ = 
+generate_task
+ ( 
+cfg
+ )
+
+137 
+task
+ . 
+arguments
+ += [ "-c" , 
+cfg_path
+ . 
+as_posix
+ ( ) ]
+
+138 
+stage
+ . 
+add_tasks
+ ( 
+task
+ )
+
+140 return 
+stage
+ 
+	}
+
+142 def 
+	$generate_machine_learning_stage
+ ( 
+self
+ ) -> 
+Stage
+ :
+
+143 
+stage
+ = 
+Stage
+ ( )
+
+144 
+stage
+ . 
+name
+ = 
+self
+ . 
+MACHINE_LEARNING_STAGE_NAME
+
+145 
+cfg
+ = 
+self
+ . 
+cfg
+ . 
+machine_learning_stage
+
+146 
+stage_api
+ = 
+self
+ . 
+api
+ . 
+machine_learning_stage
+
+148 
+task_idx
+ = 0
+
+149 
+output_path
+ = 
+stage_api
+ . 
+task_dir
+ ( 
+self
+ . 
+stage_idx
+ , 
+task_idx
+ , 
+mkdir
+ = True )
+
+150 assert 
+output_path
+ is not None
+
+153 
+cfg
+ . 
+task_config
+ . 
+experiment_directory
+ = 
+self
+ . 
+cfg
+ . 
+experiment_directory
+
+154 
+cfg
+ . 
+task_config
+ . 
+stage_idx
+ = 
+self
+ . 
+stage_idx
+
+155 
+cfg
+ . 
+task_config
+ . 
+task_idx
+ = 
+task_idx
+
+156 
+cfg
+ . 
+task_config
+ . 
+node_local_path
+ = 
+self
+ . 
+cfg
+ . 
+node_local_path
+
+157 
+cfg
+ . 
+task_config
+ . 
+output_path
+ = 
+output_path
+
+158 
+cfg
+ . 
+task_config
+ . 
+model_tag
+ = 
+stage_api
+ . 
+unique_name
+ ( 
+output_path
+ )
+
+159 if 
+self
+ . 
+stage_idx
+ > 0 :
+
+161 
+cfg
+ . 
+task_config
+ . 
+init_weights_path
+ = None
+
+164 
+cfg_path
+ = 
+stage_api
+ . 
+config_path
+ ( 
+self
+ . 
+stage_idx
+ , 
+task_idx
+ )
+
+165 
+cfg
+ . 
+task_config
+ . 
+dump_yaml
+ ( 
+cfg_path
+ )
+
+166 
+task
+ = 
+generate_task
+ ( 
+cfg
+ )
+
+167 
+task
+ . 
+arguments
+ += [ "-c" , 
+cfg_path
+ . 
+as_posix
+ ( ) ]
+
+168 
+stage
+ . 
+add_tasks
+ ( 
+task
+ )
+
+170 return 
+stage
+ 
+	}
+
+172 def 
+	$generate_agent_stage
+ ( 
+self
+ ) -> 
+Stage
+ :
+
+173 
+stage
+ = 
+Stage
+ ( )
+
+174 
+stage
+ . 
+name
+ = 
+self
+ . 
+AGENT_STAGE_NAME
+
+175 
+cfg
+ = 
+self
+ . 
+cfg
+ . 
+agent_stage
+
+176 
+stage_api
+ = 
+self
+ . 
+api
+ . 
+agent_stage
+
+178 
+task_idx
+ = 0
+
+179 
+output_path
+ = 
+stage_api
+ . 
+task_dir
+ ( 
+self
+ . 
+stage_idx
+ , 
+task_idx
+ , 
+mkdir
+ = True )
+
+180 assert 
+output_path
+ is not None
+
+183 
+cfg
+ . 
+task_config
+ . 
+experiment_directory
+ = 
+self
+ . 
+cfg
+ . 
+experiment_directory
+
+184 
+cfg
+ . 
+task_config
+ . 
+stage_idx
+ = 
+self
+ . 
+stage_idx
+
+185 
+cfg
+ . 
+task_config
+ . 
+task_idx
+ = 
+task_idx
+
+186 
+cfg
+ . 
+task_config
+ . 
+node_local_path
+ = 
+self
+ . 
+cfg
+ . 
+node_local_path
+
+187 
+cfg
+ . 
+task_config
+ . 
+output_path
+ = 
+output_path
+
+190 
+cfg_path
+ = 
+stage_api
+ . 
+config_path
+ ( 
+self
+ . 
+stage_idx
+ , 
+task_idx
+ )
+
+191 
+cfg
+ . 
+task_config
+ . 
+dump_yaml
+ ( 
+cfg_path
+ )
+
+192 
+task
+ = 
+generate_task
+ ( 
+cfg
+ )
+
+193 
+task
+ . 
+arguments
+ += [ "-c" , 
+cfg_path
+ . 
+as_posix
+ ( ) ]
+
+194 
+stage
+ . 
+add_tasks
+ ( 
+task
+ )
+
+196 return 
+stage
+ 
+	}
+
+199 def 
+	$compute_number_of_nodes
+ ( 
+cfg
+ : 
+StreamingExperimentConfig
+ ) -> 
+int
+ :
+
+200 
+nodes
+ = 0
+
+202 for 
+stage
+ in (
+
+203 
+cfg
+ . 
+molecular_dynamics_stage
+ ,
+
+204 
+cfg
+ . 
+aggregation_stage
+ ,
+
+205 
+cfg
+ . 
+machine_learning_stage
+ ,
+
+206 
+cfg
+ . 
+agent_stage
+ ,
+
+208 
+nodes_cpu
+ = (
+
+209 
+stage
+ . 
+cpu_reqs
+ . 
+processes
+
+210 * 
+stage
+ . 
+cpu_reqs
+ . 
+threads_per_process
+
+211 * 
+stage
+ . 
+num_tasks
+
+212 ) / ( 
+cfg
+ . 
+cpus_per_node
+ * 
+cfg
+ . 
+hardware_threads_per_cpu
+ )
+
+213 
+nodes_gpu
+ = (
+
+214 
+stage
+ . 
+gpu_reqs
+ . 
+processes
+
+215 * 
+stage
+ . 
+gpu_reqs
+ . 
+threads_per_process
+
+216 * 
+stage
+ . 
+num_tasks
+
+217 ) / 
+cfg
+ . 
+gpus_per_node
+
+218 
+nodes
+ += 
+max
+ ( 
+nodes_cpu
+ , 
+nodes_gpu
+ )
+
+219 return 
+int
+ ( 
+math
+ . 
+ceil
+ ( 
+nodes
+ ) ) 
+	}
+
+222 if 
+__name__
+ == "__main__" :
+
+224 
+args
+ = 
+parse_args
+ ( )
+
+225 
+cfg
+ = 
+StreamingExperimentConfig
+ . 
+from_yaml
+ ( 
+args
+ . 
+config
+ )
+
+226 
+cfg
+ . 
+config_directory
+ = 
+os
+ . 
+path
+ . 
+dirname
+ ( 
+os
+ . 
+path
+ . 
+abspath
+ ( 
+args
+ . 
+config
+ ) )
+
+227 
+print
+ ( "config_directory = " , 
+cfg
+ . 
+config_directory
+ )
+
+228 
+print
+ ( "experiment directory = " , 
+cfg
+ . 
+experiment_directory
+ )
+
+230 
+cfg
+ . 
+adios_xml_sim
+ = 
+Path
+ ( 
+cfg
+ . 
+config_directory
+ ) / "adios_sim.xml"
+
+231 
+cfg
+ . 
+adios_xml_agg
+ = 
+Path
+ ( 
+cfg
+ . 
+config_directory
+ ) / "adios_agg.xml"
+
+232 
+cfg
+ . 
+adios_xml_agg_4ml
+ = 
+Path
+ ( 
+cfg
+ . 
+config_directory
+ ) / "adios_agg_4ml.xml"
+
+233 
+cfg
+ . 
+adios_xml_file
+ = 
+Path
+ ( 
+cfg
+ . 
+config_directory
+ ) / "adios_file.xml"
+
+235 
+cfg
+ . 
+agent_stage
+ . 
+task_config
+ . 
+adios_xml_agg
+ = 
+cfg
+ . 
+adios_xml_agg
+
+236 
+cfg
+ . 
+aggregation_stage
+ . 
+task_config
+ . 
+adios_xml_agg
+ = 
+cfg
+ . 
+adios_xml_agg
+
+237 
+cfg
+ . 
+aggregation_stage
+ . 
+task_config
+ . 
+adios_xml_agg_4ml
+ = 
+cfg
+ . 
+adios_xml_agg_4ml
+
+238 
+cfg
+ . 
+machine_learning_stage
+ . 
+task_config
+ . 
+adios_xml_agg
+ = 
+cfg
+ . 
+adios_xml_agg
+
+239 
+cfg
+ . 
+machine_learning_stage
+ . 
+task_config
+ . 
+adios_xml_agg_4ml
+ = 
+cfg
+ . 
+adios_xml_agg_4ml
+
+240 
+cfg
+ . 
+molecular_dynamics_stage
+ . 
+task_config
+ . 
+adios_xml_sim
+ = 
+cfg
+ . 
+adios_xml_sim
+
+241 
+cfg
+ . 
+molecular_dynamics_stage
+ . 
+task_config
+ . 
+adios_xml_file
+ = 
+cfg
+ . 
+adios_xml_file
+
+243 
+reporter
+ = 
+ru
+ . 
+Reporter
+ ( 
+name
+ = "radical.entk" )
+
+244 
+reporter
+ . 
+title
+ ( 
+cfg
+ . 
+title
+ )
+
+248 
+appman
+ = 
+AppManager
+ (
+
+249 
+hostname
+ = 
+os
+ . 
+environ
+ [ "RMQ_HOSTNAME" ] ,
+
+250 
+port
+ = 
+int
+ ( 
+os
+ . 
+environ
+ [ "RMQ_PORT" ] ) ,
+
+251 
+username
+ = 
+os
+ . 
+environ
+ [ "RMQ_USERNAME" ] ,
+
+252 
+password
+ = 
+os
+ . 
+environ
+ [ "RMQ_PASSWORD" ] ,
+
+254 except 
+KeyError
+ :
+
+255 raise 
+ValueError
+ ( "Invalid RMQ environment. Please see README.md for configuring environment."
+
+259 
+num_nodes
+ = 
+compute_number_of_nodes
+ ( 
+cfg
+ )
+
+261 
+print
+ ( f"Required number of nodes: {num_nodes}" )
+
+263 
+appman
+ . 
+resource_desc
+ = { "resource"
+
+264 : 
+cfg
+ . 
+resource
+ , "queue"
+
+265 : 
+cfg
+ . 
+queue
+ , "access_schema"
+
+266 : 
+cfg
+ . 
+schema_
+ , "walltime"
+
+267 : 
+cfg
+ . 
+walltime_min
+ , "project"
+
+268 : 
+cfg
+ . 
+project
+ , "cpus"
+
+269 : 
+cfg
+ . 
+cpus_per_node
+ * 
+cfg
+ . 
+hardware_threads_per_cpu
+ * 
+num_nodes
+ , "gpus"
+
+270 : 
+cfg
+ . 
+gpus_per_node
+ * 
+num_nodes
+ ,
+
+273 
+pipeline_manager
+ = 
+PipelineManager
+ ( 
+cfg
+ )
+
+275 
+shutil
+ . 
+copytree
+ ( 
+cfg
+ . 
+config_directory
+ , 
+cfg
+ . 
+experiment_directory
+ / "etc" )
+
+277 
+pipelines
+ = 
+pipeline_manager
+ . 
+generate_pipelines
+ ( )
+
+280 
+appman
+ . 
+workflow
+ = 
+pipelines
+
+283 
+appman
+ . 
+run
+ ( )
+
+
+	@./NWchem_T1.py
+
+
+	@./__init__.py
+
+1 
+__version__
+ = "0.0.2"
+
+
+	@./utils.py
+
+1 import 
+	~argparse
+
+2 import 
+	~math
+
+3 import 
+	~sys
+
+4 import 
+	~time
+
+5 from 
+	~inspect
+ import 
+Traceback
+ , 
+currentframe
+ , 
+getframeinfo
+
+6 from 
+	~pathlib
+ import 
+Path
+
+7 from 
+	~types
+ import 
+TracebackType
+
+8 from 
+	~typing
+ import 
+TYPE_CHECKING
+ , 
+Any
+ , 
+Optional
+ , 
+Tuple
+ , 
+Type
+ , 
+Union
+
+10 import 
+	~numpy
+ as 
+np
+
+12 if 
+TYPE_CHECKING
+ :
+
+13 import 
+	~numpy.typing
+ as 
+npt
+
+15 
+PathLike
+ = 
+Union
+ [ 
+str
+ , 
+Path
+ ]
+
+18 def 
+	$setup_mpi_comm
+ ( 
+distributed
+ : 
+bool
+ ) -> 
+Optional
+ [ 
+Any
+ ] :
+
+19 if 
+distributed
+ :
+
+21 from 
+	~mpi4py
+ import 
+MPI
+
+23 return 
+MPI
+ . 
+COMM_WORLD
+ . 
+Dup
+ ( )
+
+24 return None 
+	}
+
+27 def 
+	$setup_mpi
+ ( 
+comm
+ : 
+Optional
+ [ 
+Any
+ ] = None ) -> 
+Tuple
+ [ 
+int
+ , 
+int
+ ] :
+
+28 
+comm_size
+ = 1
+
+29 
+comm_rank
+ = 0
+
+30 if 
+comm
+ is not None :
+
+31 
+comm_size
+ = 
+comm
+ . 
+Get_size
+ ( )
+
+32 
+comm_rank
+ = 
+comm
+ . 
+Get_rank
+ ( )
+
+34 return 
+comm_size
+ , 
+comm_rank
+ 
+	}
+
+37 def 
+	$get_frameinfo
+ ( ) -> 
+Traceback
+ :
+
+38 
+frame
+ = 
+currentframe
+ ( )
+
+39 if 
+frame
+ is not None :
+
+40 
+f_back
+ = 
+frame
+ . 
+f_back
+
+41 if 
+f_back
+ is not None :
+
+42 
+frameinfo
+ = 
+getframeinfo
+ ( 
+f_back
+ )
+
+43 assert 
+frameinfo
+ is not None
+
+44 return 
+frameinfo
+ 
+	}
+
+47 def 
+	$timer
+ ( 
+label
+ : 
+str
+ , 
+start
+ : 
+int
+ = 1 , 
+frameinfo
+ : 
+Optional
+ [ 
+Traceback
+ ] = None ) -> None :
+
+49 
+t
+ = 
+time
+ . 
+localtime
+ ( )
+
+50 
+gps
+ = 
+time
+ . 
+mktime
+ ( 
+t
+ )
+
+51 
+readable
+ = 
+time
+ . 
+asctime
+ ( 
+t
+ )
+
+52 if 
+frameinfo
+ is None :
+
+53 
+frameinfo
+ = 
+get_frameinfo
+ ( )
+
+54 
+fractions
+ = 
+time
+ . 
+perf_counter
+ ( )
+
+55 
+print
+ ( f"TLaBeL|{label}|{start}|{gps}|{readable}|{frameinfo.filename}|{frameinfo.lineno}|{fractions}"
+
+58 
+sys
+ . 
+stdout
+ . 
+flush
+ ( ) 
+	}
+
+61 class 
+	cTimer
+ :
+
+62 def 
+	$__init__
+ ( 
+self
+ , 
+label
+ : 
+str
+ ) :
+
+63 
+self
+ . 
+label
+ = 
+label
+ 
+	}
+
+65 def 
+	$__enter__
+ ( 
+self
+ ) -> "Timer" :
+
+66 
+frameinfo
+ = 
+get_frameinfo
+ ( )
+
+67 
+timer
+ ( 
+self
+ . 
+label
+ , 1 , 
+frameinfo
+ )
+
+68 return 
+self
+ 
+	}
+
+70 def 
+	$__exit__
+ (
+
+71 
+self
+ ,
+
+72 
+type
+ : 
+Optional
+ [ 
+Type
+ [ 
+BaseException
+ ] ] ,
+
+73 
+value
+ : 
+Optional
+ [ 
+BaseException
+ ] ,
+
+74 
+traceback
+ : 
+Optional
+ [ 
+TracebackType
+ ] ,
+
+76 
+frameinfo
+ = 
+get_frameinfo
+ ( )
+
+77 
+timer
+ ( 
+self
+ . 
+label
+ , - 1 , 
+frameinfo
+ ) 
+	}
+
+80 def 
+	$bestk
+ (
+
+81 
+a
+ : "npt.ArrayLike" , 
+k
+ : 
+int
+ , 
+smallest
+ : 
+bool
+ = True
+
+82 ) -> 
+Tuple
+ [ "npt.ArrayLike" , "npt.ArrayLike" ] :
+
+103 
+_a
+ = 
+np
+ . 
+array
+ ( 
+a
+ )
+
+106 
+arr
+ = 
+_a
+ if 
+smallest
+ else - 1 * 
+_a
+
+111 
+best_inds
+ = 
+np
+ . 
+argpartition
+ ( 
+arr
+ , 
+k
+ ) [ : 
+k
+ ]
+
+113 
+best_values
+ = 
+arr
+ [ 
+best_inds
+ ]
+
+115 
+sort_inds
+ = 
+np
+ . 
+argsort
+ ( 
+best_values
+ )
+
+116 return 
+best_values
+ [ 
+sort_inds
+ ] , 
+best_inds
+ [ 
+sort_inds
+ ] 
+	}
+
+119 def 
+	$t2Dto1D
+ ( 
+A
+ ) :
+
+120 
+n
+ , 
+m
+ = 
+A
+ . 
+shape
+
+121 
+B
+ = 
+np
+ . 
+zeros
+ ( 
+int
+ ( 
+n
+ * ( 
+n
+ - 1 ) / 2 ) , 
+dtype
+ = 
+np
+ . 
+uint8
+ )
+
+122 
+k
+ = 0
+
+123 for 
+i
+ in 
+range
+ ( 
+n
+ ) :
+
+124 for 
+j
+ in 
+range
+ ( 
+i
+ + 1 , 
+n
+ ) :
+
+125 
+B
+ [ 
+k
+ ] = 
+A
+ [ 
+i
+ , 
+j
+ ]
+
+126 
+k
+ += 1
+
+127 return 
+B
+ 
+	}
+
+130 def 
+	$t1Dto2D
+ ( 
+B
+ ) :
+
+131 
+m
+ = 
+B
+ . 
+shape
+ [ 0 ]
+
+132 
+n
+ = 
+int
+ ( ( 1 + 
+math
+ . 
+sqrt
+ ( 1 + 8 * 
+m
+ ) ) / 2 )
+
+133 
+A
+ = 
+np
+ . 
+ones
+ ( ( 
+n
+ , 
+n
+ ) , 
+dtype
+ = 
+np
+ . 
+uint8
+ )
+
+134 
+k
+ = 0
+
+135 for 
+i
+ in 
+range
+ ( 
+n
+ ) :
+
+136 for 
+j
+ in 
+range
+ ( 
+i
+ + 1 , 
+n
+ ) :
+
+137 
+A
+ [ 
+i
+ , 
+j
+ ] = 
+B
+ [ 
+k
+ ]
+
+138 
+A
+ [ 
+j
+ , 
+i
+ ] = 
+B
+ [ 
+k
+ ]
+
+139 
+k
+ += 1
+
+140 return 
+A
+ 
+	}
+
+143 def 
+	$parse_args
+ ( ) -> 
+argparse
+ . 
+Namespace
+ :
+
+144 
+parser
+ = 
+argparse
+ . 
+ArgumentParser
+ ( )
+
+145 
+parser
+ . 
+add_argument
+ ( "-c"
+
+146 , "--config" , 
+help
+ = "YAML config file" , 
+type
+ = 
+str
+ , 
+required
+ = True
+
+148 
+args
+ = 
+parser
+ . 
+parse_args
+ ( )
+
+149 return 
+args
+ 
+	}
+
+152 def 
+	$hash2intarray
+ ( 
+h
+ ) :
+
+153 
+b
+ = [ 
+int
+ ( 
+h
+ [ 4 * 
+i
+ : 4 * ( 
+i
+ + 1 ) ] , 16 ) for 
+i
+ in 
+range
+ ( 
+len
+ ( 
+h
+ ) // 4 ) ]
+
+154 return 
+np
+ . 
+asarray
+ ( 
+b
+ , 
+dtype
+ = 
+np
+ . 
+int64
+ ) 
+	}
+
+157 def 
+	$intarray2hash
+ ( 
+ia
+ ) :
+
+158 
+c
+ = 
+list
+ ( 
+map
+ ( lambda 
+x
+ : "{0:#0{1}x}" . 
+format
+ ( 
+x
+ , 6 ) . 
+replace
+ ( "0x" , "" ) , 
+ia
+ ) )
+
+159 return "" . 
+join
+ ( 
+c
+ ) 
+	}
+
+
+	@./NWchem_Adapt.py
+
+
+	@./NWchem_sync.py
+
+
+	@./deepdrivemd.py
+
+1 import 
+	~itertools
+
+2 import 
+	~os
+
+3 import 
+	~shutil
+
+4 from 
+	~pathlib
+ import 
+Path
+
+5 from 
+	~typing
+ import 
+List
+ , 
+Optional
+
+7 import 
+	~radical.utils
+ as 
+ru
+
+8 from 
+	~radical.entk
+ import 
+AppManager
+ , 
+Pipeline
+ , 
+Stage
+ , 
+Task
+
+10 from 
+	~deepdrivemd.config
+ import 
+BaseStageConfig
+ , 
+ExperimentConfig
+
+11 from 
+	~deepdrivemd.data.api
+ import 
+DeepDriveMD_API
+
+12 from 
+	~deepdrivemd.utils
+ import 
+parse_args
+
+15 def 
+	$generate_task
+ ( 
+cfg
+ : 
+BaseStageConfig
+ ) -> 
+Task
+ :
+
+16 
+task
+ = 
+Task
+ ( )
+
+17 
+task
+ . 
+cpu_reqs
+ = 
+cfg
+ . 
+cpu_reqs
+ . 
+dict
+ ( ) . 
+copy
+ ( )
+
+18 
+task
+ . 
+gpu_reqs
+ = 
+cfg
+ . 
+gpu_reqs
+ . 
+dict
+ ( ) . 
+copy
+ ( )
+
+19 
+task
+ . 
+pre_exec
+ = 
+cfg
+ . 
+pre_exec
+ . 
+copy
+ ( )
+
+20 
+task
+ . 
+executable
+ = 
+cfg
+ . 
+executable
+
+21 
+task
+ . 
+arguments
+ = 
+cfg
+ . 
+arguments
+ . 
+copy
+ ( )
+
+22 return 
+task
+ 
+	}
+
+25 class 
+	cPipelineManager
+ :
+
+27 
+PIPELINE_NAME
+ = "DeepDriveMD"
+
+28 
+MOLECULAR_DYNAMICS_STAGE_NAME
+ = "MolecularDynamics"
+
+29 
+AGGREGATION_STAGE_NAME
+ = "Aggregating"
+
+30 
+MACHINE_LEARNING_STAGE_NAME
+ = "MachineLearning"
+
+31 
+MODEL_SELECTION_STAGE_NAME
+ = "ModelSelection"
+
+32 
+AGENT_STAGE_NAME
+ = "Agent"
+
+34 def 
+	$__init__
+ ( 
+self
+ , 
+cfg
+ : 
+ExperimentConfig
+ ) :
+
+35 
+self
+ . 
+cfg
+ = 
+cfg
+
+36 
+self
+ . 
+stage_idx
+ = 0
+
+38 
+self
+ . 
+api
+ = 
+DeepDriveMD_API
+ ( 
+cfg
+ . 
+experiment_directory
+ )
+
+39 
+self
+ . 
+pipeline
+ = 
+Pipeline
+ ( )
+
+40 
+self
+ . 
+pipeline
+ . 
+name
+ = 
+self
+ . 
+PIPELINE_NAME
+
+42 
+self
+ . 
+_init_experiment_dir
+ ( ) 
+	}
+
+44 def 
+	$_init_experiment_dir
+ ( 
+self
+ ) -> None :
+
+46 
+self
+ . 
+cfg
+ . 
+experiment_directory
+ . 
+mkdir
+ ( )
+
+47 
+self
+ . 
+api
+ . 
+molecular_dynamics_stage
+ . 
+runs_dir
+ . 
+mkdir
+ ( )
+
+48 
+self
+ . 
+api
+ . 
+aggregation_stage
+ . 
+runs_dir
+ . 
+mkdir
+ ( )
+
+49 
+self
+ . 
+api
+ . 
+machine_learning_stage
+ . 
+runs_dir
+ . 
+mkdir
+ ( )
+
+50 
+self
+ . 
+api
+ . 
+model_selection_stage
+ . 
+runs_dir
+ . 
+mkdir
+ ( )
+
+51 
+self
+ . 
+api
+ . 
+agent_stage
+ . 
+runs_dir
+ . 
+mkdir
+ ( ) 
+	}
+
+53 def 
+	$func_condition
+ ( 
+self
+ ) -> None :
+
+54 if 
+self
+ . 
+stage_idx
+ < 
+self
+ . 
+cfg
+ . 
+max_iteration
+ :
+
+55 
+self
+ . 
+func_on_true
+ ( )
+
+57 
+self
+ . 
+func_on_false
+ ( ) 
+	}
+
+59 def 
+	$func_on_true
+ ( 
+self
+ ) -> None :
+
+60 
+print
+ ( f"Finishing stage {self.stage_idx} of {self.cfg.max_iteration}" )
+
+61 
+self
+ . 
+_generate_pipeline_iteration
+ ( ) 
+	}
+
+63 def 
+	$func_on_false
+ ( 
+self
+ ) -> None :
+
+64 
+print
+ ( "Done" ) 
+	}
+
+66 def 
+	$_generate_pipeline_iteration
+ ( 
+self
+ ) -> None :
+
+68 
+self
+ . 
+pipeline
+ . 
+add_stages
+ ( 
+self
+ . 
+generate_molecular_dynamics_stage
+ ( ) )
+
+70 if not 
+cfg
+ . 
+aggregation_stage
+ . 
+skip_aggregation
+ :
+
+71 
+self
+ . 
+pipeline
+ . 
+add_stages
+ ( 
+self
+ . 
+generate_aggregating_stage
+ ( ) )
+
+73 if 
+self
+ . 
+stage_idx
+ % 
+cfg
+ . 
+machine_learning_stage
+ . 
+retrain_freq
+ == 0 :
+
+74 
+self
+ . 
+pipeline
+ . 
+add_stages
+ ( 
+self
+ . 
+generate_machine_learning_stage
+ ( ) )
+
+75 
+self
+ . 
+pipeline
+ . 
+add_stages
+ ( 
+self
+ . 
+generate_model_selection_stage
+ ( ) )
+
+77 
+agent_stage
+ = 
+self
+ . 
+generate_agent_stage
+ ( )
+
+78 
+agent_stage
+ . 
+post_exec
+ = 
+self
+ . 
+func_condition
+
+79 
+self
+ . 
+pipeline
+ . 
+add_stages
+ ( 
+agent_stage
+ )
+
+81 
+self
+ . 
+stage_idx
+ += 1 
+	}
+
+83 def 
+	$generate_pipelines
+ ( 
+self
+ ) -> 
+List
+ [ 
+Pipeline
+ ] :
+
+84 
+self
+ . 
+_generate_pipeline_iteration
+ ( )
+
+85 return [ 
+self
+ . 
+pipeline
+ ] 
+	}
+
+87 def 
+	$generate_molecular_dynamics_stage
+ ( 
+self
+ ) -> 
+Stage
+ :
+
+88 
+stage
+ = 
+Stage
+ ( )
+
+89 
+stage
+ . 
+name
+ = 
+self
+ . 
+MOLECULAR_DYNAMICS_STAGE_NAME
+
+90 
+cfg
+ = 
+self
+ . 
+cfg
+ . 
+molecular_dynamics_stage
+
+91 
+stage_api
+ = 
+self
+ . 
+api
+ . 
+molecular_dynamics_stage
+
+93 if 
+self
+ . 
+stage_idx
+ == 0 :
+
+94 
+initial_pdbs
+ = 
+self
+ . 
+api
+ . 
+get_initial_pdbs
+ ( 
+cfg
+ . 
+task_config
+ . 
+initial_pdb_dir
+ )
+
+95 
+filenames
+ : 
+Optional
+ [ 
+itertools
+ . 
+cycle
+ [ 
+Path
+ ] ] = 
+itertools
+ . 
+cycle
+ ( 
+initial_pdbs
+ )
+
+97 
+filenames
+ = None
+
+99 for 
+task_idx
+ in 
+range
+ ( 
+cfg
+ . 
+num_tasks
+ ) :
+
+101 
+output_path
+ = 
+stage_api
+ . 
+task_dir
+ ( 
+self
+ . 
+stage_idx
+ , 
+task_idx
+ , 
+mkdir
+ = True )
+
+102 assert 
+output_path
+ is not None
+
+105 
+cfg
+ . 
+task_config
+ . 
+experiment_directory
+ = 
+self
+ . 
+cfg
+ . 
+experiment_directory
+
+106 
+cfg
+ . 
+task_config
+ . 
+stage_idx
+ = 
+self
+ . 
+stage_idx
+
+107 
+cfg
+ . 
+task_config
+ . 
+task_idx
+ = 
+task_idx
+
+108 
+cfg
+ . 
+task_config
+ . 
+node_local_path
+ = 
+self
+ . 
+cfg
+ . 
+node_local_path
+
+109 
+cfg
+ . 
+task_config
+ . 
+output_path
+ = 
+output_path
+
+110 if 
+self
+ . 
+stage_idx
+ == 0 :
+
+111 assert 
+filenames
+ is not None
+
+112 
+cfg
+ . 
+task_config
+ . 
+pdb_file
+ = 
+next
+ ( 
+filenames
+ )
+
+114 
+cfg
+ . 
+task_config
+ . 
+pdb_file
+ = None
+
+116 
+cfg_path
+ = 
+stage_api
+ . 
+config_path
+ ( 
+self
+ . 
+stage_idx
+ , 
+task_idx
+ )
+
+117 assert 
+cfg_path
+ is not None
+
+118 
+cfg
+ . 
+task_config
+ . 
+dump_yaml
+ ( 
+cfg_path
+ )
+
+119 
+task
+ = 
+generate_task
+ ( 
+cfg
+ )
+
+120 
+task
+ . 
+arguments
+ += [ "-c" , 
+cfg_path
+ . 
+as_posix
+ ( ) ]
+
+121 
+stage
+ . 
+add_tasks
+ ( 
+task
+ )
+
+123 return 
+stage
+ 
+	}
+
+125 def 
+	$generate_aggregating_stage
+ ( 
+self
+ ) -> 
+Stage
+ :
+
+126 
+stage
+ = 
+Stage
+ ( )
+
+127 
+stage
+ . 
+name
+ = 
+self
+ . 
+AGGREGATION_STAGE_NAME
+
+128 
+cfg
+ = 
+self
+ . 
+cfg
+ . 
+aggregation_stage
+
+129 
+stage_api
+ = 
+self
+ . 
+api
+ . 
+aggregation_stage
+
+131 
+task_idx
+ = 0
+
+132 
+output_path
+ = 
+stage_api
+ . 
+task_dir
+ ( 
+self
+ . 
+stage_idx
+ , 
+task_idx
+ , 
+mkdir
+ = True )
+
+133 assert 
+output_path
+ is not None
+
+136 
+cfg
+ . 
+task_config
+ . 
+experiment_directory
+ = 
+self
+ . 
+cfg
+ . 
+experiment_directory
+
+137 
+cfg
+ . 
+task_config
+ . 
+stage_idx
+ = 
+self
+ . 
+stage_idx
+
+138 
+cfg
+ . 
+task_config
+ . 
+task_idx
+ = 
+task_idx
+
+139 
+cfg
+ . 
+task_config
+ . 
+node_local_path
+ = 
+self
+ . 
+cfg
+ . 
+node_local_path
+
+140 
+cfg
+ . 
+task_config
+ . 
+output_path
+ = 
+output_path
+
+143 
+cfg_path
+ = 
+stage_api
+ . 
+config_path
+ ( 
+self
+ . 
+stage_idx
+ , 
+task_idx
+ )
+
+144 assert 
+cfg_path
+ is not None
+
+145 
+cfg
+ . 
+task_config
+ . 
+dump_yaml
+ ( 
+cfg_path
+ )
+
+146 
+task
+ = 
+generate_task
+ ( 
+cfg
+ )
+
+147 
+task
+ . 
+arguments
+ += [ "-c" , 
+cfg_path
+ . 
+as_posix
+ ( ) ]
+
+148 
+stage
+ . 
+add_tasks
+ ( 
+task
+ )
+
+150 return 
+stage
+ 
+	}
+
+152 def 
+	$generate_machine_learning_stage
+ ( 
+self
+ ) -> 
+Stage
+ :
+
+153 
+stage
+ = 
+Stage
+ ( )
+
+154 
+stage
+ . 
+name
+ = 
+self
+ . 
+MACHINE_LEARNING_STAGE_NAME
+
+155 
+cfg
+ = 
+self
+ . 
+cfg
+ . 
+machine_learning_stage
+
+156 
+stage_api
+ = 
+self
+ . 
+api
+ . 
+machine_learning_stage
+
+158 
+task_idx
+ = 0
+
+159 
+output_path
+ = 
+stage_api
+ . 
+task_dir
+ ( 
+self
+ . 
+stage_idx
+ , 
+task_idx
+ , 
+mkdir
+ = True )
+
+160 assert 
+output_path
+ is not None
+
+163 
+cfg
+ . 
+task_config
+ . 
+experiment_directory
+ = 
+self
+ . 
+cfg
+ . 
+experiment_directory
+
+164 
+cfg
+ . 
+task_config
+ . 
+stage_idx
+ = 
+self
+ . 
+stage_idx
+
+165 
+cfg
+ . 
+task_config
+ . 
+task_idx
+ = 
+task_idx
+
+166 
+cfg
+ . 
+task_config
+ . 
+node_local_path
+ = 
+self
+ . 
+cfg
+ . 
+node_local_path
+
+167 
+cfg
+ . 
+task_config
+ . 
+output_path
+ = 
+output_path
+
+168 
+cfg
+ . 
+task_config
+ . 
+model_tag
+ = 
+stage_api
+ . 
+unique_name
+ ( 
+output_path
+ )
+
+169 if 
+self
+ . 
+stage_idx
+ > 0 :
+
+171 
+cfg
+ . 
+task_config
+ . 
+init_weights_path
+ = None
+
+174 
+cfg_path
+ = 
+stage_api
+ . 
+config_path
+ ( 
+self
+ . 
+stage_idx
+ , 
+task_idx
+ )
+
+175 assert 
+cfg_path
+ is not None
+
+176 
+cfg
+ . 
+task_config
+ . 
+dump_yaml
+ ( 
+cfg_path
+ )
+
+177 
+task
+ = 
+generate_task
+ ( 
+cfg
+ )
+
+178 
+task
+ . 
+arguments
+ += [ "-c" , 
+cfg_path
+ . 
+as_posix
+ ( ) ]
+
+179 
+stage
+ . 
+add_tasks
+ ( 
+task
+ )
+
+181 return 
+stage
+ 
+	}
+
+183 def 
+	$generate_model_selection_stage
+ ( 
+self
+ ) -> 
+Stage
+ :
+
+184 
+stage
+ = 
+Stage
+ ( )
+
+185 
+stage
+ . 
+name
+ = 
+self
+ . 
+MODEL_SELECTION_STAGE_NAME
+
+186 
+cfg
+ = 
+self
+ . 
+cfg
+ . 
+model_selection_stage
+
+187 
+stage_api
+ = 
+self
+ . 
+api
+ . 
+model_selection_stage
+
+189 
+task_idx
+ = 0
+
+190 
+output_path
+ = 
+stage_api
+ . 
+task_dir
+ ( 
+self
+ . 
+stage_idx
+ , 
+task_idx
+ , 
+mkdir
+ = True )
+
+191 assert 
+output_path
+ is not None
+
+194 
+cfg
+ . 
+task_config
+ . 
+experiment_directory
+ = 
+self
+ . 
+cfg
+ . 
+experiment_directory
+
+195 
+cfg
+ . 
+task_config
+ . 
+stage_idx
+ = 
+self
+ . 
+stage_idx
+
+196 
+cfg
+ . 
+task_config
+ . 
+task_idx
+ = 
+task_idx
+
+197 
+cfg
+ . 
+task_config
+ . 
+node_local_path
+ = 
+self
+ . 
+cfg
+ . 
+node_local_path
+
+198 
+cfg
+ . 
+task_config
+ . 
+output_path
+ = 
+output_path
+
+201 
+cfg_path
+ = 
+stage_api
+ . 
+config_path
+ ( 
+self
+ . 
+stage_idx
+ , 
+task_idx
+ )
+
+202 assert 
+cfg_path
+ is not None
+
+203 
+cfg
+ . 
+task_config
+ . 
+dump_yaml
+ ( 
+cfg_path
+ )
+
+204 
+task
+ = 
+generate_task
+ ( 
+cfg
+ )
+
+205 
+task
+ . 
+arguments
+ += [ "-c" , 
+cfg_path
+ . 
+as_posix
+ ( ) ]
+
+206 
+stage
+ . 
+add_tasks
+ ( 
+task
+ )
+
+208 return 
+stage
+ 
+	}
+
+210 def 
+	$generate_agent_stage
+ ( 
+self
+ ) -> 
+Stage
+ :
+
+211 
+stage
+ = 
+Stage
+ ( )
+
+212 
+stage
+ . 
+name
+ = 
+self
+ . 
+AGENT_STAGE_NAME
+
+213 
+cfg
+ = 
+self
+ . 
+cfg
+ . 
+agent_stage
+
+214 
+stage_api
+ = 
+self
+ . 
+api
+ . 
+agent_stage
+
+216 
+task_idx
+ = 0
+
+217 
+output_path
+ = 
+stage_api
+ . 
+task_dir
+ ( 
+self
+ . 
+stage_idx
+ , 
+task_idx
+ , 
+mkdir
+ = True )
+
+218 assert 
+output_path
+ is not None
+
+221 
+cfg
+ . 
+task_config
+ . 
+experiment_directory
+ = 
+self
+ . 
+cfg
+ . 
+experiment_directory
+
+222 
+cfg
+ . 
+task_config
+ . 
+stage_idx
+ = 
+self
+ . 
+stage_idx
+
+223 
+cfg
+ . 
+task_config
+ . 
+task_idx
+ = 
+task_idx
+
+224 
+cfg
+ . 
+task_config
+ . 
+node_local_path
+ = 
+self
+ . 
+cfg
+ . 
+node_local_path
+
+225 
+cfg
+ . 
+task_config
+ . 
+output_path
+ = 
+output_path
+
+228 
+cfg_path
+ = 
+stage_api
+ . 
+config_path
+ ( 
+self
+ . 
+stage_idx
+ , 
+task_idx
+ )
+
+229 assert 
+cfg_path
+ is not None
+
+230 
+cfg
+ . 
+task_config
+ . 
+dump_yaml
+ ( 
+cfg_path
+ )
+
+231 
+task
+ = 
+generate_task
+ ( 
+cfg
+ )
+
+232 
+task
+ . 
+arguments
+ += [ "-c" , 
+cfg_path
+ . 
+as_posix
+ ( ) ]
+
+233 
+stage
+ . 
+add_tasks
+ ( 
+task
+ )
+
+235 return 
+stage
+ 
+	}
+
+238 if 
+__name__
+ == "__main__" :
+
+240 
+args
+ = 
+parse_args
+ ( )
+
+241 
+cfg
+ = 
+ExperimentConfig
+ . 
+from_yaml
+ ( 
+args
+ . 
+config
+ )
+
+243 
+reporter
+ = 
+ru
+ . 
+Reporter
+ ( 
+name
+ = "radical.entk" )
+
+244 
+reporter
+ . 
+title
+ ( 
+cfg
+ . 
+title
+ )
+
+248 
+appman
+ = 
+AppManager
+ (
+
+255 except 
+KeyError
+ :
+
+256 raise 
+ValueError
+ ( "Invalid RMQ environment. Please see README.md for configuring environment."
+
+264 if 
+cfg
+ . 
+gpus_per_node
+ == 0 :
+
+265 
+num_nodes
+ = 
+cfg
+ . 
+molecular_dynamics_stage
+ . 
+num_tasks
+
+267 
+num_nodes
+ , 
+extra_gpus
+ = 
+divmod
+ (
+
+268 
+cfg
+ . 
+molecular_dynamics_stage
+ . 
+num_tasks
+ , 
+cfg
+ . 
+gpus_per_node
+
+271 
+num_nodes
+ += 
+int
+ ( 
+extra_gpus
+ > 0 )
+
+273 
+num_nodes
+ = 
+max
+ ( 1 , 
+num_nodes
+ )
+
+275 
+appman
+ . 
+resource_desc
+ = { "resource"
+
+276 : 
+cfg
+ . 
+resource
+ , "queue"
+
+277 : 
+cfg
+ . 
+queue
+ , "access_schema"
+
+278 : 
+cfg
+ . 
+schema_
+ , "walltime"
+
+279 : 
+cfg
+ . 
+walltime_min
+ , "project"
+
+280 : 
+cfg
+ . 
+project
+ , "cpus"
+
+281 : 
+cfg
+ . 
+cpus_per_node
+ * 
+cfg
+ . 
+hardware_threads_per_cpu
+ * 
+num_nodes
+ , "gpus"
+
+282 : 
+cfg
+ . 
+gpus_per_node
+ * 
+num_nodes
+ ,
+
+285 
+pipeline_manager
+ = 
+PipelineManager
+ ( 
+cfg
+ )
+
+287 
+shutil
+ . 
+copy
+ ( 
+args
+ . 
+config
+ , 
+cfg
+ . 
+experiment_directory
+ )
+
+289 
+pipelines
+ = 
+pipeline_manager
+ . 
+generate_pipelines
+ ( )
+
+292 
+appman
+ . 
+workflow
+ = 
+pipelines
+
+295 
+appman
+ . 
+run
+ ( )
+
+
+	@
+1
+.
+0
+8
+128
+./config.py
+./deepdrivemd_stream.py
+./NWchem_T1.py
+./__init__.py
+./utils.py
+./NWchem_Adapt.py
+./NWchem_sync.py
+./deepdrivemd.py

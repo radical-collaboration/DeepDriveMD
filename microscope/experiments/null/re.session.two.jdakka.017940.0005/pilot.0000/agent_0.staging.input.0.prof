@@ -1,4 +1,0 @@
-#time,event,comp,thread,uid,state,msg
-1550123214.8655,sync_abs,agent_0.staging.input.0,MainThread,,,r011.pvt.bridges.psc.edu:127.0.0.1:1550123214.83:1550123214.83:ntp
-1550123214.9533,END,agent_0.staging.input.0,MainThread,,,
-1550123217.2427,component_init,agent_0.staging.input.0,MainThread,,,

@@ -1,7 +1,0 @@
-2019-02-13 22:51:58,928: pmgr.launching.queue.output.0000: pmgr.0000.launching.0           : MainThread     : INFO    : python.interpreter   version: 2.7.12 (default, Nov 12 2018, 14:36:49) [GCC 5.4.0 20160609]
-2019-02-13 22:51:58,929: pmgr.launching.queue.output.0000: pmgr.0000.launching.0           : MainThread     : INFO    :                      pid/tid: 20958/MainThread
-2019-02-13 22:51:58,929: pmgr.launching.queue.output.0000: pmgr.0000.launching.0           : MainThread     : INFO    : create pmgr_launching_queue - output - tcp://138.201.86.166:35545
-2019-02-13 22:51:58,930: pmgr.launching.queue.output.0000: pmgr.0000.launching.0           : MainThread     : DEBUG   : start process
-2019-02-13 22:51:58,930: pmgr.launching.queue.output.0000: pmgr.0000.launching.0           : MainThread     : DEBUG   : ru_initialize_common (NOOP)
-2019-02-13 22:51:58,930: pmgr.launching.queue.output.0000: pmgr.0000.launching.0           : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
-2019-02-13 22:51:58,930: pmgr.launching.queue.output.0000: pmgr.0000.launching.0           : MainThread     : DEBUG   : process class started (no child)
