@@ -16,6 +16,7 @@ class DummyWorkflow(DDMD_manager):
 
     def __init__(self, **kwargs):
         home_dir = Path(kwargs.get('home_dir', Path.home() / 'DDMD'))
+        self.clean_dir(home_dir)
 
         self.sim_output_dir = self._ensure_dir(kwargs.get('sim_output_dir', home_dir / 'sim_output'))
         self.sim_inputs_dir  = self._ensure_dir(kwargs.get('sim_inputs_dir',  home_dir / 'sim_input'))
@@ -54,6 +55,13 @@ class DummyWorkflow(DDMD_manager):
     # --------------------------------------------------------------------------
     #    
     @staticmethod
+    def clean_dir(dir_name):
+        dir_path = Path(dir_name)
+        if dir_path.exists() and dir_path.is_dir():
+            shutil.rmtree(dir_path)
+    # --------------------------------------------------------------------------
+    #
+    @staticmethod
     def generate_sim_inputs(sim_inputs_dir, num_files: int = 5):
         """
         Ensure all files from previous run are deleted and new dummy input files are generated
@@ -63,9 +71,9 @@ class DummyWorkflow(DDMD_manager):
             num_files: Number of dummy files to create.
         """
         sim_inputs_path = Path(sim_inputs_dir)
-        if sim_inputs_path.exists() and sim_inputs_path.is_dir():
-            shutil.rmtree(sim_inputs_path)
-        sim_inputs_path.mkdir(parents=True, exist_ok=True)
+        # if sim_inputs_path.exists() and sim_inputs_path.is_dir():
+        #     shutil.rmtree(sim_inputs_path)
+        # sim_inputs_path.mkdir(parents=True, exist_ok=True)
 
         # Generate dummy input files
         for i in range(num_files):

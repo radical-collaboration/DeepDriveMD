@@ -169,7 +169,7 @@ class DDMD_manager:
 
             # # ************************
             # # Use the following code for calling predicions as executable
-            # await self.exe_prediction(sim_inds=sim_inds, sim_output_dir=self.sim_output_dir)
+            # await self.exe_prediction()
             # with open(self.prediction_file, 'r') as f:
             #     predictions = json.load(f) 
             # # ************************
