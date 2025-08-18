@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "DeepDriveMD"
+version = "0.0.3"
+description = "DeepDriveMD - AI-steered ensemble of simulations."
+authors = [
+  { name="Masha Goliyad", email="mariya.goliyad@rutgers.edu" }
+]
+dependencies = [
+    "radical-asyncflow"
+]
