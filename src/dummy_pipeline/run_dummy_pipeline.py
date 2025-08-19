@@ -34,8 +34,8 @@ raptor_config = {
 async def run_ddmd():
 
     #engine = await ConcurrentExecutionBackend(ThreadPoolExecutor())
-    engine = await ConcurrentExecutionBackend(ProcessPoolExecutor())
-    #engine = await RadicalExecutionBackend(RESOURCES, raptor_config)
+    #engine = await ConcurrentExecutionBackend(ProcessPoolExecutor())
+    engine = await RadicalExecutionBackend(RESOURCES, raptor_config)
     #engine = await RadicalExecutionBackend(RESOURCES)
     #engine = await RadicalExecutionBackend({'resource': 'local.localhost'})
     #engine = await DaskExecutionBackend({'n_workers': 2, 'threads_per_worker': 1})

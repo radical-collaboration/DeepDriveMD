@@ -21,7 +21,7 @@ async def simulate_one(output_file: Path):
     # Run CPU-heavy loop in a thread to avoid blocking event loop
     def run_math():
         y = 0
-        for _ in range(10000):
+        for _ in range(1000):
             y += complicated_function(X)
         return y
 

@@ -7,8 +7,6 @@ import asyncio
 from collections import OrderedDict
 from rose import Learner
 from logger import Logger
-import json
-
 
 class DDMD_manager:
     """
@@ -166,6 +164,7 @@ class DDMD_manager:
             self.logger.task_started("Prediction")
             sim_inds = list(self.registered_sims.keys())
             predictions = await self.prediction(sim_inds=sim_inds, sim_output_dir=self.sim_output_dir)
+            #self.logger.info(f"predictions: {predictions} ")
 
             # # ************************
             # # Use the following code for calling predicions as executable

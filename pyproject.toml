@@ -6,9 +6,17 @@ build-backend = "setuptools.build_meta"
 name = "DeepDriveMD"
 version = "0.0.3"
 description = "DeepDriveMD - AI-steered ensemble of simulations."
+readme = "README.md"
+requires-python = ">=3.9"
 authors = [
   { name="Masha Goliyad", email="mariya.goliyad@rutgers.edu" }
 ]
 dependencies = [
     "radical-asyncflow"
 ]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
