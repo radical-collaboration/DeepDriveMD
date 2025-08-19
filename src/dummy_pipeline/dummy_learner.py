@@ -29,6 +29,7 @@ class DummyWorkflow(DDMD_manager):
         self.training_threshold  = kwargs.get('training_threshold', 0.95)
         self.prediction_threshold = kwargs.get('prediction_threshold', 0.5)
         self.training_epochs     = kwargs.get('training_epochs', 1)
+        self.iteration = 0
 
         self.retrain_model = self.training_epochs > 0
         self.sim_predictions = {}
@@ -42,7 +43,7 @@ class DummyWorkflow(DDMD_manager):
 
         self._register_learner_tasks()
 
-        self.generate_sim_inputs(self.sim_inputs_dir, num_files=10)
+        self.generate_sim_inputs(self.sim_inputs_dir, num_files=20)
 
     # --------------------------------------------------------------------------
     #    
@@ -173,8 +174,9 @@ class DummyWorkflow(DDMD_manager):
     #    
     async def train_model(self):
         """Run training loop until accuracy threshold is met or epochs are exhausted."""
+        self.iteration += 1
         for epoch in range(self.training_epochs):
-            self.logger.info(f'\nStarting Training Epoch {epoch}')
+            self.logger.info(f'\nStarting Training Iteration {self.iteration} / Epoch {epoch + 1}')
             self.logger.info(f'{len(self.registered_sims)} simulation(s) running....')
             
             train_task = self.training()
