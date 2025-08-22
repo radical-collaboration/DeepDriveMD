@@ -29,6 +29,7 @@ class DummyWorkflow(DDMD_manager):
         self.training_threshold  = kwargs.get('training_threshold', 0.95)
         self.prediction_threshold = kwargs.get('prediction_threshold', 0.5)
         self.training_epochs     = kwargs.get('training_epochs', 1)
+        self.clean_unregister_sims = bool(kwargs.get("clean_unregister_sims", True))
         self.iteration = 0
 
         self.retrain_model = self.training_epochs > 0
@@ -43,7 +44,7 @@ class DummyWorkflow(DDMD_manager):
 
         self._register_learner_tasks()
 
-        self.generate_sim_inputs(self.sim_inputs_dir, num_files=20)
+        self.generate_sim_inputs(self.sim_inputs_dir, num_files=500)
 
     # --------------------------------------------------------------------------
     #    
@@ -94,9 +95,25 @@ class DummyWorkflow(DDMD_manager):
         filenames = await asyncio.to_thread(lambda: list(self.sim_inputs_dir.iterdir()))
         for filename in filenames:
             if filename.is_file():
-                sim_tag = f'sim_{filename.name}'
+                sim_name = filename.name.split(".")[0]
+                sim_tag = f'sim_{sim_name}'
                 await self.sim_task_queue.put({'sim_input': filename, 'sim_tag': sim_tag})
 
+    # --------------------------------------------------------------------------
+    #    
+    def del_files(self, sim_ind):
+        for filename in self.train_al_dir.iterdir():
+            if sim_ind in filename.name:
+                os.remove(filename)
+        for filename in self.train_dir.iterdir():
+            if sim_ind in filename.name:
+                os.remove(filename)                
+        for filename in self.val_dir.iterdir():
+            if sim_ind in filename.name:
+                os.remove(filename)
+
+        sim_dir = Path(self.sim_output_dir, sim_ind)
+        shutil.rmtree(sim_dir, ignore_errors=True)
     # --------------------------------------------------------------------------
     #    
     def _register_learner_tasks(self):
@@ -148,12 +165,14 @@ class DummyWorkflow(DDMD_manager):
         async def prediction(*args, **kwargs):
             """Generate random sim_predictions."""
             sim_inds = kwargs["sim_inds"]
-            sim_output_dir = kwargs["sim_output_dir"]
+            #sim_output_dir = kwargs["sim_output_dir"]
             sim_predictions = {}
+
             for sim_ind in sim_inds:
-                sim_dir = Path(sim_output_dir, sim_ind)
-                if sim_dir.is_dir():
-                    sim_predictions[sim_dir.name] = random.random()
+                # sim_dir = Path(sim_output_dir, sim_ind)
+                # if sim_dir.is_dir():
+                sim_predictions[sim_ind] = random.random()
+
             return sim_predictions
         self.prediction = prediction
 

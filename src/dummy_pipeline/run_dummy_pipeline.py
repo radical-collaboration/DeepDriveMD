@@ -11,22 +11,22 @@ from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 VAL_SPLIT = 0.2
 MIN_TRAIN_SIZE = 1
 
-SIM_CORES = 10
-TRAIN_CODE = 6
+SIM_CORES = 31
+TRAIN_CODE = 1
 TOTAL_CORES= SIM_CORES + TRAIN_CODE
 
 RESOURCES = {
             'runtime': 30, 
-            'resource': 'local.localhost', 
-#            'resource': 'purdue.anvil',
-#            'cores': TOTAL_CORES
+            #'resource': 'local.localhost', 
+            'resource': 'purdue.anvil',
+            'cores': TOTAL_CORES
         }
 
 raptor_config = {
     "masters": [{
         "ranks": 1,
         "workers": [{
-            "ranks": 1
+            "ranks": TRAIN_CODE
         }]
     }]
 }

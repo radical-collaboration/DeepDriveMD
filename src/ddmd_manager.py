@@ -8,6 +8,7 @@ from collections import OrderedDict
 from rose import Learner
 from logger import Logger
 
+
 class DDMD_manager:
     """
     Orchestrates the scheduling, monitoring, and cancellation of simulations
@@ -34,7 +35,7 @@ class DDMD_manager:
     #
     async def close(self):
         try:
-            await asyncio.sleep(self.time_before_shutdown) 
+            #await asyncio.sleep(self.time_before_shutdown) 
             await self.learner.shutdown()
         except:
            pass
@@ -43,7 +44,7 @@ class DDMD_manager:
     #
     async def stop(self):
         try:
-            await asyncio.sleep(self.time_before_shutdown) 
+            #await asyncio.sleep(self.time_before_shutdown) 
             await self.learner.shutdown()
         except:
             pass
@@ -135,6 +136,9 @@ class DDMD_manager:
 
         for tag in unregister_sims:
             self.registered_sims.pop(tag, None)
+            if self.clean_unregister_sims:
+                await asyncio.to_thread(self.del_files, tag)
+
 
         if unregister_sims and not self.sim_task_queue.empty():
             self.next_batch_size = min(self.next_batch_size, self.max_sim_batch)
@@ -163,9 +167,13 @@ class DDMD_manager:
 
             self.logger.task_started("Prediction")
             sim_inds = list(self.registered_sims.keys())
-            predictions = await self.prediction(sim_inds=sim_inds, sim_output_dir=self.sim_output_dir)
-            #self.logger.info(f"predictions: {predictions} ")
 
+            predictions = await self.prediction(sim_inds=sim_inds, 
+                                                #sim_output_dir=self.sim_output_dir
+                                                )
+
+            self.logger.info(f"predictions: {predictions} ")
+ 
             # # ************************
             # # Use the following code for calling predicions as executable
             # await self.exe_prediction()
