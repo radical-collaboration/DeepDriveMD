@@ -3,20 +3,18 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "DeepDriveMD"
-version = "0.0.3"
-description = "DeepDriveMD - AI-steered ensemble of simulations."
-readme = "README.md"
-requires-python = ">=3.9"
+name = "ddmd"
+version = "1.0.0"
+description = "DeepDriveMD framework"
 authors = [
-  { name="Masha Goliyad", email="mariya.goliyad@rutgers.edu" }
+    { name = "Your Name", email = "your.email@example.com" }
 ]
+requires-python = ">=3.6"
 dependencies = [
-    "radical-asyncflow"
+    "numpy",
+    "radical.asyncflow",
 ]
 
 [tool.setuptools.packages.find]
-where = ["src"]
-
-[tool.setuptools]
-package-dir = {"" = "src"}
+where = ["ddmd"]
+exclude = ["tests*", "docs*"]
