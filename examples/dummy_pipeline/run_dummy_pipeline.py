@@ -8,7 +8,7 @@ from ddmd import DummyWorkflow
 # from radical.asyncflow import DaskExecutionBackend
 
 
-SIM_CORES = 7
+SIM_CORES = 3
 TRAIN_CORE = 1
 TOTAL_CORES= SIM_CORES + TRAIN_CORE
 
@@ -31,8 +31,8 @@ raptor_config = {
 async def run_ddmd():
 
     #engine = await ConcurrentExecutionBackend(ThreadPoolExecutor())
-    #engine = await ConcurrentExecutionBackend(ProcessPoolExecutor())
-    engine = await RadicalExecutionBackend(RESOURCES, raptor_config)
+    engine = await ConcurrentExecutionBackend(ProcessPoolExecutor())
+    #engine = await RadicalExecutionBackend(RESOURCES, raptor_config)
 
     # Create the async workflow engine
     asyncflow = await WorkflowEngine.create(engine)

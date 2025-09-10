@@ -32,6 +32,8 @@ class DummyWorkflow(DDMD_manager):
         self.prediction_threshold     = kwargs.get('prediction_threshold', 0.5)
         self.start_training_threshold = kwargs.get('start_training_threshold', 10)
         self.training_epochs          = kwargs.get('training_epochs', 1)
+        self.force_start_training     = bool(kwargs.get("force_start_training", False))
+
         self.clean_unregistered_sims    = bool(kwargs.get("clean_unregistered_sims", True))
 
         self.iteration = 0
@@ -39,7 +41,7 @@ class DummyWorkflow(DDMD_manager):
         self.sim_predictions = {}
 
         # Paths for executables and model
-        self.code_path = f'{sys.executable} {os.getcwd()}'
+        self.code_path = kwargs.get('code_path', f'{sys.executable} {os.getcwd()}')
         self.model_filename = home_dir / 'model.pkl'
         self.prediction_file = home_dir / 'predictions.json'  # fixed typo ("predicions")
 
@@ -49,9 +51,9 @@ class DummyWorkflow(DDMD_manager):
 
         # Register learner tasks
         self._register_learner_tasks()
-
+        num_files = kwargs.get('num_files', 500)
         # Generate dummy input files
-        self.generate_sim_inputs(self.sim_inputs_dir, num_files=500)
+        self.generate_sim_inputs(self.sim_inputs_dir, num_files=num_files)
 
     # --------------------------------------------------------------------------
     @staticmethod
@@ -122,11 +124,10 @@ class DummyWorkflow(DDMD_manager):
         # Collect all deletion tasks (parallel file cleanup)
         tasks = []
         for directory in [self.train_al_dir, self.train_dir, self.val_dir]:
-            self.logger.info(f"Deleting {sim_ind} files in {directory}")
+            
             for filename in directory.iterdir():
                 if sim_ind in filename.name:
                     tasks.append(_delete_file(filename))
-
         if tasks:
             await asyncio.gather(*tasks)
 
@@ -135,13 +136,11 @@ class DummyWorkflow(DDMD_manager):
         try:
             if sim_dir.exists():
                 await asyncio.to_thread(shutil.rmtree, sim_dir)
-                self.logger.info(f"Deleted simulation directory {sim_dir}")
             else:
                 self.logger.warning(f"Simulation directory already removed: {sim_dir}")
         except Exception as e:
             self.logger.error(f"Error deleting directory {sim_dir}: {e}")
-
-
+        self.logger.info(f"Removed all files related to simulation {sim_ind}")
 
     # --------------------------------------------------------------------------
     def _register_learner_tasks(self):

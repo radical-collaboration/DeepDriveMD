@@ -4,7 +4,6 @@
 # ------------------------------------------------------------------------------
 
 import asyncio
-import json
 from collections import OrderedDict
 from rose import Learner
 from ddmd.logger import Logger
@@ -103,9 +102,10 @@ class DDMD_manager:
 
         if unregistered_sims and not self.sim_task_queue.empty():
             # Adjust next batch size (ensure it does not exceed max_sim_batch)
-            self.sim_batch_size = min(self.sim_batch_size, self.max_sim_batch)
-            self.logger.info(
-                f"{self.sim_batch_size} simulations will start at next iteration"
+            num_to_submit = min(self.sim_batch_size, self.sim_task_queue.qsize())
+            if num_to_submit > 0:
+                self.logger.info(
+                f"{num_to_submit} simulations will start at next iteration"
             )
 
     # --------------------------------------------------------------------------
@@ -114,34 +114,35 @@ class DDMD_manager:
         while True:
             await self.monitor_sims()  # Clean up completed/failed tasks
 
+            if self.sim_task_queue.empty():
+                self.logger.info("No more simulation inputs in queue.")
+                break
+
             if self.sim_batch_size <= 0:
                 await asyncio.sleep(1)
                 continue
-            
-            for _ in range(self.sim_batch_size):
+
+            # Submit up to sim_batch_size items
+            num_to_submit = min(self.sim_batch_size, self.sim_task_queue.qsize())
+            for _ in range(num_to_submit):
                 try:
                     sim_inputs = self.sim_task_queue.get_nowait()
                 except asyncio.QueueEmpty:
                     self.logger.info("No more simulation inputs in queue.")
-                    return
-
-                simul = self.simulation(sim_inputs=sim_inputs)  # must return asyncio.Task
-                sim_tag = sim_inputs['sim_tag']
-                self.logger.task_started(f"Simulation {sim_tag}")
-                self.registered_sims[sim_tag] = simul 
-
-                if self.sim_task_queue.empty():
-                    self.logger.info("Last simulation has been submitted.")
                     break
 
-            if self.sim_batch_size > 0:
+                simul = self.simulation(sim_inputs=sim_inputs)
+                sim_tag = sim_inputs["sim_tag"]
+                self.logger.task_started(f"Simulation {sim_tag}")
+                self.registered_sims[sim_tag] = simul
+
+            if num_to_submit > 0:
                 self.logger.info(
-                    f"[DDMD] Submitted {self.sim_batch_size} new simulation(s)"
+                    f"[DDMD] Submitted {num_to_submit} new simulation(s)"
                 )
-                self.sim_batch_size = 0 # Reset after submission: 
-                                        # Once some simulations are canceled or completed, the batch size is adjusted for the next submission.
-                
-            await asyncio.sleep(0.5)
+            # Update sim_batch_size (subtract submitted items)
+            self.sim_batch_size -= num_to_submit
+            await asyncio.sleep(0.1)
 
     # --------------------------------------------------------------------------
     async def monitor_sims(self):
@@ -185,19 +186,18 @@ class DDMD_manager:
                 for sim_tag, task in list(self.registered_sims.items()):
                     if task.done():
                         unregistered_sims.append(sim_tag)
-                        self.sim_batch_size += 1
-                        self.logger.task_completed(f"{sim_tag} state is done")
-
-                    try:
-                        task.cancel()
-                        unregistered_sims.append(sim_tag)
-                        self.logger.task_killed(
-                            f"Cancelling {sim_tag} to start training "
-                            f"(ROSE task ID {getattr(task, 'id', 'N/A')})"
-                        )
-                        resubmitted_sims.append(sim_tag)
-                    except Exception as e:
-                        self.logger.error(f"Error cancelling {sim_tag}: {e}")
+                    else:
+                        try:
+                            task.cancel()
+                            unregistered_sims.append(sim_tag)
+                            self.logger.task_killed(
+                                f"Cancelling {sim_tag} to start training "
+                                f"(ROSE task ID {getattr(task, 'id', 'N/A')})"
+                            )
+                            resubmitted_sims.append(sim_tag)
+                        except Exception as e:
+                            self.logger.error(f"Error cancelling {sim_tag}: {e}")
+                            continue
 
                     count += 1
                     self.sim_batch_size += 1
@@ -255,10 +255,11 @@ class DDMD_manager:
         await self.collect_sim_inputs()
         submit_task = asyncio.create_task(self.submit_sims())
 
-        await self.monitor_training_data()  # blocks until training starts
+        if not self.force_start_training:
+           await self.monitor_training_data()  # blocks until training starts
 
         self.sim_batch_size -= self.training_cores  # Release training resources and ensure the DDMD manager does not allocate them for simulations
-  
+        
         while True:
             self.logger.info(f"{len(self.registered_sims)} simulation(s) running...")
             #self.logger.info(f"{list(self.registered_sims.keys())}")
@@ -289,7 +290,7 @@ class DDMD_manager:
                 await self.cancel_sims()
 
             # Exit if no sims left
-            if self.sim_task_queue.empty() and not self.registered_sims:
+            if self.sim_task_queue.empty() and len(len(self.registered_sims)) == 0:
                 break
 
             await asyncio.sleep(1) 
