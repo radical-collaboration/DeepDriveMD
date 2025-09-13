@@ -17,7 +17,7 @@ maintainers = [
 readme = "README.md"
 requires-python = ">=3.9"
 
-dependencies = ["rose", "radical.asyncflow", "radical.pilot"]
+dependencies = ["rose"]
 
 [project.urls]
 Homepage = "https://github.com/radical-collaboration/DeepDriveMD"
