@@ -8,7 +8,7 @@ max_iteration: 3
 cpus_per_node: 40
 gpus_per_node: 4
 hardware_threads_per_cpu: 1
-experiment_directory: /anvil/scratch/x-mgoliyad1/DDMD/main_archive/ddmd_test_experiments/bba-keras-dbscan-run-0
+experiment_directory: ${EXPRMNT_DIR}/bba-keras-dbscan-run-0
 node_local_path: /tmp
 molecular_dynamics_stage:
     pre_exec:
@@ -17,10 +17,10 @@ molecular_dynamics_stage:
     #- unset PYTHONPATH
     - module load anaconda
     - source activate base
-    - conda activate /anvil/scratch/x-mgoliyad1/conda_env/conda-openmm
-    executable: /anvil/scratch/x-mgoliyad1/conda_env/conda-openmm/bin/python
+    - conda activate ${CONDA_ENV}/conda-openmm
+    executable: ${CONDA_ENV}/conda-openmm/bin/python
     arguments:
-    - /anvil/scratch/x-mgoliyad1/DDMD/main_archive/DeepDriveMD-pipeline/deepdrivemd/sim/openmm/run_openmm.py
+    - ${WORK_DIR}/deepdrivemd/sim/openmm/run_openmm.py
     cpu_reqs:
         processes: 1
         process_type: null
@@ -39,7 +39,7 @@ molecular_dynamics_stage:
         output_path: set_by_deepdrivemd
         node_local_path: set_by_deepdrivemd
         pdb_file: set_by_deepdrivemd
-        initial_pdb_dir: /anvil/scratch/x-mgoliyad1/DDMD/main_archive/DeepDriveMD-pipeline/data/bba
+        initial_pdb_dir: ${WORK_DIR}/data/bba
         solvent_type: implicit
         top_suffix: null
         simulation_length_ns: 1.0
@@ -48,7 +48,7 @@ molecular_dynamics_stage:
         temperature_kelvin: 310.0
         heat_bath_friction_coef: 1.0
         wrap: false
-        reference_pdb_file: /anvil/scratch/x-mgoliyad1/DDMD/main_archive/DeepDriveMD-pipeline/data/bba/1FME-folded.pdb
+        reference_pdb_file: ${WORK_DIR}/data/bba/1FME-folded.pdb
         openmm_selection:
         - CA
         mda_selection: protein and name CA
@@ -90,12 +90,12 @@ machine_learning_stage:
     - unset PYTHONPATH
     - module load anaconda
     - source activate base
-    - conda activate /anvil/scratch/x-mgoliyad1/conda_env/conda-keras
+    - conda activate ${CONDA_ENV}/conda-keras
     - unset CUDA_VISIBLE_DEVICES
     - export OMP_NUM_THREADS=4
-    executable: /anvil/scratch/x-mgoliyad1/conda_env/conda-keras/bin/python
+    executable: ${CONDA_ENV}/conda-keras/bin/python
     arguments:
-    - /anvil/scratch/x-mgoliyad1/DDMD/main_archive/DeepDriveMD-pipeline/deepdrivemd/models/keras_cvae/train.py
+    - ${WORK_DIR}/deepdrivemd/models/keras_cvae/train.py
     cpu_reqs:
         processes: 1
         process_type: MPI
@@ -167,10 +167,10 @@ model_selection_stage:
     #- unset PYTHONPATH
     - module load anaconda
     - source activate base
-    - conda activate /anvil/scratch/x-mgoliyad1/conda_env/conda-keras
-    executable: /anvil/scratch/x-mgoliyad1/conda_env/conda-keras/bin/python
+    - conda activate ${CONDA_ENV}/conda-keras
+    executable: ${CONDA_ENV}/conda-keras/bin/python
     arguments:
-    - /anvil/scratch/x-mgoliyad1/DDMD/main_archive/DeepDriveMD-pipeline/deepdrivemd/selection/latest/select_model.py
+    - ${WORK_DIR}/deepdrivemd/selection/latest/select_model.py
     cpu_reqs:
         processes: 1
         process_type: null
@@ -197,14 +197,14 @@ agent_stage:
     #- unset PYTHONPATH
     - module load anaconda
     - source activate base
-    - conda activate /anvil/scratch/x-mgoliyad1/conda_env/conda-keras
+    - conda activate ${CONDA_ENV}/conda-keras
     - export LANG=en_US.utf-8
     - export LC_ALL=en_US.utf-8
     - unset CUDA_VISIBLE_DEVICES
     - export OMP_NUM_THREADS=4
-    executable: /anvil/scratch/x-mgoliyad1/conda_env/conda-keras/bin/python
+    executable: ${CONDA_ENV}/conda-keras/bin/python
     arguments:
-    - /anvil/scratch/x-mgoliyad1/DDMD/main_archive/DeepDriveMD-pipeline/deepdrivemd/agents/lof/lof.py
+    - ${WORK_DIR}/deepdrivemd/agents/lof/lof.py
     cpu_reqs:
         processes: 1
         process_type: null
