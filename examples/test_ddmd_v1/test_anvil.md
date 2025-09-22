@@ -52,8 +52,9 @@
 ```shell
 
     cd $PROJECT/radical.pilot.sandbox/<your-session-id>/pilot.0000
-
     # NOTE: The current test experiment is known to fail in Stage 2 at task.000015
+    # For reference here is the original config file:
+    https://github.com/DeepDriveMD/DeepDriveMD-pipeline/blob/main/test/bba/lassen-keras-dbscan.yaml
 
 ```
 
