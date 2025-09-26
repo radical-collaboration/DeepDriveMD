@@ -3,7 +3,7 @@ resource: purdue.anvil_gpu
 queue: gpu
 schema_: local
 project: cv19-a01
-walltime_min: 90
+walltime_min: 290
 max_iteration: 3
 cpus_per_node: 40
 gpus_per_node: 4
@@ -42,7 +42,7 @@ molecular_dynamics_stage:
         initial_pdb_dir: ${WORK_DIR}/data/bba
         solvent_type: implicit
         top_suffix: null
-        simulation_length_ns: 1.0
+        simulation_length_ns: 100.0
         report_interval_ps: 1.0
         dt_ps: 0.002
         temperature_kelvin: 310.0
@@ -221,13 +221,13 @@ agent_stage:
         task_idx: 0
         output_path: set_by_deepdrivemd
         node_local_path: set_by_deepdrivemd
-        num_intrinsic_outliers: 10
-        num_extrinsic_outliers: 8 
+        num_intrinsic_outliers: 12
+        num_extrinsic_outliers: 12 
         intrinsic_score: lof 
         extrinsic_score: rmsd
-        n_traj_frames: 1000
-        n_most_recent_h5_files: 12
-        k_random_old_h5_files: 12
+        n_traj_frames: 100
+        n_most_recent_h5_files: 3
+        k_random_old_h5_files: 2
         sklearn_num_jobs: -1
         model_type: "keras_cvae"
         inference_batch_size: 1024

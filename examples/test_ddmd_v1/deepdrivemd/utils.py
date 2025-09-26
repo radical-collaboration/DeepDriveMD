@@ -108,11 +108,24 @@ def bestk(
     # k in the sorted array. The elements above and below the kth position
     # are partitioned but not sorted. Returns the indices of the elements
     # on the left hand side of the partition i.e. the top k.
-    best_inds = np.argpartition(arr, k)[:k]
+
+    #print(f'bestk len {len(arr)} k {k} shape {arr.shape}')
+
+    if k < len(arr):
+        best_inds = np.argpartition(arr, k)[:k]
+    else:
+        #best_inds = np.argsort(arr)[::-1][:len(arr)]
+        best_inds = np.indices(arr.shape)
+
+    #print('best_inds', best_inds)
+
     # Get the associated values of the k-partition
+    best_inds = best_inds.flatten()
     best_values = arr[best_inds]
+    #print('best_values', best_values)
+
     # Only sorts an array of size k
-    sort_inds = np.argsort(best_values)
+    sort_inds = np.argsort(best_values).flatten()
     return best_values[sort_inds], best_inds[sort_inds]
 
 

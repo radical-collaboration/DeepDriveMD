@@ -4,7 +4,7 @@ from typing import Optional
 
 import openmm as omm  # type: ignore[import]
 import openmm.app as app  # type: ignore[import]
-#import unit as u  # type: ignore[import]
+#import openmm.unit as u  # type: ignore[import]
 from mdtools.openmm.reporter import OfflineReporter  # type: ignore[import]
 from mdtools.openmm.sim import configure_simulation  # type: ignore[import]
 
