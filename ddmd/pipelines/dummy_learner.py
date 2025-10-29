@@ -14,6 +14,8 @@ class DummyWorkflow(DDMD_manager):
 
     def __init__(self, **kwargs):
         # Default home directory
+
+        self.selection = None
         home_dir = Path(kwargs.get('home_dir', Path.home() / 'DDMD'))
         self.clean_dir(home_dir)  # ❗Careful: deletes everything in home_dir!
 
@@ -188,7 +190,8 @@ class DummyWorkflow(DDMD_manager):
         @self.learner.utility_task(as_executable=False)
         async def prediction(*args, **kwargs):
             """Dummy prediction: assign random score to each sim."""
-            sim_inds = kwargs["sim_inds"]
+            #sim_inds = kwargs["sim_inds"]
+            sim_inds = list(self.registered_sims.keys())
             return {sim_ind: random.random() for sim_ind in sim_inds}
         self.prediction = prediction
 

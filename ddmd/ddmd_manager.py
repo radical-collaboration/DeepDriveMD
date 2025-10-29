@@ -4,10 +4,18 @@
 # ------------------------------------------------------------------------------
 
 import asyncio
+import yaml
 from collections import OrderedDict
 from rose import Learner
 from ddmd.logger import Logger
+import subprocess
 
+def gpu_available():
+    try:
+        subprocess.check_output(['nvidia-smi'], stderr=subprocess.STDOUT)
+        return True
+    except Exception:
+        return False
 
 class DDMD_manager:
     """
@@ -20,10 +28,18 @@ class DDMD_manager:
         self.logger = Logger(use_colors=True)
         self.registered_sims = OrderedDict()   # Active simulations: {tag: asyncio.Task}
         self.sim_task_queue = asyncio.Queue()  # Queue of pending simulation inputs
+        self.completed_sims = set()      # To Store completed simulations
 
         # Tuning parameters (should be configurable)
         self.time_between_predictions = 20     # Delay between prediction checks
         self.time_before_shutdown    = 5       # Grace period before shutdown
+        self.debug = False
+
+        if gpu_available():
+            self.device = 'gpu'
+        else:
+            self.device = 'cpu'
+        self.logger.info(f"DDMD Manager initialized on device: {self.device}")
 
         """These attributes should be defined in pipeline subclass:
         Make sure they are set correctly!
@@ -32,6 +48,7 @@ class DDMD_manager:
             - self.retrain_model
             - self.sim_batch_size
             - self.clean_unregistered_sims
+            - self.selection: should be set to None if training task returns pretrained model
         _register_learner_tasks must be defined in subclass to register all learner tasks: simulation, training, active learning, prediction.
         """
 
@@ -92,10 +109,12 @@ class DDMD_manager:
     async def _unregister_sims(self, unregistered_sims, clean_unregistered_sims):
         """
             Remove completed or canceled simulations from the registry, 
-            and optionally clean up files from canceled simulations to exclude them from the training batch."**
+            and optionally clean up files from canceled simulations 
+            to exclude them from the training batch.
         """
         for tag in unregistered_sims:
             self.registered_sims.pop(tag, None)
+            self.completed_sims.add(tag)
             if clean_unregistered_sims:
                 #await asyncio.to_thread(self.del_files, tag)
                 await self.del_files(tag)
@@ -122,7 +141,8 @@ class DDMD_manager:
                 await asyncio.sleep(1)
                 continue
 
-            # Submit up to sim_batch_size items
+            # Don't submit more than sim_batch_size simulation 
+            # to have enough resources for training task
             num_to_submit = min(self.sim_batch_size, self.sim_task_queue.qsize())
             for _ in range(num_to_submit):
                 try:
@@ -149,7 +169,7 @@ class DDMD_manager:
         """Unregister completed/failed simulations and prepare next batch."""
         unregistered_sims = []
 
-        for sim_tag, task in self.registered_sims.items():
+        for sim_tag, task in self.registered_sims.items():   
             if task.done():
                 unregistered_sims.append(sim_tag)
                 self.logger.task_completed(f"Simulation {sim_tag}")
@@ -158,7 +178,7 @@ class DDMD_manager:
                 if task.exception():
                     self.logger.error(
                         f"Simulation {sim_tag} failed: {task.exception()}"
-                    )
+                    )                   
         await self._unregister_sims(unregistered_sims, False)
 
     # --------------------------------------------------------------------------
@@ -183,6 +203,7 @@ class DDMD_manager:
                     f"out of {total_sims} to free resources for training"
                 )
 
+                # Suspend simulations to free up resources for training
                 for sim_tag, task in list(self.registered_sims.items()):
                     if task.done():
                         unregistered_sims.append(sim_tag)
@@ -220,14 +241,16 @@ class DDMD_manager:
 
     # --------------------------------------------------------------------------
     async def cancel_sims(self):
-        """Cancel sims based on prediction results."""
+        """Cancel sims based on prediction score."""
         unregister_sims = []
 
         for sim_tag, pred in self.sim_predictions.items():
-            self.logger.info(f"{sim_tag} prediction: {pred}")
 
-            if sim_tag not in self.registered_sims:
+            if sim_tag not in self.registered_sims.keys():
                 continue
+
+            if self.debug:
+                self.logger.info(f"{sim_tag} prediction: {pred}")
 
             if self.check_prediction(prediction=pred):
                 task = self.registered_sims[sim_tag]
@@ -255,33 +278,40 @@ class DDMD_manager:
         await self.collect_sim_inputs()
         submit_task = asyncio.create_task(self.submit_sims())
 
+        # Skip waiting for training data if it is available at start
         if not self.force_start_training:
            await self.monitor_training_data()  # blocks until training starts
 
-        self.sim_batch_size -= self.training_cores  # Release training resources and ensure the DDMD manager does not allocate them for simulations
+        # Release training resources and ensure the DDMD 
+        # manager does not allocate them for simulations
+        self.sim_batch_size -= self.training_cores  
         
         while True:
             self.logger.info(f"{len(self.registered_sims)} simulation(s) running...")
-            #self.logger.info(f"{list(self.registered_sims.keys())}")
+            if self.debug:
+                self.logger.info(f"{list(self.registered_sims.keys())}")
 
             # Train model if flag is set
             if self.retrain_model:
-                await self.train_model()
+                train = await self.train_model()
             else:
                 await asyncio.sleep(self.time_between_predictions) 
 
-            # Perform prediction
-            self.logger.task_started("Prediction")
-            sim_inds = list(self.registered_sims.keys())
+            # Perform model selection if selection function is provided
+            if self.selection:
+                selected_model = await self.selection(train)
+                # Perform prediction
+                self.logger.task_started("Prediction")
+            else:
+                selected_model = train
 
-            # # ************************
-            # # Use the following code to run predicions as executable
-            # await self.exe_prediction()
-            # with open(self.prediction_file, 'r') as f:
-            #     predictions = json.load(f) 
-            # # ************************
-
-            predictions = await self.prediction(sim_inds=sim_inds)
+            # Collect prediction scores for all simulations
+            if self.run_prediction_as_exe:
+                predict = await self.exe_prediction(selected_model)
+                with open(self.prediction_file, 'r') as f:
+                    predictions = yaml.safe_load(f)
+            else:
+                predictions = await self.prediction(selected_model)
 
             self.sim_predictions = predictions
             self.logger.info(f"[Task-Prediction] completed with {len(predictions)} results.")
@@ -289,8 +319,11 @@ class DDMD_manager:
             if predictions:
                 await self.cancel_sims()
 
+            if self.sim_task_queue.empty():
+                await self.monitor_sims()
+
             # Exit if no sims left
-            if self.sim_task_queue.empty() and len(len(self.registered_sims)) == 0:
+            if self.sim_task_queue.empty() and len(self.registered_sims) == 0:
                 break
 
             await asyncio.sleep(1) 

@@ -109,6 +109,7 @@ async def train(model_filename='model.pkl', sim_output_dir='sim_output',
     i = 0
     for _ in range(10000):
         i += 1
+    return model
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Async Training Script")
