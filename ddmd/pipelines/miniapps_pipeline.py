@@ -1,5 +1,6 @@
 import asyncio
 import sys
+import yaml
 import os
 import random
 import shutil
@@ -41,7 +42,7 @@ class MiniAppsWorkflow(DDMD_manager):
         self.force_start_training     = bool(kwargs.get("force_start_training", False))
         self.run_prediction_as_exe    = bool(kwargs.get("run_prediction_as_exe", True))
         # Stop pipeline after all simulation are done
-        self.total_num_sim = kwargs.get('total_num_sim', 50)
+        self.total_num_sim = kwargs.get('total_num_sim', 25)
         #Training iteration
         self.iteration = 0
         self.phase = kwargs.get('phase', 0)  # required by miniapps
@@ -82,6 +83,12 @@ class MiniAppsWorkflow(DDMD_manager):
             shutil.rmtree(dir_path)
 
     # --------------------------------------------------------------------------
+    async def collect_predictions(self):
+        with open(self.prediction_file, 'r') as f:
+            predictions = yaml.safe_load(f)
+        return predictions
+    
+    # --------------------------------------------------------------------------
     def check_prediction(self, *args, **kwargs):
         """Check prediction score: If it returns True then simulation will be canceled"""
         if random.random() < 0.5:
@@ -114,6 +121,7 @@ class MiniAppsWorkflow(DDMD_manager):
         start_trainig = False
         while True:
             if start_trainig:
+                #await asyncio.sleep(5)
                 break
             start_trainig = True
             for filename in filenames:
@@ -137,7 +145,7 @@ class MiniAppsWorkflow(DDMD_manager):
             args = (f'--data_root_dir {self.sim_output_dir} '
                     f'--instance_index {sim_tag} '
                     f'--phase {self.phase} '
-                    f'--num_step 30 '
+                    f'--num_step 50 '
             )
             return f'{self.code_path}/simulation.py {args}'
         self.simulation = simulation

@@ -14,8 +14,8 @@ TOTAL_CORES= SIM_CORES + TRAIN_CORE
 
 RESOURCES = {
             'runtime': 30, 
-            'resource': 'local.localhost', 
-            #'resource': 'purdue.anvil',
+           # 'resource': 'local.localhost', 
+            'resource': 'purdue.anvil',
             'cores': TOTAL_CORES
         }
 

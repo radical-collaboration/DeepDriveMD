@@ -4,7 +4,6 @@
 # ------------------------------------------------------------------------------
 
 import asyncio
-import yaml
 from collections import OrderedDict
 from rose import Learner
 from ddmd.logger import Logger
@@ -233,7 +232,7 @@ class DDMD_manager:
                 # Re-add canceled sims back to task queue for later rescheduling
                 for sim_tag in resubmitted_sims:
                     await self.sim_task_queue.put({'sim_tag': sim_tag})
-                    self.logger.info(f"Re-added {sim_tag} back to sim_task_queue")
+                    self.logger.info(f"Re-added simulation {sim_tag} back to sim_task_queue")
 
                 break  # Exit loop after canceling
             else:
@@ -308,8 +307,7 @@ class DDMD_manager:
             # Collect prediction scores for all simulations
             if self.run_prediction_as_exe:
                 predict = await self.exe_prediction(selected_model)
-                with open(self.prediction_file, 'r') as f:
-                    predictions = yaml.safe_load(f)
+                predictions = await self.collect_predictions()
             else:
                 predictions = await self.prediction(selected_model)
 
