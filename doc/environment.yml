@@ -1,0 +1,8 @@
+channels:
+  - conda-forge
+dependencies:
+  - pyyaml
+  - numpy
+  - pip     
+  - pip:
+      - rose

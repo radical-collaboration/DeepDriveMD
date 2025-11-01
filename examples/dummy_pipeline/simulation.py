@@ -21,7 +21,7 @@ async def simulate_one(output_file: Path):
     # Run CPU-heavy loop in a thread to avoid blocking event loop
     def run_math():
         y = 0
-        for _ in range(1000):
+        for _ in range(10):
             y += complicated_function(X)
         return y
 
@@ -41,12 +41,13 @@ async def run_simulation(output_dir: str, sim_tag: str) -> None:
     output_sim_dir.mkdir(parents=True, exist_ok=True)
 
     tasks = []
-    for i in range(150):
+    for i in range(15):
         output_file = output_sim_dir / f"{sim_tag}_{i}.npz"
         tasks.append(simulate_one(output_file))
 
     # Run up to N simulations concurrently
     await asyncio.gather(*tasks)
+    await asyncio.sleep(25)
 
     print(f"Simulation completed. Results saved in {output_sim_dir}")
 

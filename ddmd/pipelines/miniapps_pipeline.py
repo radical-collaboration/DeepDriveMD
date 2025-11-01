@@ -89,7 +89,7 @@ class MiniAppsWorkflow(DDMD_manager):
         return predictions
     
     # --------------------------------------------------------------------------
-    def check_prediction(self, *args, **kwargs):
+    def stop_simulation(self, *args, **kwargs):
         """Check prediction score: If it returns True then simulation will be canceled"""
         if random.random() < 0.5:
             return False
@@ -97,13 +97,13 @@ class MiniAppsWorkflow(DDMD_manager):
             return True
 
     # --------------------------------------------------------------------------
-    async def collect_sim_inputs(self):
+    async def init_sim_queue(self):
         """Collect all simulation input files into task queue."""
         for s in range(self.total_num_sim):
             await self.sim_task_queue.put({'sim_tag': s})
 
     # --------------------------------------------------------------------------
-    async def check_training_data(self):
+    async def check_train_data(self):
         """Check if enough training data is available to start training."""
 
         try:

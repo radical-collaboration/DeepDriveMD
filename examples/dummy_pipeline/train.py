@@ -9,7 +9,7 @@ import shutil
 from asyncio import to_thread
 
 VAL_SPLIT = 0.5
-MIN_TRAIN_SIZE = 10
+MIN_TRAIN_SIZE = 1
 MIN_NUM_TO_PREDICT = 1
 
 async def async_iterdir(path: Path):
@@ -73,7 +73,7 @@ async def train(model_filename='model.pkl', sim_output_dir='sim_output',
             from sklearn.linear_model import LinearRegression
             model = LinearRegression()
         except:
-            pass
+            return 'No model could be created'
 
     X_all, y_all = [], []
 
@@ -107,7 +107,7 @@ async def train(model_filename='model.pkl', sim_output_dir='sim_output',
 
     #Run this to extend execution time
     i = 0
-    for _ in range(10000):
+    for _ in range(1000):
         i += 1
     return model
 

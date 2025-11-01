@@ -46,19 +46,18 @@ class Logger:
         
         self.component_colors = {
             'task': Colors.BRIGHT_GREEN,
-            #'adaptive': Colors.BRIGHT_MAGENTA,
-            'manager': Colors.BRIGHT_BLUE,
-            'workflow': Colors.CYAN,
-            'task': Colors.YELLOW,
-            'error': Colors.RED,
-            'success': Colors.GREEN,
-            'stage': Colors.BRIGHT_CYAN,
-            'step': Colors.CYAN,
-            'resource': Colors.MAGENTA,
-            'data': Colors.BRIGHT_YELLOW,
-            'validation': Colors.BRIGHT_MAGENTA,
-            'checkpoint': Colors.BRIGHT_GREEN,
-            'metric': Colors.BRIGHT_WHITE
+            'manager': Colors.BRIGHT_RED,
+            'workflow': Colors.BRIGHT_GREEN,
+           # 'task': Colors.BRIGHT_YELLOW,
+           # 'error': Colors.RED,
+           # 'success': Colors.GREEN,
+            #'stage': Colors.BRIGHT_CYAN,
+            'simulation': Colors.BLUE,
+            'training': Colors.BRIGHT_YELLOW,
+            'prediction': Colors.GREEN,
+            #'validation': Colors.BRIGHT_MAGENTA,
+            #'checkpoint': Colors.BRIGHT_MAGENTA,
+            #'metric': Colors.BLACK
         }
 
     def _colorize(self, text, color):
@@ -71,7 +70,7 @@ class Logger:
         # Handle task-specific components
         if component.lower().startswith('task-'):
             component_color = Colors.BRIGHT_GREEN
-        else:
+        else: 
             component_color = self.component_colors.get(component.lower(), Colors.WHITE)
         
         colored_component = self._colorize(f"[{component.upper()}]", component_color)
@@ -107,17 +106,17 @@ class Logger:
         formatted = self._format_message(LogLevel.CRITICAL, component, message, task_name)
         self._write_log(formatted, to_stderr=True)
 
-    def task_started(self, task_name):
+    def task_started(self, task_name, component="task"):
         message = f"Task started: {self._colorize(task_name, Colors.BRIGHT_WHITE)}"
-        self.info(message, "manager")
+        self.info(message, component)
 
-    def task_completed(self, task_name):
+    def task_completed(self, task_name, component="task"):
         message = f"Task completed: {self._colorize(task_name, Colors.BRIGHT_WHITE)}"
-        self.info(message, "manager")
+        self.info(message, component)
 
-    def task_killed(self, task_name):
+    def task_killed(self, task_name, component="task"):
         message = f"Task killed: {self._colorize(task_name, Colors.BRIGHT_WHITE)}"
-        self.warning(message, "task")
+        self.warning(message, component)
 
     # def adaptive_started(self, task_name):
     #     message = f"Adaptive function started for: {self._colorize(task_name, Colors.BRIGHT_WHITE)}"

@@ -1,11 +1,10 @@
 # predict_async_limited.py
 import pickle
 import random
-import json
+import yaml
 import os
 import numpy as np
 from pathlib import Path
-from sklearn.metrics import mean_squared_error
 import argparse
 from typing import Dict, Union
 import asyncio
@@ -94,19 +93,14 @@ async def predict(
         results[sim_tag] = mse
 
     print(f"\nPrediction completed. Saving results to {output_file}")
-    # try:
-    #     await asyncio.to_thread(
-    #         lambda: json.dump(results, open(output_file, 'w'), indent=2)
-    #     )
-    # except OSError as e:
-    #     print(f"⚠ Failed to write results to {output_file}: {e}")
 
     def _write():
         os.makedirs(os.path.dirname(output_file), exist_ok=True)
         with open(output_file, "w") as f:
-            json.dump(results, f, indent=2)
+            yaml.dump(results, f, sort_keys=True)
 
     await asyncio.to_thread(_write)
+    await asyncio.sleep(10)
 
 
 def main():

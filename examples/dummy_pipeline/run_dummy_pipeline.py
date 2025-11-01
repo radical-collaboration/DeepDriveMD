@@ -2,11 +2,9 @@
 import asyncio
 from radical.asyncflow import WorkflowEngine
 from radical.asyncflow import ConcurrentExecutionBackend
-from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
+from concurrent.futures import ProcessPoolExecutor
 from radical.asyncflow import RadicalExecutionBackend
 from ddmd import DummyWorkflow
-# from radical.asyncflow import DaskExecutionBackend
-
 
 SIM_CORES = 3
 TRAIN_CORE = 1
@@ -14,8 +12,8 @@ TOTAL_CORES= SIM_CORES + TRAIN_CORE
 
 RESOURCES = {
             'runtime': 30, 
-            #'resource': 'local.localhost', 
-            'resource': 'purdue.anvil',
+            'resource': 'local.localhost', 
+            #'resource': 'purdue.anvil',
             'cores': TOTAL_CORES
         }
 
@@ -30,7 +28,6 @@ raptor_config = {
 
 async def run_ddmd():
 
-    #engine = await ConcurrentExecutionBackend(ThreadPoolExecutor())
     engine = await ConcurrentExecutionBackend(ProcessPoolExecutor())
     #engine = await RadicalExecutionBackend(RESOURCES, raptor_config)
 
