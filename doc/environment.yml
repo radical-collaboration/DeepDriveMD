@@ -1,8 +1,15 @@
+name: ddsim-tutorial
 channels:
   - conda-forge
+  - defaults
 dependencies:
+  - python=3.10
   - pyyaml
   - numpy
   - pip     
+  - jupyterlab         # modern interface, supports classic notebooks
+  - ipykernel          # register kernel for this env
   - pip:
-      - rose
+    - radical-asyncflow
+    - -e /ocean/projects/dmr170002p/goliyad/ROSE
+    - -e /ocean/projects/dmr170002p/goliyad/DeepDriveMD

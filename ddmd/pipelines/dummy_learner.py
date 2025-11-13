@@ -18,7 +18,7 @@ class DummyWorkflow(DDMD_manager):
 
         self.selection = None
         home_dir = Path(kwargs.get('home_dir', Path.home() / 'DDSim'))
-        self.clean_dir(home_dir)  # ❗Careful: deletes everything in home_dir!
+        self._clean_dir(home_dir)  # ❗Careful: deletes everything in home_dir!
 
         # Create workflow directories
         self.sim_output_dir = self._ensure_dir(kwargs.get('sim_output_dir', home_dir / 'sim_output'))
@@ -58,7 +58,7 @@ class DummyWorkflow(DDMD_manager):
         self._register_learner_tasks()
         num_files = kwargs.get('num_files', 25)
         # Generate dummy input files
-        self.generate_sim_inputs(self.sim_inputs_dir, num_files=num_files)
+        self._generate_sim_inputs(self.sim_inputs_dir, num_files=num_files)
 
     # --------------------------------------------------------------------------
     @staticmethod
@@ -70,7 +70,7 @@ class DummyWorkflow(DDMD_manager):
 
     # --------------------------------------------------------------------------
     @staticmethod
-    def clean_dir(dir_name):
+    def _clean_dir(dir_name):
         """Delete an existing directory (used for a clean workflow run)."""
         dir_path = Path(dir_name)
         if dir_path.exists() and dir_path.is_dir():
@@ -78,7 +78,7 @@ class DummyWorkflow(DDMD_manager):
 
     # --------------------------------------------------------------------------
     @staticmethod
-    def generate_sim_inputs(sim_inputs_dir, num_files: int = 5):
+    def _generate_sim_inputs(sim_inputs_dir, num_files: int = 5):
         """
         Generate dummy input `.npz` files for simulations.
         """
@@ -87,74 +87,6 @@ class DummyWorkflow(DDMD_manager):
             file_path = sim_inputs_path / f"config_{i}.npz"
             X = np.random.rand(100, 1)  # Dummy input data
             np.savez(file_path, X=X)
-
-    # --------------------------------------------------------------------------
-    def stop_simulation(self, *args, **kwargs):
-        """Return True if prediction < threshold (cancel simulation)."""
-        return kwargs['prediction'] < self.prediction_threshold
-
-    # --------------------------------------------------------------------------
-    async def collect_predictions(self):
-        with open(self.prediction_file, 'r') as f:
-            predictions = yaml.safe_load(f)
-        return predictions
-
-    # --------------------------------------------------------------------------
-    async def init_sim_queue(self):
-        """Collect all simulation input files into task queue."""
-        filenames = await asyncio.to_thread(lambda: list(self.sim_inputs_dir.iterdir()))
-        for filename in filenames:
-            if filename.is_file():
-                sim_name = filename.stem
-                sim_tag = f'{sim_name}'
-                await self.sim_task_queue.put({'sim_tag': sim_tag})
-
-    # --------------------------------------------------------------------------
-    async def check_train_data(self):
-        """Check if enough training data is available to start training."""
-        total_files = 0
-        for dir in self.sim_output_dir.iterdir():
-            if dir.is_dir():
-                # Run blocking file listing in thread pool
-                filenames = await asyncio.to_thread(lambda: list(dir.iterdir()))
-                total_files += len(filenames)
-        return total_files >= self.start_training_threshold
-
-    # --------------------------------------------------------------------------
-    async def clean_sim_data(self, sim_ind):
-        """Asynchronously delete all files associated with a simulation index (safe parallel cleanup)."""
-
-        async def _delete_file(file_path):
-            try:
-                await asyncio.to_thread(os.remove, file_path)
-            except FileNotFoundError:
-                self.logger.warning(f"File already removed: {file_path}")
-            except Exception as e:
-                self.logger.error(f"Error deleting {file_path}: {e}")
-
-        # Collect all deletion tasks (parallel file cleanup)
-        tasks = []
-        for directory in [self.train_al_dir, self.train_dir, self.val_dir]:
-            
-            for filename in directory.iterdir():
-                if sim_ind in filename.name:
-                    tasks.append(_delete_file(filename))
-        if tasks:
-            await asyncio.gather(*tasks)
-
-        # Remove simulation output directory after files are gone
-        sim_dir = Path(self.sim_output_dir, sim_ind)
-        try:
-            if sim_dir.exists():
-                await asyncio.to_thread(shutil.rmtree, sim_dir)
-                if self.debug:
-                    self.logger.warning(f"Simulation directory has been removed: {sim_dir}")
-            else:
-                self.logger.warning(f"Simulation directory already removed: {sim_dir}")
-        except Exception as e:
-            self.logger.error(f"Error deleting directory {sim_dir}: {e}")
-        if self.debug:
-            self.logger.info(f"Removed all files related to simulation {sim_ind}")
 
     # --------------------------------------------------------------------------
     def _register_learner_tasks(self):
@@ -209,6 +141,74 @@ class DummyWorkflow(DDMD_manager):
             args = f'--model_filename {self.model_filename} --val_dir {self.val_dir}'
             return f'{self.code_path}/check_accuracy.py {args}'
         self.check_accuracy = check_accuracy
+
+    # --------------------------------------------------------------------------
+    def stop_simulation(self, *args, **kwargs) -> bool:
+        """Return True if prediction < threshold (cancel simulation)."""
+        return kwargs['prediction'] < self.prediction_threshold
+
+    # --------------------------------------------------------------------------
+    async def collect_predictions(self) -> dict:
+        with open(self.prediction_file, 'r') as f:
+            predictions = yaml.safe_load(f)
+        return predictions
+
+    # --------------------------------------------------------------------------
+    async def init_sim_queue(self) -> None:
+        """Collect all simulation input files into task queue."""
+        filenames = await asyncio.to_thread(lambda: list(self.sim_inputs_dir.iterdir()))
+        for filename in filenames:
+            if filename.is_file():
+                sim_name = filename.stem
+                sim_tag = f'{sim_name}'
+                await self.sim_task_queue.put({'sim_tag': sim_tag})
+
+    # --------------------------------------------------------------------------
+    async def check_train_data(self) -> bool:
+        """Check if enough training data is available to start training."""
+        total_files = 0
+        for dir in self.sim_output_dir.iterdir():
+            if dir.is_dir():
+                # Run blocking file listing in thread pool
+                filenames = await asyncio.to_thread(lambda: list(dir.iterdir()))
+                total_files += len(filenames)
+        return total_files >= self.start_training_threshold
+    
+    # --------------------------------------------------------------------------
+    async def clean_sim_data(self, sim_ind) -> None:
+        """Asynchronously delete all files associated with a simulation index (safe parallel cleanup)."""
+
+        async def _delete_file(file_path):
+            try:
+                await asyncio.to_thread(os.remove, file_path)
+            except FileNotFoundError:
+                self.logger.warning(f"File already removed: {file_path}")
+            except Exception as e:
+                self.logger.error(f"Error deleting {file_path}: {e}")
+
+        # Collect all deletion tasks (parallel file cleanup)
+        tasks = []
+        for directory in [self.train_al_dir, self.train_dir, self.val_dir]:
+            
+            for filename in directory.iterdir():
+                if sim_ind in filename.name:
+                    tasks.append(_delete_file(filename))
+        if tasks:
+            await asyncio.gather(*tasks)
+
+        # Remove simulation output directory after files are gone
+        sim_dir = Path(self.sim_output_dir, sim_ind)
+        try:
+            if sim_dir.exists():
+                await asyncio.to_thread(shutil.rmtree, sim_dir)
+                if self.debug:
+                    self.logger.warning(f"Simulation directory has been removed: {sim_dir}")
+            else:
+                self.logger.warning(f"Simulation directory already removed: {sim_dir}")
+        except Exception as e:
+            self.logger.error(f"Error deleting directory {sim_dir}: {e}")
+        if self.debug:
+            self.logger.info(f"Removed all files related to simulation {sim_ind}")
 
     # --------------------------------------------------------------------------
     async def train_model(self):
