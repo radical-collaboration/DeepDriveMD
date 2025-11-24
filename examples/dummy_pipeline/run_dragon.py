@@ -1,21 +1,22 @@
 #!/usr/bin/env python3
+import logging
 import asyncio
 from radical.asyncflow import WorkflowEngine
-from radical.asyncflow import DragonExecutionBackend
+from radical.asyncflow import DragonExecutionBackendV3
 from concurrent.futures import ProcessPoolExecutor
 from radical.asyncflow import RadicalExecutionBackend
 from ddmd import DummyWorkflow
+from radical.asyncflow.logging import init_default_logger
 
 SIM_CORES = 3
 TRAIN_CORE = 1
 TOTAL_CORES= SIM_CORES + TRAIN_CORE
 
 async def run_ddmd():
-
-    engine = await DragonExecutionBackend()
-    #engine = await RadicalExecutionBackend(RESOURCES, raptor_config)
-
+    engine = await DragonExecutionBackendV3()
+    
     # Create the async workflow engine
+    init_default_logger(logging.DEBUG)
     asyncflow = await WorkflowEngine.create(engine)
     
     # Initialize the workflow

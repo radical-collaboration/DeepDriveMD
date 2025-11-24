@@ -101,6 +101,8 @@ async def predict(
 
     await asyncio.to_thread(_write)
     await asyncio.sleep(10)
+    print(f"\nExiting Prediction ...")
+    return
 
 
 def main():
