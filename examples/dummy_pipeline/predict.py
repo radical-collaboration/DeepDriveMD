@@ -19,13 +19,14 @@ async def async_iterdir(path: Path):
 
 async def load_model(model_filename: Union[str, Path]):
     """Load a model from a pickle file in a thread."""
-    try:
-        return await asyncio.to_thread(
-            lambda: pickle.load(open(model_filename, 'rb'))
-        )
-    except (OSError, pickle.UnpicklingError) as e:
-        print(f"⚠ Unable to load model from {model_filename}: {e}")
-        return None
+    return "mock_model"  # placeholder for actual model loading
+    # try:
+    #     return await asyncio.to_thread(
+    #         lambda: pickle.load(open(model_filename, 'rb'))
+    #     )
+    # except (OSError, pickle.UnpicklingError) as e:
+    #     print(f"⚠ Unable to load model from {model_filename}: {e}")
+    #     return None
 
 
 async def evaluate_npz_file(file: Path, model, sem: asyncio.Semaphore) -> float:

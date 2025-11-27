@@ -32,7 +32,7 @@ raptor_config = {
 async def run_ddmd():
 
     #engine = await ConcurrentExecutionBackend(ThreadPoolExecutor())
-    engine = await ConcurrentExecutionBackend(ProcessPoolExecutor())
+    #engine = await ConcurrentExecutionBackend(ProcessPoolExecutor())
     engine = await RadicalExecutionBackend(RESOURCES, raptor_config)
 
     # Create the async workflow engine

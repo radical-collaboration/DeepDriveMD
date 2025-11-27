@@ -16,7 +16,7 @@ async def run_ddmd():
     engine = await DragonExecutionBackendV3()
     
     # Create the async workflow engine
-    init_default_logger(logging.DEBUG)
+    #init_default_logger(logging.DEBUG)
     asyncflow = await WorkflowEngine.create(engine)
     
     # Initialize the workflow

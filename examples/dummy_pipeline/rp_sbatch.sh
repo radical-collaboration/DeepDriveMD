@@ -12,7 +12,7 @@
 #SBATCH --mail-type=ALL      # When to send emails (BEGIN, END, FAIL, ALL)
 
 module load anaconda3
-conda activate /ocean/projects/dmr170002p/goliyad/htp/conda_env 
+conda activate /ocean/projects/dmr170002p/goliyad/conda_env/test_dragon
 #dragon-network-config --output-to-yaml 
 
 #dragon -w ssh --network-config slurm.yaml 

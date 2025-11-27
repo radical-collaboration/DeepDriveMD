@@ -30,7 +30,7 @@ async def simulate_one(output_file: Path):
     # Save results asynchronously
     np_bytes = await asyncio.to_thread(np.savez_compressed, output_file, X=X, y=y)
 
-    print(f"Saved simulation to {output_file}")
+    #print(f"Saved simulation to {output_file}")
 
 
 async def run_simulation(output_dir: str, sim_tag: str) -> None:
@@ -50,6 +50,7 @@ async def run_simulation(output_dir: str, sim_tag: str) -> None:
     await asyncio.sleep(25)
 
     print(f"Simulation completed. Results saved in {output_sim_dir}")
+    return
 
 
 def main():

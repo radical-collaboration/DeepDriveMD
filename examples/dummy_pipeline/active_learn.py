@@ -12,14 +12,15 @@ LABELED_DATA = []
 LABELS = {}
 
 async def load_model(model_filename: Union[str, Path]):
-    """Load a model from a pickle file in a thread."""
-    try:
-        return await asyncio.to_thread(
-            lambda: pickle.load(open(model_filename, 'rb'))
-        )
-    except (OSError, pickle.UnpicklingError) as e:
-        print(f"⚠ Unable to load model from {model_filename}: {e}")
-        return None
+    return "model"
+    # """Load a model from a pickle file in a thread."""
+    # try:
+    #     return await asyncio.to_thread(
+    #         lambda: pickle.load(open(model_filename, 'rb'))
+    #     )
+    # except (OSError, pickle.UnpicklingError) as e:
+    #     print(f"⚠ Unable to load model from {model_filename}: {e}")
+    #     return None
 
 async def train_model(labeled_data, labels):
     """Simulate model training."""
@@ -80,7 +81,7 @@ async def active_learning_loop(model_filename: str,
     global UNLABELED_DATA, LABELED_DATA, LABELS
 
     for it in range(iterations):
-        print(f"\n=== Iteration {it+1} ===")
+        print(f"\n=== AL Iteration {it+1} ===")
 
         # Load model
         model = await load_model(model_filename)

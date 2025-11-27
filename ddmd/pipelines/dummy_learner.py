@@ -5,10 +5,12 @@ import random
 import shutil
 import yaml
 import numpy as np
+import json
 from pathlib import Path
 from ddmd.ddmd_manager import DDMD_manager
 from rose.metrics import MODEL_ACCURACY
-
+import time
+from datetime import datetime
 
 class DummyWorkflow(DDMD_manager):
     """Dummy workflow for managing DDMD simulations, training, and predictions."""
@@ -30,7 +32,8 @@ class DummyWorkflow(DDMD_manager):
         # Simulation/training config
         self.max_sim_batch            = kwargs.get('max_sim_batch', 4)
         self.training_cores           = kwargs.get('training_cores', 1)
-        self.sim_batch_size           = self.max_sim_batch + self.training_cores
+        self.submit_next_batch = True
+        self.total_num_cores          = self.max_sim_batch + self.training_cores
         self.training_threshold       = kwargs.get('training_threshold', 0.5)
         self.prediction_threshold     = kwargs.get('prediction_threshold', 0.5)
         self.start_training_threshold = kwargs.get('start_training_threshold', 10)
@@ -227,10 +230,33 @@ class DummyWorkflow(DDMD_manager):
             if should_stop:
                 self.logger.info(f'Accuracy ({metric_val}) reached threshold → stopping training')
                 self.retrain_model = False
-                self.sim_batch_size += self.training_cores
+                self.training_cores = 0
                 break
             self.logger.task_completed('Check Accuracy', component="training")
 
             self.logger.task_started('Active Learning', component="training")
             al = await self.active_learn()
             self.logger.task_completed('Active Learning', component="training")
+
+    # --------------------------------------------------------------------------
+    def _record_cancel(self, sim_tag, score):
+        self.cancel_stats["total"] += 1
+        hm = datetime.now().strftime('%H:%M')
+        self.cancel_stats["timestamps"].append({'simulation': sim_tag, 'score': score, "timestamp": hm})
+
+    # --------------------------------------------------------------------------
+    async def finalize_pipeline(self, path="cancel_stats.json"):
+        """
+        Export self.cancel_stats to a JSON file.
+
+        self.cancel_stats should be a dict or list.
+        """
+        if not hasattr(self, "cancel_stats"):
+            raise AttributeError("self.cancel_stats does not exist")
+
+        out = Path(path)
+
+        with out.open("w") as f:
+            json.dump(self.cancel_stats, f, indent=2, default=str)
+
+        return str(out.absolute())
