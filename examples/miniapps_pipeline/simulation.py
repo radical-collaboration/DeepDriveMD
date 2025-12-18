@@ -5,12 +5,20 @@ import time
 import argparse
 import wfMiniAPI.kernel as wf
 
+try:
+    import cupy
+    default_device = "gpu"
+except ImportError:
+    default_device = "cpu"
+
 def parse_args():
     parser = argparse.ArgumentParser(description='Exalearn_miniapp_simulation')
     parser.add_argument('--phase', type=int, default=0,
                         help='the current phase of workflow, in miniapp all phases do the same thing except rng')
     parser.add_argument('--mat_size', type=int, default=5000,
                         help='the matrix with have size of mat_size * mat_size')
+    parser.add_argument('--device', default=default_device,
+                        help='Wheter this is running on cpu or gpu')
     parser.add_argument('--data_root_dir', default='./',
                         help='the root dir of gsas output data')
     parser.add_argument('--num_step', type=int, default=10000,
@@ -39,11 +47,8 @@ def main():
 
     msz = args.mat_size
 
-    try:
-        import cupy
-        device = "gpu"
-    except ImportError:
-        device = "cpu"
+    device = args.device
+    print("device is ", device)
 
     print("device is ", device)
     wf.generateRandomNumber(device, msz)

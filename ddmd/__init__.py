@@ -4,10 +4,12 @@ from .ddmd_manager import DDMD_manager
 from .logger import Logger
 from .pipelines.dummy_learner import DummyWorkflow
 from .pipelines.miniapps_pipeline import MiniAppsWorkflow
+from .pipelines.noop_pipeline import NoopWorkflow
 
 __all__ = [
     "DDMD_manager",
     "Logger",
     "DummyWorkflow",
     "MiniAppsWorkflow",
+    "NoopWorkflow"
 ]

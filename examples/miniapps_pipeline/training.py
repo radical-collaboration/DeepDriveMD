@@ -5,6 +5,12 @@ import time
 import argparse
 import wfMiniAPI.kernel as wf
 
+try:
+    import cupy
+    default_device = "gpu"
+except ImportError:
+    default_device = "cpu"
+    
 def parse_args():
     parser = argparse.ArgumentParser(description='Exalearn_miniapp_training')
     parser.add_argument('--num_epochs', type=int, default=30, metavar='N',
@@ -65,7 +71,7 @@ def main():
         device = "cpu"
 
     wf.readNonMPI(args.read_size, root_path, args.instance_index)
-    wf.sleep(args.preprocess_time)
+    #wf.sleep(args.preprocess_time)
     wf.generateRandomNumber(device, args.num_sample * args.dense_dim_in)
     wf.generateRandomNumber(device, args.dense_dim_in * args.dense_dim_out)
     if device == 'gpu':

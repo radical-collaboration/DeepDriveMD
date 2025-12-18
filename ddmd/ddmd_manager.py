@@ -16,7 +16,7 @@ def gpu_available():
     except Exception:
         return False
 
-class DDMD_manager:
+class DDMD_manager():
     """
     Orchestrates the scheduling, monitoring, and cancellation of simulations
     in an AI-steered ensemble simulation workflow.
@@ -25,13 +25,19 @@ class DDMD_manager:
     def __init__(self, asyncflow):
         self.learner = Learner(asyncflow)
         self.logger = Logger(use_colors=True)
-        self.registered_sims = OrderedDict()   # Active simulations: {tag: asyncio.Task}
-        self.sim_task_queue = asyncio.Queue()  # Queue of pending simulation inputs
-        self.completed_sims = set()      # To Store completed simulations
 
-        # Tuning parameters (should be configurable)
-        self.time_between_predictions = 20     # Delay between prediction checks
-        self.time_before_shutdown    = 5       # Grace period before shutdown
+        self.registered_sims = OrderedDict()    # Active simulations: {tag: asyncio.Task}
+        self.sim_task_queue = asyncio.Queue()   # Queue of pending simulation inputs
+        self.completed_sims = set()             # To Store completed simulations
+        self.clean_unregistered_sims = False    # Set True if simulation data has to be cleaned at the end of run
+
+        # Set to True if training data is available at start
+        self.force_start_training = True
+
+        self.sim_batch_size = 1 #This attribute should be defined in pipeline subclass
+        self.max_sim_batch = 1 #This attribute should be defined in pipeline subclass
+        self.retrain_model = 1 #This attribute should be defined in pipeline subclass
+
         self.debug = False
 
         if gpu_available():
@@ -39,17 +45,6 @@ class DDMD_manager:
         else:
             self.device = 'cpu'
         self.logger.info(f"DDSim Manager initialized on device: {self.device}")
-
-        """These attributes should be defined in pipeline subclass:
-        Make sure they are set correctly!
-            - self.sim_batch_size
-            - self.max_sim_batch
-            - self.retrain_model
-            - self.sim_batch_size
-            - self.clean_unregistered_sims
-            - self.selection: should be set to None if training task returns pretrained model
-        _register_learner_tasks must be defined in subclass to register all learner tasks: simulation, training, active learning, prediction.
-        """
 
     # --------------------------------------------------------------------------
     def stop_simulation(self, pred):
@@ -104,19 +99,21 @@ class DDMD_manager:
             pass
 
     # --------------------------------------------------------------------------
-    async def _unregister_sims(self, unregistered_sims, clean_unregistered_sims):
+    async def _unregister_sims(self, unregistered_sims):
         """
             Remove completed or canceled simulations from the registry, 
             and optionally clean up files from canceled simulations 
             to exclude them from the training batch.
+
         """
+
         for tag in unregistered_sims:
             self.registered_sims.pop(tag, None)
-            self.completed_sims.add(tag)
-            if clean_unregistered_sims:
-                await self.clean_sim_data(tag)
+            #self.completed_sims.add(tag)
+            # if clean_unregistered_sims:
+            #     await self.clean_sim_data(tag)
 
-        if unregistered_sims and not self.sim_task_queue.empty():
+        if self.debug and unregistered_sims and not self.sim_task_queue.empty():
             # Adjust next batch size (ensure it does not exceed max_sim_batch)
             num_to_submit = min(self.sim_batch_size, self.sim_task_queue.qsize())
             if num_to_submit > 0:
@@ -128,14 +125,15 @@ class DDMD_manager:
     async def submit_sims(self):
         """Submit simulations from the queue and register them."""
         while True:
-            await self.monitor_sims()  # Clean up completed/failed tasks
 
             if self.sim_task_queue.empty():
                 self.logger.info("No more simulation inputs in queue.")
                 break
 
+            await self.monitor_sims()  # Clean up completed/failed tasks
+
             if self.sim_batch_size <= 0:
-                await asyncio.sleep(1)
+                await asyncio.sleep(10)
                 continue
 
             # Don't submit more than sim_batch_size simulation 
@@ -148,8 +146,9 @@ class DDMD_manager:
                     self.logger.info("No more simulation inputs in queue.")
                     break
 
-                simul = self.simulation(sim_inputs=sim_inputs)
                 sim_tag = sim_inputs["sim_tag"]
+                simul = self.simulation(sim_tag=sim_tag)
+                
                 self.logger.task_started(f"Sim {sim_tag}", component="simulation")
                 self.registered_sims[sim_tag] = simul
 
@@ -159,7 +158,7 @@ class DDMD_manager:
                 )
             # Update sim_batch_size (subtract submitted items)
             self.sim_batch_size -= num_to_submit
-            await asyncio.sleep(0.1)
+            #await asyncio.sleep(0.1)
 
     # --------------------------------------------------------------------------
     async def monitor_sims(self):
@@ -176,7 +175,7 @@ class DDMD_manager:
                     self.logger.error(
                         f"Sim {sim_tag} failed: {task.exception()}", component="simulation"
                     )                   
-        await self._unregister_sims(unregistered_sims, self.clean_unregistered_sims)
+        await self._unregister_sims(unregistered_sims)
 
     # --------------------------------------------------------------------------
     async def monitor_training_data(self):
@@ -193,11 +192,8 @@ class DDMD_manager:
                 unregistered_sims = []
                 resubmitted_sims = []
                 count = 0
-                total_sims = len(self.registered_sims)
 
-                self.logger.info(
-                    f"Training can start now."
-                )
+                self.logger.info(f"Training can start now.")
 
                 # Suspend simulations to free up resources for training
                 for sim_tag, task in list(self.registered_sims.items()):
@@ -224,7 +220,7 @@ class DDMD_manager:
                 self.logger.info(f"Cancelled {count} simulations; Training will now start.")
 
                 # Remove canceled sims from registry
-                await self._unregister_sims(unregistered_sims, False)
+                await self._unregister_sims(unregistered_sims)
 
                 # Re-add canceled sims back to task queue for later rescheduling
                 for sim_tag in resubmitted_sims:
@@ -248,18 +244,18 @@ class DDMD_manager:
             if self.debug:
                 self.logger.info(f"Sim {sim_tag} prediction: {pred}", component="prediction")
 
-            if self.stop_simulation(prediction=pred):
+            if self.stop_simulation(sim_tag=sim_tag):
                 task = self.registered_sims[sim_tag]
                 task.cancel()
                 unregister_sims.append(sim_tag)
                 self.logger.task_killed(
                     f"Sim {sim_tag} canceled due to prediction score {pred} ",
-                    component="simulation",
-                   # f"(task ID {getattr(task, 'id', 'N/A')})"
+                    component="simulation"
+                    f"(task ID {getattr(task, 'id', 'N/A')})"
                 )
                 self.sim_batch_size += 1
 
-        await self._unregister_sims(unregister_sims, self.clean_unregistered_sims)
+        await self._unregister_sims(unregister_sims)
 
     # --------------------------------------------------------------------------
     async def teach(self):
@@ -280,42 +276,20 @@ class DDMD_manager:
            await self.monitor_training_data()  # blocks until training starts
         
         while True:
+            
             self.logger.info(f"{len(self.registered_sims)} simulation(s) running...")
             if self.debug:
                 self.logger.info(f"{list(self.registered_sims.keys())}")
 
-            # Train model if flag is set
-            if self.retrain_model:
-                train = await self.train_model()
-            else:
-                await asyncio.sleep(self.time_between_predictions) 
-
-            # Perform model selection if selection function is provided
-            if self.selection:
-                selected_model = await self.selection(train)
-                # Perform prediction
-                self.logger.task_started("Model Prediction", component="prediction")
-            else:
-                selected_model = train
-
-            self.logger.task_started('Model Prediction', component="prediction")
-            # Collect prediction scores for all simulations
-            if self.run_prediction_as_exe:
-                predict = await self.exe_prediction(selected_model)
-                predictions = await self.collect_predictions()
-            else:
-                predictions = await self.prediction(selected_model)
-
-            self.sim_predictions = predictions
-            self.logger.task_completed('Model Prediction', component="prediction")
-
+            predictions = await self.train_model()
             if predictions:
+                self.sim_predictions = predictions
                 await self.cancel_sims()
 
             if self.sim_task_queue.empty():
                 await self.monitor_sims()
 
-            # Exit if no sims left
+            # Exit if no sims are running
             if self.sim_task_queue.empty() and len(self.registered_sims) == 0:
                 break
             else:
@@ -323,11 +297,13 @@ class DDMD_manager:
                     self.logger.info(
                         f"Simulations in queue: {self.sim_task_queue.qsize()}; registered sims {len(self.registered_sims)}"
                     )
-                else:
-                    pass
 
-            await asyncio.sleep(1) 
+            #await asyncio.sleep(10) 
 
         await submit_task
+
+        if self.clean_unregistered_sims:
+            self.clean_sim_data()
+            
         self.logger.manager_exiting()
         self.logger.separator("DDMD MANAGER FINISHED")

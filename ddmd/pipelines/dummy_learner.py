@@ -16,9 +16,13 @@ class DummyWorkflow(DDMD_manager):
     def __init__(self, **kwargs):
         # Default home directory
 
+        # Initialize parent class (sets up asyncflow, logger, queues, etc.)
+        asyncflow = kwargs.get('asyncflow')
+        super().__init__(asyncflow)
+
         self.selection = None
         home_dir = Path(kwargs.get('home_dir', Path.home() / 'DDSim'))
-        self.clean_dir(home_dir)  # ❗Careful: deletes everything in home_dir!
+        self._clean_dir(home_dir)  # ❗Careful: deletes everything in home_dir!
 
         # Create workflow directories
         self.sim_output_dir = self._ensure_dir(kwargs.get('sim_output_dir', home_dir / 'sim_output'))
@@ -37,6 +41,7 @@ class DummyWorkflow(DDMD_manager):
         self.training_epochs          = kwargs.get('training_epochs', 1)
         self.force_start_training     = bool(kwargs.get("force_start_training", False))
         self.run_prediction_as_exe    = bool(kwargs.get("run_prediction_as_exe", True))
+        self.time_between_predictions = 2.0
 
         self.clean_unregistered_sims    = bool(kwargs.get("clean_unregistered_sims", True))
 
@@ -50,15 +55,11 @@ class DummyWorkflow(DDMD_manager):
         self.model_filename = home_dir / 'model.pkl'
         self.prediction_file = home_dir / 'predictions.yml'  # fixed typo ("predicions")
 
-        # Initialize parent class (sets up asyncflow, logger, queues, etc.)
-        asyncflow = kwargs.get('asyncflow')
-        super().__init__(asyncflow)
-
         # Register learner tasks
         self._register_learner_tasks()
-        num_files = kwargs.get('num_files', 25)
+        num_files = kwargs.get('num_files', 1024)
         # Generate dummy input files
-        self.generate_sim_inputs(self.sim_inputs_dir, num_files=num_files)
+        self._generate_sim_inputs(self.sim_inputs_dir, num_files=num_files)
 
     # --------------------------------------------------------------------------
     @staticmethod
@@ -70,7 +71,7 @@ class DummyWorkflow(DDMD_manager):
 
     # --------------------------------------------------------------------------
     @staticmethod
-    def clean_dir(dir_name):
+    def _clean_dir(dir_name):
         """Delete an existing directory (used for a clean workflow run)."""
         dir_path = Path(dir_name)
         if dir_path.exists() and dir_path.is_dir():
@@ -78,7 +79,7 @@ class DummyWorkflow(DDMD_manager):
 
     # --------------------------------------------------------------------------
     @staticmethod
-    def generate_sim_inputs(sim_inputs_dir, num_files: int = 5):
+    def _generate_sim_inputs(sim_inputs_dir, num_files: int = 5):
         """
         Generate dummy input `.npz` files for simulations.
         """
@@ -89,80 +90,12 @@ class DummyWorkflow(DDMD_manager):
             np.savez(file_path, X=X)
 
     # --------------------------------------------------------------------------
-    def stop_simulation(self, *args, **kwargs):
-        """Return True if prediction < threshold (cancel simulation)."""
-        return kwargs['prediction'] < self.prediction_threshold
-
-    # --------------------------------------------------------------------------
-    async def collect_predictions(self):
-        with open(self.prediction_file, 'r') as f:
-            predictions = yaml.safe_load(f)
-        return predictions
-
-    # --------------------------------------------------------------------------
-    async def init_sim_queue(self):
-        """Collect all simulation input files into task queue."""
-        filenames = await asyncio.to_thread(lambda: list(self.sim_inputs_dir.iterdir()))
-        for filename in filenames:
-            if filename.is_file():
-                sim_name = filename.stem
-                sim_tag = f'{sim_name}'
-                await self.sim_task_queue.put({'sim_tag': sim_tag})
-
-    # --------------------------------------------------------------------------
-    async def check_train_data(self):
-        """Check if enough training data is available to start training."""
-        total_files = 0
-        for dir in self.sim_output_dir.iterdir():
-            if dir.is_dir():
-                # Run blocking file listing in thread pool
-                filenames = await asyncio.to_thread(lambda: list(dir.iterdir()))
-                total_files += len(filenames)
-        return total_files >= self.start_training_threshold
-
-    # --------------------------------------------------------------------------
-    async def clean_sim_data(self, sim_ind):
-        """Asynchronously delete all files associated with a simulation index (safe parallel cleanup)."""
-
-        async def _delete_file(file_path):
-            try:
-                await asyncio.to_thread(os.remove, file_path)
-            except FileNotFoundError:
-                self.logger.warning(f"File already removed: {file_path}")
-            except Exception as e:
-                self.logger.error(f"Error deleting {file_path}: {e}")
-
-        # Collect all deletion tasks (parallel file cleanup)
-        tasks = []
-        for directory in [self.train_al_dir, self.train_dir, self.val_dir]:
-            
-            for filename in directory.iterdir():
-                if sim_ind in filename.name:
-                    tasks.append(_delete_file(filename))
-        if tasks:
-            await asyncio.gather(*tasks)
-
-        # Remove simulation output directory after files are gone
-        sim_dir = Path(self.sim_output_dir, sim_ind)
-        try:
-            if sim_dir.exists():
-                await asyncio.to_thread(shutil.rmtree, sim_dir)
-                if self.debug:
-                    self.logger.warning(f"Simulation directory has been removed: {sim_dir}")
-            else:
-                self.logger.warning(f"Simulation directory already removed: {sim_dir}")
-        except Exception as e:
-            self.logger.error(f"Error deleting directory {sim_dir}: {e}")
-        if self.debug:
-            self.logger.info(f"Removed all files related to simulation {sim_ind}")
-
-    # --------------------------------------------------------------------------
     def _register_learner_tasks(self):
         """Register learner tasks: simulation, training, active learning, prediction."""
 
         @self.learner.simulation_task()
         async def simulation(*args, **kwargs):
-            sim_tag = kwargs["sim_inputs"]["sim_tag"]
+            sim_tag = kwargs["sim_tag"]
             args = f'--output_dir {self.sim_output_dir} --sim_tag {sim_tag}'
             return f'{self.code_path}/simulation.py {args}'
         self.simulation = simulation
@@ -188,21 +121,21 @@ class DummyWorkflow(DDMD_manager):
         self.active_learn = active_learn
 
         @self.learner.prediction_task(as_executable=True)
-        async def exe_prediction(*args, **kwargs):
+        async def prediction(*args, **kwargs):
             args = (
                 f'--model_filename {self.model_filename} '
                 f'--sim_output_dir {self.sim_output_dir} '
                 f'--output_file {self.prediction_file}'
             )
             return f'{self.code_path}/predict.py {args}'
-        self.exe_prediction = exe_prediction
-
-        @self.learner.prediction_task(as_executable=False)
-        async def prediction(*args, **kwargs):
-            """Dummy prediction: assign random score to each sim."""
-            sim_inds = list(self.registered_sims.keys())
-            return {sim_ind: random.random() for sim_ind in sim_inds}
         self.prediction = prediction
+
+        # sim_inds = list(self.registered_sims.keys())
+        # @self.learner.prediction_task(as_executable=False)
+        # async def prediction(*args, **kwargs):
+        #     """Dummy prediction: assign random score to each sim."""
+        #     return {sim_ind: random.random() for sim_ind in sim_inds}
+        # self.prediction = prediction
 
         @self.learner.as_stop_criterion(metric_name=MODEL_ACCURACY, threshold=self.training_threshold)
         async def check_accuracy(*args, **kwargs):
@@ -211,26 +144,78 @@ class DummyWorkflow(DDMD_manager):
         self.check_accuracy = check_accuracy
 
     # --------------------------------------------------------------------------
+    def stop_simulation(self, *args, **kwargs) -> bool:
+        """Return True if prediction < threshold (cancel simulation)."""
+        prediction = self.sim_predictions[kwargs['sim_tag']]
+        return prediction < self.prediction_threshold
+
+    # --------------------------------------------------------------------------
+    async def collect_predictions(self) -> dict:
+        with open(self.prediction_file, 'r') as f:
+            predictions = yaml.safe_load(f)
+        return predictions
+
+    # --------------------------------------------------------------------------
+    async def skip_training(self):
+        await asyncio.sleep(self.time_between_predictions)
+
+    # --------------------------------------------------------------------------
+    async def init_sim_queue(self) -> None:
+        """Collect all simulation input files into task queue."""
+        filenames = await asyncio.to_thread(lambda: list(self.sim_inputs_dir.iterdir()))
+        for filename in filenames:
+            if filename.is_file():
+                sim_name = filename.stem
+                sim_tag = f'{sim_name}'
+                await self.sim_task_queue.put({'sim_tag': sim_tag})
+
+    # --------------------------------------------------------------------------
+    async def check_train_data(self) -> bool:
+        """Check if enough training data is available to start training."""
+        total_files = 0
+        for dir in self.sim_output_dir.iterdir():
+            if dir.is_dir():
+                # Run blocking file listing in thread pool
+                filenames = await asyncio.to_thread(lambda: list(dir.iterdir()))
+                total_files += len(filenames)
+        return total_files >= self.start_training_threshold
+    
+    # --------------------------------------------------------------------------
+    async def clean_sim_data(self) -> None:
+        """Asynchronously delete all files associated with a simulation index (safe parallel cleanup)."""
+
+        self._clean_dir(self.sim_output_dir)
+
+    # --------------------------------------------------------------------------
     async def train_model(self):
         """Train until accuracy threshold is met or epochs are exhausted."""
-        self.iteration += 1
-        for epoch in range(self.training_epochs):
-            self.logger.info(f'Iteration {self.iteration} / Epoch {epoch + 1}', component="training")
+        if self.retrain_model:
+            self.iteration += 1
+            for epoch in range(self.training_epochs):
+                self.logger.info(f'Iteration {self.iteration} / Epoch {epoch + 1}', component="training")
 
-            train_task = await self.training()
-            self.logger.task_started('Model Training', component="training")
+                train_task = await self.training()
+                self.logger.task_started('Model Training', component="training")
 
-            should_stop, metric_val = await self.check_accuracy(train_task)
-            self.logger.task_completed('Model Training', component="training")
-            self.logger.task_started('Check Accuracy', component="training")
+                should_stop, metric_val = await self.check_accuracy(train_task)
+                self.logger.task_completed('Model Training', component="training")
+                self.logger.task_started('Check Accuracy', component="training")
 
-            if should_stop:
-                self.logger.info(f'Accuracy ({metric_val}) reached threshold → stopping training')
-                self.retrain_model = False
-                self.sim_batch_size += self.training_cores
-                break
-            self.logger.task_completed('Check Accuracy', component="training")
+                if should_stop:
+                    self.logger.info(f'Accuracy ({metric_val}) reached threshold → stopping training')
+                    self.retrain_model = False
+                    self.sim_batch_size += self.training_cores
+                    break
+                self.logger.task_completed('Check Accuracy', component="training")
 
-            self.logger.task_started('Active Learning', component="training")
-            al = await self.active_learn()
-            self.logger.task_completed('Active Learning', component="training")
+                self.logger.task_started('Active Learning', component="training")
+                al = await self.active_learn()
+                self.logger.task_completed('Active Learning', component="training")
+        else:
+            await self.skip_training()
+
+        pred = await self.prediction()
+        predictions = await self.collect_predictions()
+        self.logger.task_completed('Model Prediction', component="prediction")
+        
+        return predictions

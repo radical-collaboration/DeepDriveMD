@@ -69,7 +69,7 @@ def main():
 #    if device == 'gpu':
 #        print("gpu id is {}".format(cp.cuda.runtime.getDeviceProperties(0)['uuid']))
 
-    wf.sleep(args.preprocess_time)
+    #wf.sleep(args.preprocess_time)
     wf.readNonMPI(args.read_size, root_path, args.instance_index)
     wf.generateRandomNumber(device, args.num_sample * args.dense_dim_in)
     wf.generateRandomNumber(device, args.dense_dim_in * args.dense_dim_out)
