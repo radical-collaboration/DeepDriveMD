@@ -6,7 +6,31 @@ build-backend = "setuptools.build_meta"
 name = "DDMD"
 version = "0.2.0"
 description = "Toolkit for Deep learning-driven Adaptive Molecular Simulations for Protein Folding"
-
+license = {text = "MIT"}
+keywords = [
+    "molecular-dynamics",
+    "deep-learning",
+    "protein-folding",
+    "adaptive-simulation",
+    "hpc",
+    "machine-learning",
+    "computational-biology"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Chemistry",
+]
 authors = [
     {name = "Mariya Goliyad", email = "mariya.goliyad@rutgers.edu"},
     {name = "RADICAL Lab"},
